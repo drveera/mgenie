@@ -1,0 +1,44 @@
+import sys
+import re
+
+mungedir = sys.path[0]
+maindir = re.search(r'.*genie/',mungedir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+import json
+from md import process_list
+
+pfix_munge = config["pfix_munge"]
+pfix_dbsnp = pfix_munge.replace("munge","dbsnp")
+config['pfix_dbsnp'] = pfix_dbsnp
+
+sumstats = config['--sumstats']
+sumstats = process_list(sumstats)
+daner = config['--daner']
+Nsamples = config['--Nsamples']
+other = config['--other']
+if daner:
+    ann_sumstats = f"{pfix_dbsnp}{{wcard}}.ann"
+else:
+    ann_sumstats = lambda wildcards: sumstats[wildcards.wcard]
+munge_sumstats = f"{pfix_munge}{{wcard}}.munged.sumstats"
+munge_sumstats_pre = f"{pfix_munge}{{wcard}}.munged"
+##scripts
+mungescript=f"{maindir}/resources/ldsc/software/munge_sumstats.py"
+include: f"{maindir}/modules/sumstats/dbsnp/dbsnp.snake"
+rule genie_munge_all:
+    input: expand(munge_sumstats, wcard = sumstats)
+
+rule genie_munge_one:
+    input: ann_sumstats
+    output: munge_sumstats
+    params: script = mungescript, pre = munge_sumstats_pre
+    conda: f"{maindir}/resources/ldsc/env/p2.yaml"
+    shell:
+        "{{params.script}} --sumstats {{input}} {daner} {Nsamples} --out {{params.pre}} {other}"
+        .format(
+            daner = "--daner" if daner else "",
+            Nsamples = "--N " + Nsamples if Nsamples else "",
+            other = other if other else ""
+        )
+

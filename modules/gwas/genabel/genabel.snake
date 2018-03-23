@@ -1,0 +1,68 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+
+pheno = config['--pheno']
+covar = config['--covar']
+geno = config['--geno']
+geno = process_list(geno)
+pfix_abel = config['pfix_genabel']
+
+##scripts
+pheno_rscript = f"{methoddir}/prepare.pheno.R"
+assoc_rscript = f"{methoddir}/genabel.assoc.R"
+merge_script = f"{methoddir}/merge.summary.R"
+
+map_script = f"{methoddir}/update.allele.R"
+man_script = f"{methoddir}/manhattan.R"
+
+
+## outfiles
+formatted_pheno = f"{pfix_abel}individual_files/{{wcard}}.formatted.pheno"
+outfile = f"{pfix_abel}individual_files/{{wcard}}.gbl.summary"
+outfile1 = f"{pfix_abel}individual_files/{{wcard}}.gbl.summary.with.alleles"
+slist = f"{pfix_abel}summary.list"
+outfile2 = f"{pfix_abel}merged.summary.txt"
+manplot = f"{pfix_abel}manhattan.pdf"
+
+rule abel_all:
+    input: expand(formatted_pheno, wcard = geno),
+           expand(outfile, wcard = geno),
+           outfile2, manplot
+
+rule abel_assoc:
+    input: geno = lambda wildcards: geno[wildcards.wcard], pheno = pheno, covar = covar
+    output: a = formatted_pheno, b = outfile
+    params: rscript = pheno_rscript
+    shell:
+        "Rscript {params.rscript} {input.geno} {input.pheno} {input.covar} {output.a} {output.b}"
+rule abel_updateallele:
+    input: a = outfile, b = lambda wildcards: geno[wildcards.wcard]
+    output: outfile1
+    params: rscript = map_script
+    shell:
+        "Rscript {params.rscript} {input.a} {input.b} {output}"
+rule abel_list:
+    input: expand(outfile1, wcard = geno)
+    output: slist
+    run:
+        for i in input:
+            shell("ls {i} >> {output}")
+rule abel_merge:
+    input: genos = expand(outfile1, wcard = geno), slist = slist
+    output: outfile2
+    params: rscript = merge_script
+    shell:
+        "Rscript {params.rscript} {input.slist} {output}"
+
+rule abel_plot:
+    input: outfile2
+    output: manplot
+    params: rscript = man_script
+    shell:
+        "Rscript {params.rscript} {input} {output}"

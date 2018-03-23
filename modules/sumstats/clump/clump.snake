@@ -1,0 +1,43 @@
+#!/bin/env snakemake
+
+sys.path.insert(1, sys.path[0] + '/../../../library')
+from md import process_list
+from os.path import basename
+
+pfix = config['pfix_clump']
+
+ld=config['--ld']
+sumstats=config['--sumstats']
+sumstats = process_list(sumstats)
+
+
+outfile_base = f"{pfix}ld_from_{basename(ld)}/{{wcard}}"
+outfile = f"{outfile_base}.clumped"
+outfile2 = f"{outfile_base}.clumped.formatted"
+
+
+p1 = config['--p1']
+p2 = config['--p2']
+r2 = config['--r2']
+dist = config['--distance']
+
+other = config['--other']
+if not other:
+    other=""
+rscript = sys.path[0] + "/add.alleles.R"
+
+rule clump_all:
+    input: expand(outfile, wcard = sumstats), expand(outfile2, wcard = sumstats)
+
+rule clump_one:
+    input: ld = expand(f"{ld}.{{ext}}", ext = ['bed','bim','fam']), sumstats = lambda wildcards: sumstats[wildcards.wcard]
+    output: outfile
+    params: outfile_base
+    shell: "plink --bfile {ld} --clump {input.sumstats} --out {params} --clump-p1 {p1} --clump-p2 {p2} "
+           "--clump-r2 {r2} --clump-kb {dist} {other} "
+
+rule clump_two:
+    input: clump = outfile, sumstats = lambda wildcards: sumstats[wildcards.wcard]
+    output: outfile2
+    params: rscript= rscript, 
+    shell: "Rscript {params.rscript} {input.sumstats} {input.clump} {output}"

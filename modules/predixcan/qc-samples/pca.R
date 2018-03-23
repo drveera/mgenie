@@ -1,0 +1,65 @@
+#!/bin/env Rscript
+
+args <- commandArgs(trailingOnly = TRUE)
+
+bfile <- args[1]
+reffam <- args[2]
+outfile <- args[3]
+
+##temp
+
+###
+
+library(SNPRelate)
+library(data.table)
+library(ggplot2)
+
+##conver to gds
+snpgdsBED2GDS(bed.fn = paste0(bfile,".bed"),
+              fam.fn = paste0(bfile,".fam"),
+              bim.fn = paste0(bfile,".bim"),
+              out.gdsfn = paste0(outfile,".gds"))
+
+##open the gds
+genofile <- snpgdsOpen(paste0(outfile,".gds"))
+##run pca
+pca <- snpgdsPCA(genofile,num.thread = 4)
+pca.eigen <- pca$eigenvect
+pca.eigen <- data.table(pca.eigen)
+IID <- pca$sample.id
+pca.eigen <- cbind(IID,pca.eigen)
+
+##read referrence samples
+fam <- fread(reffam)
+refsamples = fam$V1
+
+pca.eigen$popgroup <- ifelse(pca.eigen$IID %in% refsamples,"Referrence","Cases")
+
+##plot1
+##p1 <- ggplot(pca.eigen, aes(V1,V2, colour=popgroup)) + geom_point()
+##ggsave(plot1)
+
+
+##subset the dfm
+pdfm = pca.eigen[IID %in% refsamples,]
+##formula
+pca.eigen$ell2sd6 <- (
+  ((pca.eigen$V1 - mean(pdfm$V1, na.rm=TRUE))/(6*sd(pdfm$V1,na.rm=TRUE)))^2 +
+  ((pca.eigen$V2 - mean(pdfm$V2, na.rm=TRUE))/(6*sd(pdfm$V2, na.rm=TRUE)))^2
+) <=1
+##pca.eigen$ell2sd6 = pca.eigen$ell2sd6*1
+
+pca.eigen$popgroup <- with(pca.eigen, ifelse(ell2sd6 & (!IID %in% refsamples),"keep",popgroup))
+pca.eigen$popgroup <- with(pca.eigen, ifelse((!ell2sd6) & (!IID %in% refsamples),"remove",popgroup))
+
+p2 <- ggplot(pca.eigen, aes(V1,V2, colour=popgroup)) + geom_point()
+plot2 <- paste0(outfile,".PCA.pdf")
+ggsave(plot2)
+
+fwrite(pca.eigen,paste0(outfile,".allsamples.mds"),sep="\t",na="NA")
+pca.eigen1 <- pca.eigen[ell2sd6==TRUE,]
+fwrite(pca.eigen1,paste0(outfile,".mds"),sep="\t",na="NA")
+fwrite(pca.eigen1[,"IID",with=FALSE],paste0(outfile,".samples"),sep="\t",col.names = FALSE, na="NA")
+
+
+

@@ -1,0 +1,74 @@
+import sys
+sys.path.insert(1, sys.path[0] + '/../../../library')
+from md import process_list
+gwas = config['<summary-file>']
+gwas = process_list(gwas)
+#outname = config['--out']
+#outfolder = config['--outfolder']
+
+geneloc = config['--geneloc']
+ldfile = config['--ldfile']
+if config['--nsamples']:
+    nsamples = f"N = {config['--nsamples']}"
+elif config['--ncol']:
+    nsamples = f"ncol = {config['--ncol']}"
+else:
+    nsamples = 'ncol = Neff'
+
+genesets = config['--genesets']
+genesets = process_list(genesets)
+pfix_magma = config['pfix_magma']
+
+annot = f"{pfix_magma}.genes.annot"
+raw_base = f"{pfix_magma}.{{summary}}/{{summary}}"
+raw = raw_base + ".genes.raw",
+
+genes_base = f"{pfix_magma}.{{summary}}/{{summary}}"
+genes = genes_base + ".genes.out"
+
+outfile_base = f"{pfix_magma}.{{summary}}/{{summary}}_{{gset}}"
+outfile = outfile_base + ".sets.out"
+
+ldfiles = expand(ldfile + ".{ext}", ext=["bim", "bed", "fam"])
+bim = f"{ldfile}.bim"
+
+
+rule all:
+    input:
+        expand(outfile, summary = gwas, gset = genesets),
+        expand(raw, summary = gwas),
+        expand(genes, summary = gwas)
+
+
+rule magma_annot:
+    input:
+        geneloc = geneloc, bim = bim
+    output:
+        annot
+    params: base = pfix_magma
+    shell:
+        "magma --annotate --snp-loc {input.bim} --gene-loc {input.geneloc} --out {params.base}"
+
+
+rule magma_gene:
+    input:
+        annot = annot,
+        gwas = lambda wildcards: gwas[wildcards.summary],
+        ldfiles = ldfiles
+    output:
+        raw = raw,
+        genes = genes
+    params: base = raw_base
+    shell:
+        "magma --bfile {ldfile} --pval {input.gwas} {nsamples} --gene-annot {input.annot} --out {params.base}"
+
+
+rule magma_geneset:
+    input:
+        raw = raw,
+        genesets = lambda wildcards: genesets[wildcards.gset]
+    output: outfile
+    params: base = outfile_base
+    shell:
+        "magma --gene-results {input.raw} --set-annot {input.genesets} --out {params.base}"
+

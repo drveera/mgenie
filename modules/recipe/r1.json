@@ -1,0 +1,10 @@
+{
+    "_method" : "r1",
+    "--fname" : "ENTER",
+    "--out" : "r1",
+    "pipein_methods" : "None",
+    "pipe_input" : "--fname",
+    "pipe_output_suffix" : "_r1",
+    "all_out_suffix" : ["_r1"],
+    "wcard":["bfile"]
+}

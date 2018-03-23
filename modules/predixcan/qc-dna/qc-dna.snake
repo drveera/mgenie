@@ -1,0 +1,76 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+##inputs
+vcf = config['--vcf']
+vcf = process_list(vcf)
+
+ref = config['--ref']
+if ref == "hrc":
+    ref = f"{maindir}/resources/qc-dna/hrc/.."
+else:
+    ref = f"{maindir}/resources/qc-dna/1000g/1kg.eur.biallele.snps.maf0.01.nonAmbi.onlyRs.recode.vcf.gz"
+pfix = config['pfix_qc-dna']
+
+##outfiles
+vcfout1 = f"{pfix}_intermediatefiles/{{vcf}}.filtered.vcf.gz"
+vcfout1_tbi = f"{pfix}_intermediatefiles/{{vcf}}.filtered.vcf.gz.tbi"
+vcfout2_prefix = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose"
+vcfout2_gen = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.gen"
+vcfout2_sample = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.sample"
+mergedgen = f"{pfix}_finalfiles/merged.gen"
+mergedsample = f"{pfix}_finalfiles/merged.sample"
+gdsout = f"{pfix}_finalfiles/merged.gds"
+
+##scripts
+gh="/hpc/users/xrajagv01/installs/GenotypeHarmonizer-1.4.20-SNAPSHOT/GenotypeHarmonizer.sh"
+listATGC_R=f"{methoddir}/list.ambiSNPs.R"
+gen2gds_R=f"{methoddir}/gentogds.R"
+
+rule qcdna_all:
+    input: gdsout
+
+rule qcdna_filter1:
+    input: vcf = lambda wildcards: vcf[wildcards.vcf]
+    output: vcfout1
+    params:
+    shell:
+        "module load bcftools/1.6 && "
+        "bcftools view -m2 -M2 -i 'MAF>0.01 & R2>0.8' -v snps -o {output} -O z {input.vcf} "
+
+rule qcdna_tabix1:
+    input: vcf = vcfout1
+    output: index = vcfout1_tbi
+    shell:
+        "module load htslib/1.7 && "
+        "tabix {input.vcf}"
+
+rule qcdna_harmonize:
+    input: vcf=vcfout1, ref=ref, tbi=vcfout1_tbi
+    output: vcfout2_gen
+    params: script = gh, prefix=vcfout2_prefix
+    shell: "{params.script} --input {input.vcf} --inputType VCF --output {params.prefix} "
+           "--outputType GEN -id -ura --ref {input.ref}"
+
+rule qcdna_merge_gen:
+    input: expand(vcfout2_gen, vcf=vcf)
+    output: gen=mergedgen, sample=mergedsample
+    run:
+        for i in input:
+            shell("cat {i} >> {output.gen}")
+        newsample=input[0].replace(".gen",".sample")
+        shell("cp {newsample} {output.sample}")
+
+rule qcdna_gen2gds:
+    input:gen = mergedgen, sample = mergedsample
+    output:gdsout
+    params: script=gen2gds_R
+    shell:
+        "Rscript {params.script} {input.gen} {input.sample} {output}"

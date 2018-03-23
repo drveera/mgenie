@@ -1,0 +1,66 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+##from config
+gds = config['--gds']
+db = config['--db']
+db = process_list(db)
+genes = config['--genes']
+genes = process_list(genes)
+snpannot = config['--snpannot']
+pfix = config['pfix_predict']
+
+##scripts
+gds_subset_R = f"{methoddir}/gds.sub.R"
+predict_R = f"{methoddir}/predict.R"
+
+##outfiles
+ifiles=f"{pfix}_intermediatefiles"
+ffiles=f"{pfix}_finalfiles"
+subgds = f"{ifiles}/{{db}}/{{genes}}.gds"
+subannot = f"{ifiles}/{{db}}/{{genes}}.snpannot"
+geneexpr = f"{ifiles}/{{db}}/{{genes}}.predicted.expr"
+geneexpr_part = f"{ifiles}/{{{{db}}}}/{{genes}}.predicted.expr"
+genemeta = f"{ifiles}/{{db}}/{{genes}}.meta"
+genemeta_part = f"{ifiles}/{{{{db}}}}/{{genes}}.meta"
+allexpr = f"{ffiles}/{{db}}/{basename(gds)}.expr"
+allmeta = f"{ffiles}/{{db}}/{basename(gds)}.meta"
+
+rule predict_all:
+    input: expand(allexpr, genes=genes, db=db),
+           expand(allmeta, genes=genes, db=db)
+
+rule predict_subset_gds:
+    input: gds = gds, genes = lambda wildcards: genes[wildcards.genes],
+           snpannot = snpannot
+    output: gds = temp(subgds), annot = temp(subannot)
+    params: script = gds_subset_R
+    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {output.gds} {output.annot}"
+
+rule predict_expressions:
+    input: gds = gds, snpannot = snpannot,
+           genes = lambda wildcards: genes[wildcards.genes],
+           db = lambda wildcards: db[wildcards.db]
+    output: expr=geneexpr, meta=genemeta
+    params: script = predict_R
+    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {input.db} {output.expr} {output.meta}"
+
+rule predict_cat_expressions:
+    input: expr = expand(geneexpr_part, genes=genes),
+           meta = expand(genemeta_part, genes=genes)
+    output: expr=allexpr, meta=allmeta
+    run:
+        shell("head -1 {input.expr[0]} > {output.expr}")
+        for i in input.expr:
+            shell("cat {i} | sed 1d >> {output.expr}")
+        shell("head -1 {input.meta[0]} > {output.meta}")
+        for i in input.meta:
+            shell("cat {i} | sed 1d >> {output.meta}")
+

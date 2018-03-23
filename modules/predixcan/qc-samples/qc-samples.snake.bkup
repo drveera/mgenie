@@ -1,0 +1,177 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+##inputs
+bfile = config['--bfile']
+bfile = process_list(bfile)
+ref = config['--ref']
+pfix = config['pfix_qc-samples']
+skip_sex = config['--skip-sex']
+
+##script specific
+pj=list(range(1,11))
+
+##scripts
+removerelated_R = f"{methoddir}/related.R"
+sexcheck_R = f"{methoddir}/sexcheck.R"
+hetfilter_R = f"{methoddir}/het.R"
+mergebim_R = f"{methoddir}/mergebim.R"
+gharm="/hpc/users/xrajagv01/installs/GenotypeHarmonizer-1.4.20-SNAPSHOT/GenotypeHarmonizer.sh"
+
+#outputfiles
+##
+sexreport = f"{pfix}_intermediatefiles/{{bfile}}.sexreport.sexcheck"
+sexreport_prefix = f"{pfix}_intermediatefiles/{{bfile}}.sexreport"
+missex_ids = f"{pfix}_intermediatefiles/{{bfile}}.sexreport.toremove"
+bfile_sexOK = f"{pfix}_intermediatefiles/{{bfile}}.sexOK.bim"
+bfile_sexOK_prefix = f"{pfix}_intermediatefiles/{{bfile}}.sexOK"
+##
+if skip_sex:
+    startfile = lambda wildcards: bfile[wildcards.bfile][0] + ".bim"
+    startfile_prefix = lambda wildcards: bfile[wildcards.bfile][0]
+else:
+    startfile = bfile_sexOK
+    startfile_prefix = bfile_sexOK_prefix
+##
+hetreport = f"{pfix}_intermediatefiles/{{bfile}}.hetreport.het"
+hetreport_prefix = f"{pfix}_intermediatefiles/{{bfile}}.hetreport"
+hetfilter_ids = f"{pfix}_intermediatefiles/{{bfile}}.hetreport.IDs"
+bfile_hetOK = f"{pfix}_intermediatefiles/{{bfile}}.hetOK.bim"
+bfile_hetOK_prefix = f"{pfix}_intermediatefiles/{{bfile}}.hetOK"
+bfile_thin_prefix = f"{pfix}_intermediatefiles/{{bfile}}.thin"
+bfile_thin = f"{pfix}_intermediatefiles/{{bfile}}.thin.bim"
+genomeout=f"{pfix}_intermediatefiles/{{bfile}}.genome.{{pj}}"
+genomeout_prefix=f"{pfix}_intermediatefiles/{{bfile}}"
+genomeout_part=f"{pfix}_intermediatefiles/{{{{bfile}}}}.genome.{{pj}}"
+genomeoutall = f"{pfix}_intermediatefiles/{{bfile}}.merged.genome"
+relatedidstoremove = f"{pfix}_intermediatefiles/{{bfile}}.related.toremove"
+bfile_sexOK_hetOK_unrelated = f"{pfix}_intermediatefiles/{{bfile}}.unrelated.bim"
+bfile_sexOK_hetOK_unrelated_prefix = f"{pfix}_intermediatefiles/{{bfile}}.unrelated"
+bfile_harmonized = f"{pfix}_intermediatefiles/{{bfile}}.harmonized.bim"
+bfile_harmonized_prefix = f"{pfix}_intermediatefiles/{{bfile}}.harmonized"
+
+bfile_merged = f"{pfix}_intermediatefiles/{{bfile}}.merged.bim"
+bfile_merged_prefix = f"{pfix}_intermediatefiles/{{bfile}}.merged"
+
+rule qcsamples_all:
+    message: "final file"
+    input: expand(bfile_sexOK_hetOK_unrelated, bfile=bfile),
+           expand(bfile_harmonized, bfile=bfile)
+
+###sex filter###
+rule qcsamples_sex_check:
+    message: "checking sex"
+    input: bfile = lambda wildcards: bfile[wildcards.bfile][0] + ".bim"
+    output: sexreport
+    params: bfile = lambda wildcards: bfile[wildcards.bfile], out = sexreport_prefix
+    shell: "module load plink/1.90 &&"
+           "plink --bfile {params.bfile} --check-sex --out {params.out}"
+
+rule qcsample_missex_ids:
+    message: "extracting IDs with sex mismatch"
+    input: sexreport
+    output: missex_ids
+    params: script = sexcheck_R
+    shell: "Rscript {params.script} {input} {output}"
+
+rule qcsamples_sex_filter:
+    message: "removing samples with mismatched sex"
+    input: bfile = lambda wildcards: bfile[wildcards.bfile][0] + ".bim", fam=missex_ids
+    output: bfile_sexOK
+    params:bfile = lambda wildcards: bfile[wildcards.bfile], out = bfile_sexOK_prefix
+    shell: "module load plink/1.90 && "
+           "plink --bfile {params.bfile} --remove {input.fam} --make-bed --out {params.out}"
+####
+
+rule qcsamples_het_report:
+    message: "generating heterozygosity stats"
+    input: startfile
+    output: hetreport
+    params: bfile = startfile_prefix, out = hetreport_prefix
+    shell: "module load plink/1.90 && "
+           "plink --bfile {params.bfile} --het --out {params.out}"
+
+rule qcsamples_het_getIDs:
+    message: "listing IDs with F>0.2"
+    input: het = hetreport, bfile=startfile
+    output: hetfilter_ids
+    params: script = hetfilter_R, fam = startfile_prefix
+    shell: "Rscript {params.script} {input.het} {params.fam} {output}"
+
+rule qcsamples_het_hetfilter:
+    message: "removing samples with F>0.2"
+    input: bfile = startfile, remove=hetfilter_ids
+    output: bfile_hetOK
+    params: bfile = startfile_prefix, out = bfile_hetOK_prefix
+    shell: "module load plink/1.90 && "
+           "plink --bfile {params.bfile} --remove {input.remove} --out {params.out} "
+           "--make-bed"
+
+rule qcsamples_thin:
+    message: "thinning the markers to 20000"
+    input: bfile = bfile_hetOK
+    output: bfile_thin
+    params: bfile = bfile_hetOK_prefix, out = bfile_thin_prefix
+    shell: "module load plink/1.90 && "
+           "plink --bfile {params.bfile} --thin-count 20000 --out {params.out} --make-bed"
+
+rule qcsamples_genome:
+    message: "running IBD analysis"
+    input: bfile_thin
+    output: genomeout
+    params: bfile = bfile_thin_prefix, out = genomeout_prefix
+    shell: "module load plink/1.90 && "
+           "plink --bfile {params.bfile} --genome --parallel {wildcards.pj} 10 "
+           "--out {params.out}"
+
+rule qcsamples_genome_collect:
+    message: "collecting the results from IBD analysis"
+    input: expand(genomeout_part, pj = pj)
+    output: genomeoutall
+    run:
+        for i in input:
+            shell("cat {i} >> {output}")
+
+rule qcsamples_list_related:
+    message:"extracting related IDs to removed"
+    input: genome=genomeoutall, fam = lambda wildcards: bfile[wildcards.bfile][0]+".fam"
+    output: relatedidstoremove
+    params: script = removerelated_R
+    shell:"Rscript {params.script} {input.genome} {input.fam} {output}"
+
+rule qcsamples_remove_related:
+    message: "removing related individuals"
+    input: fam=relatedidstoremove, bfile = bfile_hetOK
+    output: bfile_sexOK_hetOK_unrelated
+    params: bfile = bfile_hetOK_prefix, out = bfile_sexOK_hetOK_unrelated_prefix
+    shell: "module load plink/1.90 && "
+           "plink --bfile {params.bfile} --remove {input.fam} --out {params.out} "
+           "--make-bed "
+
+
+rule qcsamples_harmonize:
+    message: "harmonizing infile with referrence file"
+    input: bfile_sexOK_hetOK_unrelated
+    output: bfile_harmonized
+    params: script = gharm, bfile=bfile_sexOK_hetOK_unrelated_prefix, ref = ref,
+            out = bfile_harmonized_prefix
+    shell: "{params.script} --input {params.bfile} --output {params.out} "
+           "--ref {params.ref} -id -ura"
+
+'''
+rule qcsamples_mergewithref:
+    message: "merging with referrence file"
+    input: bfile1 = bfile_harmonized, bfile2 = ref + ".bim"
+    output: bfile_merged
+    params: bfile1 = bfile_harmonized_prefix, bfile2=ref, out=bfile_merged_prefix
+    shell: "module load plink/1.9 && "
+           "plink --bfile {params.bfile1} --bmerge {params.bfile2}.bed {params.bfile2}.bim "
+           "{params.bfile2}.fam --out {params.out} --make-bed "
+'''

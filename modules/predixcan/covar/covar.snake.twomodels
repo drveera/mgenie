@@ -1,0 +1,108 @@
+#!/bin/env snakemake
+
+### * routine
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+
+### * from config
+expr = process_list(config['--expr'])
+covar = config['--covar']
+pfix = config['pfix_covar']
+thold = config['--thold']
+basemodel=config['--basemodel']
+
+if basemodel:
+    basevars = [basemodel]
+else:
+    basevars = ["NA"]
+
+### * output files
+covar_filtered = f"{pfix}_intermediatefiles/{{expr}}.covar.filtered"
+expr_filtered  = f"{pfix}_intermediatefiles/{{expr}}.filtered.RDS"
+genelist = f"{pfix}_intermediatefiles/{{expr}}.genelist"
+genebatch = f"{pfix}_intermediatefiles/{{expr}}.genebatch.{{dcard}}"
+genebatch_prefix = f"{pfix}_intermediatefiles/{{expr}}.genebatch."
+##bic 
+bic_sub = f"{pfix}_intermediatefiles/{{expr}}.BIC.results.{{bmodel}}.{{dcard}}"
+bicmerge = f"{pfix}_intermediatefiles/{{expr}}.bic.merged.{{bmodel}}"
+bicplot1 = f"{pfix}_intermediatefiles/{{expr}}.bic.{{bmodel}}.models.pdf"
+bicplot2 = f"{pfix}_intermediatefiles/{{expr}}.bic.{{bmodel}}.vars.pdf"
+##
+vpart = f"{pfix}_intermediatefiles/{{expr}}.vpart.RDS"
+
+### *scripts
+filter_R=f"{methoddir}/expr.process1.R"
+bic_R=f"{methoddir}/bic.model.R"
+vpart_R=f"{methoddir}/variance.partition.R"
+bicplot_R=f"{methoddir}/bic.plot.R"
+
+### * rules
+### ** mcovar all
+rule mcovar_all:
+    input: ##expand(vpart,expr=expr),
+           expand(bicplot1,expr=expr,bmodel=basevars)
+
+### ** mcovar one
+rule mcovar_one:
+    message: "filter, TMM/Voom normalize and preselect covariates"
+    input: expr = lambda wildcards: expr[wildcards.expr],
+           covar= covar
+    output: expr=expr_filtered, covar=covar_filtered, genelist=genelist
+    params: script = filter_R, thold=thold
+    shell: "Rscript {params.script} {input.expr} {input.covar} {output.expr} {output.covar} "
+           "{output.genelist} {params.thold}"
+
+rule mcovar_vpart:
+    message: "variance partition"
+    input: expr = expr_filtered, covar = covar_filtered
+    output: vpart
+    params: script = vpart_R
+    shell: "Rscript {params.script} {input.expr} {input.covar} {output}"
+
+### ** mcovar two
+rule mcovar_splitgenes:
+    message:"split the gene list"
+    input: genelist
+    output: dynamic(genebatch)
+    params: out=genebatch_prefix
+    shell:"split -dl 200 -a 3 {input} {params.out}"
+
+rule mcovar_BIC:
+    message: "BIC models selection for all genes"
+    input: expr = expr_filtered,
+           covar = covar_filtered, genebatch=genebatch
+    output: bic_sub
+    params: script = bic_R, basevars = basevars
+    shell: "Rscript {params.script} {input.expr} {input.covar} {output} {input.genebatch} "
+           "{params.basevars}"
+
+rule mcovar_BIC_merge:
+    message: "collect BIC results"
+    input: dynamic(bic_sub)
+    output: bicmerge
+    run:
+        shell("head -1 {input[0]} > {output}")
+        for i in input:
+            shell("cat {i} | sed 1d >> {output}")
+
+rule mcovar_BIC_plot:
+    message: "bic models plot"
+    input: bicmerge
+    output: plot1=bicplot1, plot2=bicplot2
+    params: script=bicplot_R
+    shell:"Rscript {params.script} {input} {output.plot1} {output.plot2}"
+
+### * org mode specific
+### Local Variables:
+### eval: (orgstruct-mode 1)
+### orgstruct-heading-prefix-regexp: "### "
+### End:
+
+
+

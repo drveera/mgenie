@@ -1,0 +1,31 @@
+
+meta = config['meta']
+if meta:
+    meta_nocov = meta[:]
+    if "cov" in meta:
+        meta_nocov.remove("cov")
+else:
+    meta_nocov = None
+        
+
+meta_prefix = f"{pfix_rare}/meta/{{wcard}}_{{wcardM}}"
+outfile_meta = f"{pfix_rare}/meta/.{{wcard}}_{{wcardM}}.assoc.ok"
+
+rule rare_meta:
+    input: vcf = infile, pheno = phenocov
+    output: outfile_meta
+    params: script = rvtest, out = meta_prefix, geneflat = geneflat
+    shell:
+        "{{params.script}} --inVcf {{input.vcf}} --pheno {{input.pheno}} \
+        --out {{params.out}} --geneFile {{params.geneflat}} \
+        --meta {{wildcards.wcardM}} {covar} {covarName} {gene} {geneFile} {pheno_name} \
+        --inverseNormal --useResidualAsPhenotype \
+        && touch {{output}} || touch {{output}}"
+        .format(
+            covar = "--covar " + covar if covar else "",
+	    covarName = "--covar-name " + covarName if covarName else "",
+            gene = "--gene " + gene if gene else "",
+            geneFile = "--geneFile " + geneFile if geneFile else "",
+            pheno_name = "--pheno-name " + pheno_name if pheno_name else ""
+        )
+

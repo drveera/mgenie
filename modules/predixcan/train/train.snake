@@ -1,0 +1,65 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+gds = config['--gds']
+expr = config['--expr']
+snpannot = config['--snpannot']
+genes = config['--genes']
+genes = process_list(genes) ##wildcard
+pfix_train = config['pfix_train']
+
+##scripts
+gds_subset_R = f"{methoddir}/gds.sub.R"
+trainmodel_R = f"{methoddir}/cvelastic.R"
+
+##outfiles
+subgds = f"{pfix_train}intermediatefiles/{{genes}}.gds"
+subannot = f"{pfix_train}intermediatefiles/{{genes}}.annot.RDS"
+geneweights = f"{pfix_train}intermediatefiles/{{genes}}.weights"
+modelsummary = f"{pfix_train}intermediatefiles/{{genes}}.modelsummary"
+allweights = f"{pfix_train}/finalfiles/snp.weights"
+allmodels = f"{pfix_train}/finalfiles/model.summary"
+
+rule train_all:
+    input: allweights, allmodels
+
+rule train_subset_gds:
+    input: genes = lambda wildcards: genes[wildcards.genes], snpannot=snpannot,
+           gds = gds
+    output: gds=temp(subgds),annot=temp(subannot)
+    params: script = gds_subset_R
+    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {output.gds} {output.annot} "
+
+rule train_model:
+    input: gds = subgds, genes = lambda wildcards: genes[wildcards.genes],
+           snpannot = subannot, expr=expr
+    output: geneweights = temp(geneweights), modelsummary = temp(modelsummary)
+    params: script = trainmodel_R
+    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {input.expr} {output.geneweights}"
+           " {output.modelsummary}"
+
+rule train_genelist:
+    input: wts=expand(geneweights, genes=genes),
+           models = expand(modelsummary, genes=genes)
+    output: wts = allweights, models = allmodels
+    run:
+        shell("head -1 {input.wts[0]} > {output.wts}")
+        for i in input.wts:
+            shell("cat {i} | sed 1d  >> {output.wts}")
+        shell("head -1 {input.models[0]} > {output.models}")
+        for i in input.models:
+            shell("cat {i} | sed 1d >> {output.models}")
+
+'''
+rule train_db:
+    input: gene_list
+    output: db
+    shell: "Rscript {input} {output}"
+'''
