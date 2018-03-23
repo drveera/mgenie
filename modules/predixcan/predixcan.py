@@ -12,6 +12,7 @@ train    train prediction models
 predict  predict gene expressions
 qc-dna   qc vcf files
 qc-rna   qc gene expression matrix/covariates
+fqtl     run fqtl run
 
 type 'genie predixcan <method> --help' for more information on specific command
 For example, type 'genie predixcan train --help'
@@ -35,7 +36,7 @@ argv = [arguments['<method>']] + arguments['<args>']
 ########################################################################################################
 # CHECK IF METHOD IS VALID
 method = arguments['<method>']
-gwasmethods = ['train','qc-dna','predict','-h','--help','qc-samples','metax','covar']
+gwasmethods = ['train','qc-dna','predict','-h','--help','qc-samples','metax','covar','fqtl']
 if method not in gwasmethods:
     exit(method + " is not valid")
 ########################################################################################################
