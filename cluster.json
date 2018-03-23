@@ -1,0 +1,41 @@
+
+{
+    "__default__":
+    {
+        "P" : "acc_epigenAD",
+        "n" : 1,
+        "q" : "expressalloc",
+        "W" : "2:00",
+        "R" : "rsuage[mem=2000]",
+        "M" : "2000",
+        "output": "{rule}.{wildcards}.out",
+        "error": "{rule}.err"
+    },
+    "train_subset_gds":
+    {
+        "R" : "rsuage[mem=4000]",
+        "M" : "16000"
+    },
+    "qcdna_harmonize":
+    {
+        "M":"4000"
+    },
+    "qcdna_gen2gds":
+    {
+        "M":"16000",
+        "W":"48:00",
+        "q":"alloc"
+    },
+    "qcsamples_harmonize":
+    {
+        "M":"4000"
+    },
+    "mcovar_vpart":
+    {
+        "M":"16000"
+    },
+    "mcovar_one":
+    {
+        "M":"8000"
+    }
+}
