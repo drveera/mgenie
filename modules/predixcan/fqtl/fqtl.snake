@@ -1,0 +1,111 @@
+#!/bin/env snakemake
+
+### * routine
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+
+### * config load
+vcf = config['--vcf']
+expr = process_list(config['--expr'])
+covar = config['--covar']
+pfix = config['pfix_fqtl']
+oargs = config['--oargs']
+
+### * scripts
+peer_R = f"{methoddir}/peer.R"
+prepare_R = f"{methoddir}/prepare.bed.covar.R"
+plotcounts_R = f"{methoddir}/plotcounts.R"
+
+### default values
+peer = list(range(1,12))
+pfactors = 10
+### * outfiles
+peermodel=f"{pfix}_intermediatefiles/{{expr}}.peer.model.RDS"
+peerfactors=f"{pfix}_intermediatefiles/{{expr}}.peer.factors.RDS"
+bedout=f"{pfix}_intermediatefiles/{{expr}}.bed"
+bedformatted=f"{pfix}_intermediatefiles/{{expr}}.formatted.bed.gz"
+bedformatted_pre=f"{pfix}_intermediatefiles/{{expr}}.formatted.bed"
+covarout_pre=f"{pfix}_intermediatefiles/{{expr}}"
+covarout=f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.pcovar"
+covarout_part=f"{pfix}_intermediatefiles/{{{{expr}}}}.{{peer}}.pcovar"
+nominalout = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.nominalout"
+nominalout_part = f"{pfix}_intermediatefiles/{{{{expr}}}}.{{peer}}.nominalout"
+qtlcounts = f"{pfix}_finalfiles/{{expr}}.qtlcounts"
+countplot = f"{pfix}_finalfiles/{{expr}}.qtlcounts.pdf"
+
+### * rules
+### ** final files
+rule fqtl_all:
+    input: expand(countplot, expr=expr),
+           expand(qtlcounts, expr=expr),
+           expand(nominalout, peer=peer, expr=expr),
+           expand(bedout, expr=expr),
+           expand(covarout,expr=expr,peer=peer)
+
+### ** rule peer
+rule fqtl_peer:
+    input: expr = lambda wildcards: expr[wildcards.expr],
+           covar = covar
+    output: model=peermodel, factors=peerfactors
+    params: script = "module unload R && module load R/3.3.1 && Rscript",
+            scriptfile = peer_R, pfactors=pfactors,
+    shell: "{params.script} {params.scriptfile} {input.expr} {input.covar} "
+           "{output.model} {output.factors} {params.pfactors}"
+
+### ** rule fqtl prepare Inputs
+rule fqtl_prepareInputs:
+    input: expr = lambda wildcards: expr[wildcards.expr],
+           covar = covar, factors=peerfactors
+    output: covar = expand(covarout_part, peer=peer),
+            bed = bedout
+    params: script = prepare_R, covarout=covarout_pre
+    shell: "Rscript {params.script} {input.expr} {input.covar} {input.factors} "
+           "{output.bed} {params.covarout}"
+
+### ** format bed file
+rule fqtl_formatbed:
+    input: bedout
+    output: bedformatted
+    params: scriptLoad = "module load bedtools htslib", bedpre=bedformatted_pre
+    shell: "{params.scriptLoad} && "
+           "head -1 {input} > {output}.header &&"
+           "bedtools sort -i {input} > {output}.sorted.bed &&"
+           "cat {output}.header {output}.sorted.bed > {params.bedpre} &&"
+           "bgzip {params.bedpre} && tabix -p bed {output}"
+
+
+### ** rule run QTL analysis
+rule fqtl_runQTL:
+    input: vcf = vcf, bed = bedformatted, covar = covarout
+    output: nominalout
+    params: script="module load qtltools && QTLtools"
+    shell: "{params.script} cis --vcf {input.vcf} --bed {input.bed} "
+           "--cov {input.covar} --nominal 0.01 --out {output} {oargs}"
+
+### ** rule count eqtl hits
+rule fqtl_counthits:
+    input: expand(nominalout_part, peer=peer)
+    output: qtlcounts
+    run:
+        for i in input:
+            shell("wc -l {i} >> {output}")
+
+### ** rule plotcounts
+rule fqtl_plotcounts:
+    input: qtlcounts
+    output: countplot
+    params: script = plotcounts_R
+    shell: "Rscript {params.script} {input} {output}"
+
+### * org mode sepcific
+### Local Variables:
+### eval: (orgstruct-mode 1)
+### orgstruct-heading-prefix-regexp: "### "
+### End:
+

@@ -4,11 +4,11 @@
 '''
 
 usage:
- predixcan fqtl [options] --vcf=FILE --bed=FILE
+ predixcan fqtl [options] --vcf=FILE --expr=RDS
 
 options:
  --vcf=FILE        vcf file
- --bed=FILE        phenotype bed file
+ --expr=RDS        expression rds file or list
  --covar=FILE      covariate file
  --oargs=ARGS      other arguments to pass within quotes
  --out=PREFIX      outname prefix [default: predixcan]
