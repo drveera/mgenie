@@ -16,81 +16,57 @@ expr = process_list(config['--expr'])
 covar = config['--covar']
 pfix = config['pfix_fqtl']
 oargs = config['--oargs']
-pfactors = int(config['--npeer'])
 
 ### * scripts
 peer_R = f"{methoddir}/peer.R"
 prepare_R = f"{methoddir}/prepare.bed.covar.R"
-prepare_covar_R = f"{methoddir}/prepare.covars.R"
-plotcounts_R= f"{methoddir}/plotcounts.R"
-calcResiduals_R = f"{methoddir}/residuals.sample.R"
-createbed_R = f"{methoddir}/create.bed.R"
+plotcounts_R = f"{methoddir}/plotcounts.R"
 
-### * default values
-##pfactors = 40 ##from config
-peer = list(range(0,pfactors+1))
+### default values
+peer = list(range(1,12))
+pfactors = 10
 ### * outfiles
-expr_dge = f"{pfix}_intermediatefiles/{{expr}}.dge"
 peermodel=f"{pfix}_intermediatefiles/{{expr}}.peer.model.RDS"
 peerfactors=f"{pfix}_intermediatefiles/{{expr}}.peer.factors.RDS"
-bedout=f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.pcovar.residuals.bed"
-bedformatted=f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.pcovar.residuals.formatted.bed.gz"
-bedformatted_pre=f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.pcovar.residuals.formatted.bed"
-##bedformatted=f"{pfix}_intermediatefiles/{{expr}}.formatted.bed.gz"
-##bedformatted_pre=f"{pfix}_intermediatefiles/{{expr}}.formatted.bed"
+bedout=f"{pfix}_intermediatefiles/{{expr}}.bed"
+bedformatted=f"{pfix}_intermediatefiles/{{expr}}.formatted.bed.gz"
+bedformatted_pre=f"{pfix}_intermediatefiles/{{expr}}.formatted.bed"
 covarout_pre=f"{pfix}_intermediatefiles/{{expr}}"
 covarout=f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.pcovar"
 covarout_part=f"{pfix}_intermediatefiles/{{{{expr}}}}.{{peer}}.pcovar"
-covarout_residuals=f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.pcovar.residuals"
 nominalout = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.nominalout"
 nominalout_part = f"{pfix}_intermediatefiles/{{{{expr}}}}.{{peer}}.nominalout"
 qtlcounts = f"{pfix}_finalfiles/{{expr}}.qtlcounts"
 countplot = f"{pfix}_finalfiles/{{expr}}.qtlcounts.pdf"
 
 ### * rules
-### ** define local rules
-localrules: fqtl_all, fqtl_prepareCovars, fqtl_createBed, fqtl_counthits, fqtl_plotcounts
 ### ** final files
 rule fqtl_all:
-    input: expand(countplot, expr=expr)
-           ##expand(bedformatted, expr=expr, peer=peer)
-           ##expand(covarout_residuals, expr=expr,peer=peer)
-           #expand(countplot, expr=expr),
-           #expand(qtlcounts, expr=expr),
-           #expand(nominalout, peer=peer, expr=expr),
-           #expand(bedout, expr=expr),
-           #expand(covarout,expr=expr,peer=peer)
+    input: expand(countplot, expr=expr),
+           expand(qtlcounts, expr=expr),
+           expand(nominalout, peer=peer, expr=expr),
+           expand(bedout, expr=expr),
+           expand(covarout,expr=expr,peer=peer)
+
 ### ** rule peer
 rule fqtl_peer:
     input: expr = lambda wildcards: expr[wildcards.expr],
            covar = covar
-    output: model=peermodel, factors=peerfactors, dge = expr_dge
+    output: model=peermodel, factors=peerfactors
     params: script = "module unload R && module load R/3.3.1 && Rscript",
             scriptfile = peer_R, pfactors=pfactors,
     shell: "{params.script} {params.scriptfile} {input.expr} {input.covar} "
-           "{output.model} {output.factors} {params.pfactors} {output.dge}"
+           "{output.model} {output.factors} {params.pfactors}"
 
 ### ** rule fqtl prepare Inputs
-rule fqtl_prepareCovars:
-    input: covar = covar, factors=peerfactors
-    output: covar = expand(covarout_part, peer=peer)
-    params: script = prepare_covar_R, covarout=covarout_pre, npeer = pfactors
-    shell: "Rscript {params.script} {input.covar} {input.factors} {params.covarout} {params.npeer}"
-
-### ** calculate residuals
-rule fqtl_calculateResiduals:
-    input: expr = expr_dge,
-           covar = covarout
-    output: covarout_residuals
-    params: script = calcResiduals_R
-    shell: "Rscript {params.script} {input.expr} {input.covar} {output}"
-
-### ** create bed file
-rule fqtl_createBed:
-    input: covarout_residuals
-    output: bedout
-    params: script = createbed_R
-    shell: "Rscript {params.script} {input} {output}"
+rule fqtl_prepareInputs:
+    input: expr = lambda wildcards: expr[wildcards.expr],
+           covar = covar, factors=peerfactors
+    output: covar = expand(covarout_part, peer=peer),
+            bed = bedout
+    params: script = prepare_R, covarout=covarout_pre
+    shell: "Rscript {params.script} {input.expr} {input.covar} {input.factors} "
+           "{output.bed} {params.covarout}"
 
 ### ** format bed file
 rule fqtl_formatbed:
@@ -103,13 +79,14 @@ rule fqtl_formatbed:
            "cat {output}.header {output}.sorted.bed > {params.bedpre} &&"
            "bgzip {params.bedpre} && tabix -p bed {output}"
 
+
 ### ** rule run QTL analysis
 rule fqtl_runQTL:
-    input: vcf = vcf, bed = bedformatted
+    input: vcf = vcf, bed = bedformatted, covar = covarout
     output: nominalout
     params: script="module load qtltools && QTLtools"
     shell: "{params.script} cis --vcf {input.vcf} --bed {input.bed} "
-           " --nominal 0.01 --out {output} {oargs}"
+           "--cov {input.covar} --nominal 0.01 --out {output} {oargs}"
 
 ### ** rule count eqtl hits
 rule fqtl_counthits:

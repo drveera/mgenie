@@ -1,3 +1,5 @@
 *.swp
 *~
+.#*
+.Rhistory
 library/__pycache__/

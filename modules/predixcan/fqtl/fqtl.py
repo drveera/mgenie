@@ -11,14 +11,15 @@ options:
  --expr=RDS        expression rds file or list
  --covar=FILE      covariate file
  --oargs=ARGS      other arguments to pass within quotes
+ --npeer=NUMBER    number of peer factors  [default: 10]
  --out=PREFIX      outname prefix [default: predixcan]
  --nojob           run in front end
  --dry-run         just show the codes
  --int             submit jobs from front end
- --njobs=NUMBER    number of parallel jobs; applicable only when running 
+ --njobs=NUMBER    number of parallel jobs; applicable only when running
                     in front end
-
 '''
+
 from docopt import docopt
 import sys
 sys.path.insert(1, sys.path[0] + '/../../../library')
