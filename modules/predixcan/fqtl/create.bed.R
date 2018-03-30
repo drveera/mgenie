@@ -16,23 +16,14 @@ expr <- readRDS(residuals.file)
 ##genes in rows and ids in columns, so transpose it
 expr <- t(expr)
 
-### * read the input bed file 
-#genes <- colnames(expr)
-#genes <- gsub("\\..*$","",genes)
-#ensembl <- useMart("ensembl",dataset="hsapiens_gene_ensembl")
-
-#my_refseq <- getBM(attributes=c("ensembl_gene_id","start_position","end_position","chromosome_name","strand"),
-#                   filters = c("ensembl_gene_id"),
-#                   values =genes,
-#                   mart = ensembl)
-#c22 <- my_refseq[my_refseq$chromosome_name == "22",]
-#c22 <- data.table(c22)
-#c22$strand <- ifelse(c22$strand == "-1", "-","+")
-#names(c22) <- c("pid","start","end","Chr","strand")
+### * read the input bed file
 c22 <- fread(bed.file)
 
 ##change the names of expr
 colnames(expr) <- genes
+genes <- colnames(expr)
+genes <- gsub("\\..*$","",genes)
+
 ##subset the expression
 expr <- expr[,c22$pid]
 ##transpose
