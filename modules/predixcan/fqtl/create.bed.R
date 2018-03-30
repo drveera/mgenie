@@ -20,9 +20,9 @@ expr <- t(expr)
 c22 <- fread(bed.file)
 
 ##change the names of expr
-colnames(expr) <- genes
 genes <- colnames(expr)
 genes <- gsub("\\..*$","",genes)
+colnames(expr) <- genes
 
 ##subset the expression
 expr <- expr[,c22$pid]
