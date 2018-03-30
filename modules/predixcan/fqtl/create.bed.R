@@ -25,7 +25,8 @@ genes <- gsub("\\..*$","",genes)
 colnames(expr) <- genes
 
 ##subset the expression
-expr <- expr[,c22$pid]
+genescommon <- intersect(c22$pid,genes)
+expr <- expr[,genescommon]
 ##transpose
 expr <- t(expr)
 expr <- as.data.frame(expr)
