@@ -46,7 +46,12 @@
     },
     "fqtl_peer":
     {
-    "W":"24:00",
-    "q":"premium"
+        "W":"24:00",
+        "q":"premium",
+        "M":"16000"
+    },
+    "fqtl_calculateResiduals":
+    {
+        "M":"16000"
     }
 }
