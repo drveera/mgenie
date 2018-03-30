@@ -12,6 +12,7 @@ options:
  --covar=FILE      covariate file
  --oargs=ARGS      other arguments to pass within quotes
  --npeer=NUMBER    number of peer factors  [default: 10]
+ --bed=annotation  bed file annotation for genes
  --out=PREFIX      outname prefix [default: predixcan]
  --nojob           run in front end
  --dry-run         just show the codes

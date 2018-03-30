@@ -17,6 +17,7 @@ covar = config['--covar']
 pfix = config['pfix_fqtl']
 oargs = config['--oargs']
 pfactors = int(config['--npeer'])
+bed = config['--bed']
 
 ### * scripts
 peer_R = f"{methoddir}/peer.R"
@@ -87,10 +88,10 @@ rule fqtl_calculateResiduals:
 
 ### ** create bed file
 rule fqtl_createBed:
-    input: covarout_residuals
+    input: expr=covarout_residuals, bed = bed
     output: bedout
     params: script = createbed_R
-    shell: "Rscript {params.script} {input} {output}"
+    shell: "Rscript {params.script} {input.expr} {input.bed} {output}"
 
 ### ** format bed file
 rule fqtl_formatbed:

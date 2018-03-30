@@ -52,6 +52,14 @@
     },
     "fqtl_calculateResiduals":
     {
-        "M":"16000"
+        "q":"premium",
+        "M":"16000",
+        "W":"12:00"
+    },
+    "fqtl_runQTL":
+    {
+        "q":"premium",
+        "M":"8000",
+        "W":"12:00"
     }
 }
