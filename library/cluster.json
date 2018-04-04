@@ -23,8 +23,8 @@
     "qcdna_gen2gds":
     {
         "M":"16000",
-        "W":"48:00",
-        "q":"alloc"
+        "W":"12:00",
+        "q":"premium"
     },
     "qcsamples_harmonize":
     {

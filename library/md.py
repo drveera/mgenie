@@ -40,7 +40,7 @@ def main(args, methods):
         if args['--nojob']:
             njobs = 1
         else:
-            njobs = 100000
+            njobs = 1
 
 
     cmds = f"snakemake -j {njobs} --use-conda --keep-going " \

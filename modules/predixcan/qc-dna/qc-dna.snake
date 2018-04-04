@@ -25,9 +25,7 @@ vcfout1_tbi = f"{pfix}_intermediatefiles/{{vcf}}.filtered.vcf.gz.tbi"
 vcfout2_prefix = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose"
 vcfout2_gen = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.gen"
 vcfout2_sample = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.sample"
-mergedgen = f"{pfix}_finalfiles/merged.gen"
-mergedsample = f"{pfix}_finalfiles/merged.sample"
-gdsout = f"{pfix}_finalfiles/merged.gds"
+gdsout = f"{pfix}_finalfiles/{{vcf}}.gds"
 
 ##scripts
 gh="/hpc/users/xrajagv01/installs/GenotypeHarmonizer-1.4.20-SNAPSHOT/GenotypeHarmonizer.sh"
@@ -35,7 +33,7 @@ listATGC_R=f"{methoddir}/list.ambiSNPs.R"
 gen2gds_R=f"{methoddir}/gentogds.R"
 
 rule qcdna_all:
-    input: gdsout
+    input: expand(gdsout,vcf=vcf)
 
 rule qcdna_filter1:
     input: vcf = lambda wildcards: vcf[wildcards.vcf]
@@ -59,6 +57,7 @@ rule qcdna_harmonize:
     shell: "{params.script} --input {input.vcf} --inputType VCF --output {params.prefix} "
            "--outputType GEN -id -ura --ref {input.ref}"
 
+'''
 rule qcdna_merge_gen:
     input: expand(vcfout2_gen, vcf=vcf)
     output: gen=mergedgen, sample=mergedsample
@@ -67,10 +66,11 @@ rule qcdna_merge_gen:
             shell("cat {i} >> {output.gen}")
         newsample=input[0].replace(".gen",".sample")
         shell("cp {newsample} {output.sample}")
+'''
 
 rule qcdna_gen2gds:
-    input:gen = mergedgen, sample = mergedsample
+    input:gen = vcfout2_gen
     output:gdsout
     params: script=gen2gds_R
     shell:
-        "Rscript {params.script} {input.gen} {input.sample} {output}"
+        "Rscript {params.script} {input.gen} {output}"

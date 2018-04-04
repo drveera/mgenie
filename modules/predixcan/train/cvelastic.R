@@ -1,11 +1,11 @@
 #!/bin/env Rscript
-
 args <- commandArgs(trailingOnly = TRUE)
 library(glmnet)
 library(data.table)
 library(GWASTools)
 library(SNPRelate)
 library(GenomicRanges)
+library(dplyr)
 ##function
 
 cvElastic <- function(gene,geneid,snp,
@@ -69,8 +69,8 @@ expr.file <- args[4]
 output1 <- args[5]
 output2 <- args[6]
 
-
 genes <- fread(genes.file, header=FALSE)
+print(genes)
 names(genes) <- c("gene","chr","start","end")
 genes$start <- genes$start - 1000000
 genes$end <- genes$end + 1000000
@@ -95,25 +95,35 @@ for(i in 1:nrow(genes)){
   gdsSubset(gds.file,tempgds, snp.include = index)
   mgds <- snpgdsOpen(tempgds)
   genos <- read.gdsn(index.gdsn(mgds, "genotype"))
-  snpids <- read.gdsn(index.gdsn(mgds,"snp.rs.id"))
+  print(dim(genos))
+  ##snpids <- read.gdsn(index.gdsn(mgds,"snp.rs.id"))
+  snpids <- as.data.frame(snpannot.sub)$rsid
   sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))
-  rownames(genos) <- sampleids
-  colnames(genos) <- snpids
   closefn.gds(mgds)
-  file.remove(tempgds)
-  expr1 <- expr[,gene$gene,with=FALSE]
-  expr1 <- unlist(expr1)
-  names(expr1) <- expr$sample
-  genos <- genos[rownames(genos)%in% names(expr1),]
-  expr1 <- expr1[rownames(genos)]
-  gene.model <- tryCatch(cvElastic(gene=expr1,snp=genos,geneid=gene$gene),
-                         error=function(e) return(NULL))
+  if(is.null(dim(genos))){
+    r <- data.table(gene=gene$gene,error = "genos is null")
+    gene.model <- list(r,r)
+  } else {
+    rownames(genos) <- sampleids
+    colnames(genos) <- snpids
+    file.remove(tempgds)
+    expr1 <- expr[,gene$gene,with=FALSE]
+    expr1 <- unlist(expr1)
+    names(expr1) <- expr$sample
+    genos <- genos[rownames(genos)%in% names(expr1),]
+    expr1 <- expr1[rownames(genos)]
+    gene.model <- tryCatch(cvElastic(gene=expr1,snp=genos,geneid=gene$gene),
+                           error=function(e) {
+                             r <- data.table(gene=gene$gene,error=paste0(e))
+                             return(list(r,r))
+                           } )
+  }
   genesmodel1[[i]] <- gene.model[[1]]
   genesmodel2[[i]] <- gene.model[[2]]
 }
 
-genesmodel1 <- do.call(rbind,genesmodel1)
-genesmodel2 <- do.call(rbind,genesmodel2)
+genesmodel1 <- do.call(bind_rows,genesmodel1)
+genesmodel2 <- do.call(bind_rows,genesmodel2)
 
 fwrite(genesmodel1,output1,na="NA")
 fwrite(genesmodel2,output2,na="NA")

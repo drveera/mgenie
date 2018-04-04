@@ -50,7 +50,7 @@ countplot = f"{pfix}_finalfiles/{{expr}}.qtlcounts.pdf"
 
 ### * rules
 ### ** define local rules
-##localrules: fqtl_all, fqtl_prepareCovars, fqtl_createBed, fqtl_counthits, fqtl_plotcounts
+localrules: fqtl_all, fqtl_prepareCovars, fqtl_createBed, fqtl_counthits, fqtl_plotcounts
 ### ** final files
 rule fqtl_all:
     input: expand(countplot, expr=expr)
