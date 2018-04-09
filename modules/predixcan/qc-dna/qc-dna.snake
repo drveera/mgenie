@@ -26,14 +26,22 @@ vcfout2_prefix = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose"
 vcfout2_gen = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.gen"
 vcfout2_sample = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.sample"
 gdsout = f"{pfix}_finalfiles/{{vcf}}.gds"
+gdsout1 = f"{pfix}_finalfiles/{{vcf}}.copy.gds"
+
+gdslist = f"{pfix}_intermediatefiles/gds.list"
+mergedgds = f"{pfix}_finalfiles/merged_gds"
+
+
 
 ##scripts
 gh="/hpc/users/xrajagv01/installs/GenotypeHarmonizer-1.4.20-SNAPSHOT/GenotypeHarmonizer.sh"
 listATGC_R=f"{methoddir}/list.ambiSNPs.R"
 gen2gds_R=f"{methoddir}/gentogds.R"
+mergegds_R=f"{methoddir}/mergegds.R"
+
 
 rule qcdna_all:
-    input: expand(gdsout,vcf=vcf)
+    input: mergedgds
 
 rule qcdna_filter1:
     input: vcf = lambda wildcards: vcf[wildcards.vcf]
@@ -57,20 +65,23 @@ rule qcdna_harmonize:
     shell: "{params.script} --input {input.vcf} --inputType VCF --output {params.prefix} "
            "--outputType GEN -id -ura --ref {input.ref}"
 
-'''
-rule qcdna_merge_gen:
-    input: expand(vcfout2_gen, vcf=vcf)
-    output: gen=mergedgen, sample=mergedsample
-    run:
-        for i in input:
-            shell("cat {i} >> {output.gen}")
-        newsample=input[0].replace(".gen",".sample")
-        shell("cp {newsample} {output.sample}")
-'''
 
 rule qcdna_gen2gds:
     input:gen = vcfout2_gen
-    output:gdsout
+    output:gds=gdsout, gdscopy=gdsout1
     params: script=gen2gds_R
     shell:
-        "Rscript {params.script} {input.gen} {output}"
+        "Rscript {params.script} {input.gen} {output.gds} {output.gdscopy}"
+
+rule qcdna_listgds:
+    input: expand(gdsout1, vcf=vcf)
+    output: gdslist
+    run:
+        for i in input:
+            shell("ls {i} >> {output}")
+
+rule qcdna_mergegds:
+    input: gdslist
+    output: mergedgds
+    params: script = mergegds_R
+    shell: "Rscript {params.script} {input} {output}"
