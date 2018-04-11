@@ -32,7 +32,9 @@ clist <- list(rsids,snp.positions,snp.chromosomes,snp.alleles)
 refnames <- names(clist[[1]])
 if(!all(sapply(clist,function(x) all(names(x)==refnames)))) stop("names don't match between elements")
 ## genotypes
-genotypes <- do.call(rbind,lapply(gds.list, function(x) return(read.gdsn(index.gdsn(x,"genotype")))))
+##genotypes <- do.call(rbind,lapply(gds.list, function(x) return(read.gdsn(index.gdsn(x,"genotype")))))
+g.list <- lapply(gds.list, function(x) return(read.gdsn(index.gdsn(x,"genotype"))))
+for(i in 1:lengt
 
 ## create gds file
 f <- createfn.gds(out.file)

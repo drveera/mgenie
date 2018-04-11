@@ -18,7 +18,6 @@ pfix_train = config['pfix_train']
 ##scripts
 gds_subset_R = f"{methoddir}/gds.sub.R"
 trainmodel_R = f"{methoddir}/cvelastic.R"
-
 ##outfiles
 subgds = f"{pfix_train}intermediatefiles/{{genes}}.gds"
 subannot = f"{pfix_train}intermediatefiles/{{genes}}.annot.RDS"

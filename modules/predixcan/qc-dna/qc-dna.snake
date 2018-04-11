@@ -11,7 +11,8 @@ from os.path import basename
 ##inputs
 vcf = config['--vcf']
 vcf = process_list(vcf)
-
+ifilter = config['--ifilter']
+print(ifilter)
 ref = config['--ref']
 if ref == "hrc":
     ref = f"{maindir}/resources/qc-dna/hrc/.."
@@ -25,31 +26,35 @@ vcfout1_tbi = f"{pfix}_intermediatefiles/{{vcf}}.filtered.vcf.gz.tbi"
 vcfout2_prefix = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose"
 vcfout2_gen = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.gen"
 vcfout2_sample = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.sample"
-gdsout = f"{pfix}_finalfiles/{{vcf}}.gds"
-gdsout1 = f"{pfix}_finalfiles/{{vcf}}.copy.gds"
-
-gdslist = f"{pfix}_intermediatefiles/gds.list"
-mergedgds = f"{pfix}_finalfiles/merged_gds"
-
-
+vcfout2_sample2 = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.sample2"
+vcfout2_vcf = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.vcf"
+vcfout2_vcf_gz = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.vcf.gz"
+vcfout2_vcf_index = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.vcf.gz.tbi"
+vcflist = f"{pfix}_intermediatefiles/vcf.list"
+mergedvcf = f"{pfix}_finalfiles/merged.vcf.gz"
+mergedvcf_index = f"{pfix}_finalfiles/merged.vcf.gz.tbi"
+mergedgds = f"{pfix}_finalfiles/merged.gds"
+annot = f"{pfix}_finalfiles/merged.gds.annot.RDS"
 
 ##scripts
 gh="/hpc/users/xrajagv01/installs/GenotypeHarmonizer-1.4.20-SNAPSHOT/GenotypeHarmonizer.sh"
 listATGC_R=f"{methoddir}/list.ambiSNPs.R"
 gen2gds_R=f"{methoddir}/gentogds.R"
 mergegds_R=f"{methoddir}/mergegds.R"
-
+sampleformat_R = f"{methoddir}/formatsample.R"
+vcf2gds_R = f"{methoddir}/vcf2gds.R"
+gdsannot_R = f"{methoddir}/gdsannot.R"
 
 rule qcdna_all:
-    input: mergedgds
+    input: annot
 
 rule qcdna_filter1:
     input: vcf = lambda wildcards: vcf[wildcards.vcf]
     output: vcfout1
-    params:
+    params: script = "module load bcftools/1.6 && ",
+            ifilter = ifilter
     shell:
-        "module load bcftools/1.6 && "
-        "bcftools view -m2 -M2 -i 'MAF>0.01 & R2>0.8' -v snps -o {output} -O z {input.vcf} "
+        "bcftools view -m2 -M2 -i '{ifilter}' -v snps -o {output} -O z {input.vcf} "
 
 rule qcdna_tabix1:
     input: vcf = vcfout1
@@ -60,28 +65,65 @@ rule qcdna_tabix1:
 
 rule qcdna_harmonize:
     input: vcf=vcfout1, ref=ref, tbi=vcfout1_tbi
-    output: vcfout2_gen
+    output: vcfout2_gen, vcfout2_sample
     params: script = gh, prefix=vcfout2_prefix
     shell: "{params.script} --input {input.vcf} --inputType VCF --output {params.prefix} "
            "--outputType GEN -id -ura --ref {input.ref}"
 
+rule qcdna_sampleFormatting:
+    input: vcfout2_sample
+    output: vcfout2_sample2
+    params: script = sampleformat_R
+    shell: "Rscript {params.script} {input} {output}"
 
-rule qcdna_gen2gds:
-    input:gen = vcfout2_gen
-    output:gds=gdsout, gdscopy=gdsout1
-    params: script=gen2gds_R
-    shell:
-        "Rscript {params.script} {input.gen} {output.gds} {output.gdscopy}"
+rule qcdna_gen2vcf:
+    input: gen = vcfout2_gen, sample = vcfout2_sample2
+    output: vcfout2_vcf
+    params: script = "module load qctool && qctool "
+    shell: "{params.script} -g {input.gen} -s {input.sample} -og {output}"
 
-rule qcdna_listgds:
-    input: expand(gdsout1, vcf=vcf)
-    output: gdslist
+rule qcdna_vcfZip:
+    input: vcfout2_vcf
+    output: vcfout2_vcf_gz
+    params: script = "module load htslib && bgzip "
+    shell: "{params.script} {input}"
+
+rule qcdna_vcfIndex:
+    input: vcfout2_vcf_gz
+    output: vcfout2_vcf_index
+    params: script = "module load htslib && tabix -p vcf"
+    shell: "{params.script} {input}"
+
+rule qcdna_listVcf:
+    input: vcf = expand(vcfout2_vcf_gz, vcf=vcf),
+           index = expand(vcfout2_vcf_index, vcf=vcf)
+    output: vcflist
     run:
-        for i in input:
+        for i in input.vcf:
             shell("ls {i} >> {output}")
 
-rule qcdna_mergegds:
-    input: gdslist
+rule qcdna_vcfMerge:
+    input: vcflist
+    output: mergedvcf
+    params: script="module load bcftools && bcftools "
+    shell: "{params.script} concat -f {input} -o {output} -O z"
+
+'''
+rule qcdna_mergedvcfIndex:
+    input: mergedvcf
+    output: mergedvcf_index
+    params: script = "module load htslib && tabix -p vcf "
+    shell: "{params.script} {input}"
+'''
+rule qcdna_vcf2gds:
+    input: vcf = mergedvcf
     output: mergedgds
-    params: script = mergegds_R
-    shell: "Rscript {params.script} {input} {output}"
+    params: script = vcf2gds_R
+    shell: "Rscript {params.script} {input.vcf} {output}"
+
+rule qcdna_gdsAnnot:
+    input: mergedgds
+    output: annot
+    params: script = gdsannot_R
+    shell:"Rscript {params.script} {input} {output}"
+

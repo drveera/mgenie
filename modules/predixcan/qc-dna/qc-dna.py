@@ -7,14 +7,14 @@ usage:
  predixcan qc-dna [options] --vcf=FILE
 
 options:
- --vcf=FILE        bgzipped and indexed vcf file or list
- --ref=FILE        bgzipped and indexed referrence vcf file
- --out=PREFIX      outname prefix [default: predixcan]
- --nojob           run in front end
- --dry-run         just show the codes
- --int             control job submission from frontend
- --njobs=NUMBER    number of parallel jobs; applicable only when running 
-                    in front end
+ --vcf=FILE             bgzipped and indexed vcf file or list
+ --ref=FILE             bgzipped and indexed referrence vcf file
+ --ifilter=EXPRESSION   filter expression  [default: 'MAF>0.01 & R2>0.8']
+ --out=PREFIX           outname prefix [default: predixcan]
+ --nojob                run in front end
+ --dry-run              just show the codes
+ --int                  control job submission from frontend
+ --njobs=NUMBER         number of parallel jobs; applicable only when running in front end
 
 '''
 from docopt import docopt
