@@ -15,7 +15,7 @@ library(metaxcanr)
 library(data.table)
 res <- metaxcan(gwas.file = gwas.file,
                 db.file = db.file, snpcov.file = paste0("zcat ",cov.file),
-                genes = genes)
+                genes = genes, return.snpinfo=TRUE)
 
 if(is.null(res)){
   file.create(out.file)
