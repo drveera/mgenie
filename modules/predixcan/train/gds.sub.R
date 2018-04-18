@@ -23,7 +23,6 @@ snpannot.sub <- subsetByOverlaps(snpannot,genes.ranges)
 saveRDS(snpannot.sub,outannot)
 print(head(snpannot.sub))
 index <- as.data.frame(snpannot.sub)$index
-print(range(index))
 
 ##subset gds
 gdsSubset(gds.file, outgds, sample.include = NULL,

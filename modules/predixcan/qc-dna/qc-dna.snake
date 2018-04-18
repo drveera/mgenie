@@ -45,6 +45,7 @@ sampleformat_R = f"{methoddir}/formatsample.R"
 vcf2gds_R = f"{methoddir}/vcf2gds.R"
 gdsannot_R = f"{methoddir}/gdsannot.R"
 
+localrules: qcdna_all, qcdna_sampleFormatting, qcdna_listVcf
 rule qcdna_all:
     input: annot
 

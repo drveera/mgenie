@@ -6,8 +6,9 @@ library(GWASTools)
 library(SNPRelate)
 library(GenomicRanges)
 library(dplyr)
-##function
 
+
+##function
 cvElastic <- function(gene,geneid,snp,
                       nfolds=10,alpha=0.5){
   groupid <- sample(1:10,length(gene),replace=TRUE)
@@ -69,8 +70,15 @@ expr.file <- args[4]
 output1 <- args[5]
 output2 <- args[6]
 
+##test arguments
+##gds.file <- "merged.gds"
+##snpannot.file <- "merged.gds.annot.RDS"
+##genes.file <- "sample.gene"
+##expr.file <- "CMC.expr.txt.formatted"
+##output1 <- "testoutput1"
+##output2 <- "testoutput2"
+
 genes <- fread(genes.file, header=FALSE)
-print(genes)
 names(genes) <- c("gene","chr","start","end")
 genes$start <- genes$start - 1000000
 genes$end <- genes$end + 1000000
@@ -87,25 +95,30 @@ genesmodel1 <- list()
 genesmodel2 <- list()
 for(i in 1:nrow(genes)){
   gene <- genes[i]
-  cat("training gene: ",gene$gene,"\n")
+  cat("training gene:",gene$gene,"\n")
   gene.ranges <- with(gene, GRanges(seqnames = chr, IRanges(start=start,end=end), gene=gene))
   snpannot.sub <- subsetByOverlaps(snpannot,gene.ranges)
-  index <- as.data.frame(snpannot.sub)$index
-  tempgds <- paste0(".temp.",gene$gene,basename(output1),".gds")
-  gdsSubset(gds.file,tempgds, snp.include = index)
-  mgds <- snpgdsOpen(tempgds)
-  genos <- read.gdsn(index.gdsn(mgds, "genotype"))
-  print(dim(genos))
-  ##snpids <- read.gdsn(index.gdsn(mgds,"snp.rs.id"))
-  snpids <- as.data.frame(snpannot.sub)$rsid
-  sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))
-  closefn.gds(mgds)
-  if(is.null(dim(genos))){
+  if(nrow(as.data.frame(snpannot.sub)) == 0){
     r <- data.table(gene=gene$gene,error = "genos is null")
     gene.model <- list(r,r)
   } else {
+    index <- as.data.frame(snpannot.sub)$index
+    tempgds <- paste0(".temp.",gene$gene,basename(output1),".gds")
+    gdsSubset(gds.file,tempgds, snp.include = index)
+    mgds <- snpgdsOpen(tempgds)
+    genos <- read.gdsn(index.gdsn(mgds, "genotype"))
+    snpids <- read.gdsn(index.gdsn(mgds,"snp.rs.id"))
+    ##snpids <- as.data.frame(snpannot.sub)$rsid
+    rsids <- gsub(",.*$","",snpids)
+    chromosomes <- gsub("^.*,","",snpids)
+    sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))
+    alleles <- read.gdsn(index.gdsn(mgds,"snp.allele"))
+    alleles <- as.data.frame(do.call(rbind,strsplit(alleles, split="/")))
+    names(alleles) <- c("eff_allele","ref_allele")
+    alleles$rsid <- rsids
+    closefn.gds(mgds)
     rownames(genos) <- sampleids
-    colnames(genos) <- snpids
+    colnames(genos) <- rsids
     file.remove(tempgds)
     expr1 <- expr[,gene$gene,with=FALSE]
     expr1 <- unlist(expr1)
@@ -117,6 +130,7 @@ for(i in 1:nrow(genes)){
                              r <- data.table(gene=gene$gene,error=paste0(e))
                              return(list(r,r))
                            } )
+    if(!all(is.na(gene.model[[1]]$rsid))) gene.model[[1]] <- merge(gene.model[[1]],alleles,by="rsid")
   }
   genesmodel1[[i]] <- gene.model[[1]]
   genesmodel2[[i]] <- gene.model[[2]]
@@ -127,5 +141,3 @@ genesmodel2 <- do.call(bind_rows,genesmodel2)
 
 fwrite(genesmodel1,output1,na="NA")
 fwrite(genesmodel2,output2,na="NA")
-
-

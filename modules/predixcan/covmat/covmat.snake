@@ -1,0 +1,55 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+## from config
+gds = config['--gds']
+db = process_list(config['--db'])
+genes = process_list(config['--genes'])
+pfix = config['pfix_covmat']
+
+##outfiles
+subgds = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds"
+subannot = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds.annot.RDS"
+covmat_sub = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.covmat"
+covmat_sub_part = f"{pfix}_intermediatefiles/{{{{db}}}}/{{genes}}.covmat"
+covmat_merged = f"{pfix}_intermediatefiles/{{db}}.covmat"
+
+##scripts
+gds_subset_R = f"{methoddir}/gdssubset.R"
+covmat_R = f"{methoddir}/covmat.R"
+
+rule covmat_all:
+    input: expand(covmat_merged, db=db)
+
+rule covmat_subset_gds:
+    input: gds = gds, db = lambda wildcards: db[wildcards.db],
+           genes = lambda wildcards: genes[wildcards.genes],
+           snpannot=gds + ".annot.RDS"
+    output: gds = temp(subgds), annot=temp(subannot)
+    params: script = gds_subset_R
+    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {input.db} "
+           "{output.gds} {output.annot}"
+
+rule covmat_covariance:
+    input: gds = subgds, annot= subannot, genes=lambda wildcards: genes[wildcards.genes],
+           db=lambda wildcards: db[wildcards.db]
+    output: covmat_sub
+    params: script = covmat_R
+    shell: "Rscript {params.script} {input.gds} {input.annot} {input.genes} {input.db} {output}"
+
+
+rule covmat_concat:
+    input: expand(covmat_sub_part, genes=genes)
+    output: covmat_merged
+    run:
+        shell("head -1 {input[0]} >> {output}")
+        for i in input:
+            shell("cat {i} | sed 1d >> {output}")
+

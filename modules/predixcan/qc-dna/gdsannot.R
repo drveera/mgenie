@@ -18,7 +18,7 @@ rsid <- gsub(",.*$","",rsid)
 position <- read.gdsn(index.gdsn(mgds,"snp.position"))
 index <- read.gdsn(index.gdsn(mgds,"snp.id"))
 
-gds.ranges <- GRanges(seqnames = chrom, IRanges(start=position,end=position+1),index=index)
+gds.ranges <- GRanges(seqnames = chrom, IRanges(start=position,end=position+1),index=index, rsid = rsid)
 
 saveRDS(gds.ranges,outfile)
 

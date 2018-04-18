@@ -18,16 +18,19 @@ pfix_train = config['pfix_train']
 ##scripts
 gds_subset_R = f"{methoddir}/gds.sub.R"
 trainmodel_R = f"{methoddir}/cvelastic.R"
+db_R = f"{methoddir}/createdb.R"
+
 ##outfiles
 subgds = f"{pfix_train}intermediatefiles/{{genes}}.gds"
 subannot = f"{pfix_train}intermediatefiles/{{genes}}.annot.RDS"
 geneweights = f"{pfix_train}intermediatefiles/{{genes}}.weights"
 modelsummary = f"{pfix_train}intermediatefiles/{{genes}}.modelsummary"
-allweights = f"{pfix_train}/finalfiles/snp.weights"
-allmodels = f"{pfix_train}/finalfiles/model.summary"
+allweights = f"{pfix_train}_finalfiles/snp.weights"
+allmodels = f"{pfix_train}_finalfiles/model.summary"
+db = f"{pfix_train}_finalfiles/model.db"
 
 rule train_all:
-    input: allweights, allmodels
+    input: allweights, allmodels, db
 
 rule train_subset_gds:
     input: genes = lambda wildcards: genes[wildcards.genes], snpannot=snpannot,
@@ -56,9 +59,8 @@ rule train_genelist:
         for i in input.models:
             shell("cat {i} | sed 1d >> {output.models}")
 
-'''
 rule train_db:
-    input: gene_list
+    input: wts = allweights, extra = allmodels
     output: db
-    shell: "Rscript {input} {output}"
-'''
+    params: script = db_R
+    shell: "Rscript {params.script} {input.wts} {input.extra} {output}"

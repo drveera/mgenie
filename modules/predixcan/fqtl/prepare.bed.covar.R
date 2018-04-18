@@ -20,12 +20,13 @@ peerfactors <- readRDS(peerfactors.file)
 ### * get co ordintates and create bed file
 genes <- colnames(expr)
 genes <- gsub("\\..*$","",genes)
-ensembl <- useMart("ensembl",dataset="hsapiens_gene_ensembl")
+grch37 = useMart(biomart="ENSEMBL_MART_ENSEMBL", host="grch37.ensembl.org", path="/biomart/martservice", dataset="hsapiens_gene_ensembl")
+##ensembl <- useMart("grch37",dataset="hsapiens_gene_ensembl")
 
 my_refseq <- getBM(attributes=c("ensembl_gene_id","start_position","end_position","chromosome_name","strand"),
                    filters = c("ensembl_gene_id"),
                    values =genes,
-                   mart = ensembl)
+                   mart = grch37)
 c22 <- my_refseq[my_refseq$chromosome_name == "22",]
 c22 <- data.table(c22)
 c22$strand <- ifelse(c22$strand == "-1", "-","+")
