@@ -10,12 +10,12 @@ outfile.gds <- args[5]
 outfile.annot <- args[6]
 
 ##test arguments
-gds.file <- "merged.gds"
-snpannot.file <- "merged.gds.annot.RDS"
-genes.file <- "sample.gene"
-db.file <- "genie_train/star.aor/star.aor_finalfiles/model.db"
-outfile.gds <- "testout.gds"
-outfile.annot <- "testout.gds.annot.RDS"
+##gds.file <- "merged.gds"
+##snpannot.file <- "merged.gds.annot.RDS"
+##genes.file <- "sample.gene"
+##db.file <- "genie_train/star.aor/star.aor_finalfiles/model.db"
+##outfile.gds <- "testout.gds"
+##outfile.annot <- "testout.gds.annot.RDS"
 
 
 library(SNPRelate)

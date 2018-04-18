@@ -11,6 +11,7 @@ library(dplyr)
 ##function
 cvElastic <- function(gene,geneid,snp,
                       nfolds=10,alpha=0.5){
+  set.seed(1)
   groupid <- sample(1:10,length(gene),replace=TRUE)
   fit1 <- cv.glmnet(x=snp,y=gene,nfolds=nfolds,
                     alpha=alpha,foldid = groupid,
@@ -18,11 +19,11 @@ cvElastic <- function(gene,geneid,snp,
   fit1.df <- data.table(cvm=fit1$cvm, lambda=fit1$lambda,index=1:length(fit1$cvm))
   best.lambda <- fit1.df[cvm==min(cvm)]
   ##extract betas
-  allbetas <- as.data.frame(fit1$glmnet.fit$beta[,best.lambda$index])
+  allbetas <- fit1$glmnet.fit$beta[,best.lambda$index]
   allbetas[allbetas==0.0] <- NA
   best.betas <- allbetas[!is.na(allbetas)]
   if(length(best.betas)>2){
-      names(best.betas) <- row.names(allbetas)[!is.na(allbetas)]
+      ##names(best.betas) <- row.names(allbetas)[!is.na(allbetas)]
       res <- data.table(rsid=names(best.betas),weight=best.betas)
       res$gene <- geneid
       ##take only useful predictors
@@ -70,11 +71,11 @@ expr.file <- args[4]
 output1 <- args[5]
 output2 <- args[6]
 
-##test arguments
+####test arguments
 ##gds.file <- "merged.gds"
 ##snpannot.file <- "merged.gds.annot.RDS"
 ##genes.file <- "sample.gene"
-##expr.file <- "CMC.expr.txt.formatted"
+##expr.file <- "expression/STARNET.SF.expr.txt.formatted"
 ##output1 <- "testoutput1"
 ##output2 <- "testoutput2"
 
