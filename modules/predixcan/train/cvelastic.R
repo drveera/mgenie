@@ -115,7 +115,7 @@ for(i in 1:nrow(genes)){
     sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))
     alleles <- read.gdsn(index.gdsn(mgds,"snp.allele"))
     alleles <- as.data.frame(do.call(rbind,strsplit(alleles, split="/")))
-    names(alleles) <- c("eff_allele","ref_allele")
+    names(alleles) <- c("ref_allele","eff_allele")
     alleles$rsid <- rsids
     closefn.gds(mgds)
     rownames(genos) <- sampleids
