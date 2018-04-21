@@ -25,7 +25,8 @@ cvElastic <- function(gene,geneid,snp,
   if(length(best.betas)>2){
       ##names(best.betas) <- row.names(allbetas)[!is.na(allbetas)]
       res <- data.table(rsid=names(best.betas),weight=best.betas)
-      res$gene <- geneid
+    res$gene <- geneid
+    res$error <- NA
       ##take only useful predictors
       ##allsnps <- data.table(snp=colnames(snp),index=paste0("V",1:ncol(snp)))
       ##usefulsnps <- allsnps[index %in% names(best.betas)]$snp
@@ -49,14 +50,16 @@ cvElastic <- function(gene,geneid,snp,
                          n_snps_in_window=ncol(snp),
                          n.snps.in.model=ncol(snp.new),
                          allfolds_R2= rsq,
-                         overall_R2 = g.rsq )
+                         overall_R2 = g.rsq ,
+                         error=NA)
       return(list(res,res2))
   } else {
     res2 <- data.table(gene=geneid,alpha=alpha,
                        n_snps_in_window=ncol(snp),
                        n.snps.in.model=length(best.betas),
                        allfolds_R2 = NA,
-                       overall_R2 = NA)
+                       overall_R2 = NA,
+                       error=NA)
     res <- data.table(rsid=NA,weight=NA,gene=geneid)
     return(list(res,res2))
   }
@@ -99,7 +102,8 @@ for(i in 1:nrow(genes)){
   cat("training gene:",gene$gene,"\n")
   gene.ranges <- with(gene, GRanges(seqnames = chr, IRanges(start=start,end=end), gene=gene))
   snpannot.sub <- subsetByOverlaps(snpannot,gene.ranges)
-  if(nrow(as.data.frame(snpannot.sub)) == 0){
+  print(snpannot.sub)
+  if(nrow(as.data.frame(snpannot.sub)) < 2){
     r <- data.table(gene=gene$gene,error = "genos is null")
     gene.model <- list(r,r)
   } else {

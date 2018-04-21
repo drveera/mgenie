@@ -15,6 +15,7 @@ options:
  --dry-run         just show the codes
  --njobs=NUMBER    number of parallel jobs; applicable only when running 
                     in front end
+ --int
 
 '''
 from docopt import docopt

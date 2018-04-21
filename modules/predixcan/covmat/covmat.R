@@ -76,4 +76,8 @@ for(i in genes){
 covmat.merged <- do.call(rbind,results)
 print(head(covmat.merged))
 print(class(covmat.merged))
-fwrite(covmat.merged,outfile,sep="\t",na="NA")
+if(is.null(covmat.merged)){
+  system(paste0("touch ",outfile))
+} else {
+  fwrite(covmat.merged,outfile,sep="\t",na="NA")
+}
