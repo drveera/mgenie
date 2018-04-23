@@ -19,12 +19,15 @@ pfix_train = config['pfix_train']
 gds_subset_R = f"{methoddir}/gds.sub.R"
 trainmodel_R = f"{methoddir}/cvelastic.R"
 db_R = f"{methoddir}/createdb.R"
+mergefiles_R = f"{methoddir}/mergefiles.R"
 
 ##outfiles
 subgds = f"{pfix_train}intermediatefiles/{{genes}}.gds"
 subannot = f"{pfix_train}intermediatefiles/{{genes}}.annot.RDS"
 geneweights = f"{pfix_train}intermediatefiles/{{genes}}.weights"
 modelsummary = f"{pfix_train}intermediatefiles/{{genes}}.modelsummary"
+allweights_list = f"{pfix_train}_finalfiles/snp.weights.list"
+allmodels_list = f"{pfix_train}_finalfiles/model.summary.list"
 allweights = f"{pfix_train}_finalfiles/snp.weights"
 allmodels = f"{pfix_train}_finalfiles/model.summary"
 db = f"{pfix_train}_finalfiles/model.db"
@@ -42,22 +45,30 @@ rule train_subset_gds:
 rule train_model:
     input: gds = subgds, genes = lambda wildcards: genes[wildcards.genes],
            snpannot = subannot, expr=expr
-    output: geneweights = temp(geneweights), modelsummary = temp(modelsummary)
+    output: geneweights = geneweights, modelsummary = modelsummary
     params: script = trainmodel_R
     shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {input.expr} {output.geneweights}"
            " {output.modelsummary}"
 
+
 rule train_genelist:
     input: wts=expand(geneweights, genes=genes),
            models = expand(modelsummary, genes=genes)
-    output: wts = allweights, models = allmodels
+    output: wts = allweights_list, models = allmodels_list
     run:
-        shell("head -1 {input.wts[0]} > {output.wts}")
         for i in input.wts:
-            shell("cat {i} | sed 1d  >> {output.wts}")
-        shell("head -1 {input.models[0]} > {output.models}")
+            shell("ls {i}  >> {output.wts}")
         for i in input.models:
-            shell("cat {i} | sed 1d >> {output.models}")
+            shell("ls {i} >> {output.models}")
+
+rule train_mergelist:
+    input: wts = allweights_list,
+           models = allmodels_list
+    output: wts = allweights,
+            models = allmodels
+    params: script = mergefiles_R
+    shell: "Rscript {params.script} {input.wts} {output.wts} && "
+           "Rscript {params.script} {input.models} {output.models}"
 
 rule train_db:
     input: wts = allweights, extra = allmodels

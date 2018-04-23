@@ -1,0 +1,28 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+##from config
+gene = process_list(config['--gene'])
+noise = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+##noise = [0.6,0.7]
+
+##script
+sim_R = f"{methoddir}/model.R"
+
+##outfiles
+outfile = f"/sc/orga/projects/roussp01a/Wen/Simulation/{{gene}}/adjR2_wenet_enet_{{noise}}.txt"
+
+rule sim_all:
+    input: expand(outfile, gene=gene, noise=noise)
+
+rule sim_one:
+    output: outfile
+    params: script=sim_R, noise=noise, gene= lambda wildcards: gene[wildcards.gene]
+    shell:"Rscript {params.script} {params.gene} {params.noise}"
