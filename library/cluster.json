@@ -5,7 +5,7 @@
         "P" : "acc_epigenAD",
         "n" : 1,
         "q" : "expressalloc",
-        "W" : "2:00",
+        "W" : "6:00",
         "R" : "rsuage[mem=2000]",
         "M" : "2000",
         "output": "{rule}.{wildcards}.out",
@@ -23,8 +23,12 @@
     "qcdna_gen2gds":
     {
         "M":"16000",
-        "W":"12:00",
+        "W":"24:00",
         "q":"premium"
+    },
+    "qcdna_gdsannot":
+    {
+        "M":"16000"
     },
     "qcsamples_harmonize":
     {

@@ -10,14 +10,24 @@ from os.path import basename
 
 gds = config['--gds']
 expr = config['--expr']
-snpannot = config['--snpannot']
+##snpannot = config['--snpannot']
+snpannot = gds + ".annot.RDS"
 genes = config['--genes']
 genes = process_list(genes) ##wildcard
 pfix_train = config['pfix_train']
+priors = config['--priors']
+grouping = config['--grouping']
+if not grouping:
+    grouping = ""
 
 ##scripts
 gds_subset_R = f"{methoddir}/gds.sub.R"
 trainmodel_R = f"{methoddir}/cvelastic.R"
+if config['--nested']:
+    trainmodel_R = f"{methoddir}/nested_cvelastic.R"
+if priors:
+    trainmodel_R = f"{methoddir}/priors_nested_cvelastic.R"
+
 db_R = f"{methoddir}/createdb.R"
 mergefiles_R = f"{methoddir}/mergefiles.R"
 
@@ -46,9 +56,10 @@ rule train_model:
     input: gds = subgds, genes = lambda wildcards: genes[wildcards.genes],
            snpannot = subannot, expr=expr
     output: geneweights = geneweights, modelsummary = modelsummary
-    params: script = trainmodel_R
-    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {input.expr} {output.geneweights}"
-           " {output.modelsummary}"
+    params: script = trainmodel_R, priors = priors, grouping=grouping
+    shell: "Rscript {params.script} {input.gds} {input.snpannot} "
+           "{input.genes} {input.expr} {output.geneweights} "
+           "{output.modelsummary} {params.priors} {params.grouping}"
 
 
 rule train_genelist:

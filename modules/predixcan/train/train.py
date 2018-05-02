@@ -9,8 +9,10 @@ usage:
 options:
  --gds=FILE        genotype gds file
  --expr=FILE       expression file
- --snpannot=FILE   snp annotation RDS file
  --genes=FILE      a file with list of genes with co-ordinates
+ --priors=FILE     priors file
+ --grouping=FILE   grouping file
+ --nested
  --out=PREFIX      outname prefix [default: predixcan]
  --nojob           run in front end
  --dry-run         just show the codes
