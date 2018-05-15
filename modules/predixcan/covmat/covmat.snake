@@ -10,9 +10,11 @@ from os.path import basename
 
 ## from config
 gds = config['--gds']
+snpannot = gds + ".annot.RDS"
 db = process_list(config['--db'])
 genes = process_list(config['--genes'])
 pfix = config['pfix_covmat']
+module = config['--module']
 
 ##outfiles
 subgds = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds"
@@ -25,17 +27,14 @@ covmat_merged = f"{pfix}_intermediatefiles/{{db}}.covmat"
 gds_subset_R = f"{methoddir}/gdssubset.R"
 covmat_R = f"{methoddir}/covmat.R"
 
+if module:
+    subgds = gds
+    subannot = snpannot
+else:
+    include: f"{methoddir}/subsetgds.snake"
+
 rule covmat_all:
     input: expand(covmat_merged, db=db)
-
-rule covmat_subset_gds:
-    input: gds = gds, db = lambda wildcards: db[wildcards.db],
-           genes = lambda wildcards: genes[wildcards.genes],
-           snpannot=gds + ".annot.RDS"
-    output: gds = temp(subgds), annot=temp(subannot)
-    params: script = gds_subset_R
-    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {input.db} "
-           "{output.gds} {output.annot}"
 
 rule covmat_covariance:
     input: gds = subgds, annot= subannot, genes=lambda wildcards: genes[wildcards.genes],

@@ -1,0 +1,8 @@
+rule covmat_subset_gds:
+    input: gds = gds, db = lambda wildcards: db[wildcards.db],
+           genes = lambda wildcards: genes[wildcards.genes],
+           snpannot=snpannot
+    output: gds = temp(subgds), annot=temp(subannot)
+    params: script = gds_subset_R
+    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {input.db} "
+           "{output.gds} {output.annot}"

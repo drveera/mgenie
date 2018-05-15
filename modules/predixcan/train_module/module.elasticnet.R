@@ -12,38 +12,25 @@ library(dplyr)
 args <- commandArgs(trailingOnly = TRUE)
 gds.file <- args[1]
 snpannot.file <- args[2]
-genes.file <- args[3]
-expr.file <- args[4]
+qassoc.file <- args[3]
+pc.file <- args[4]
 output1 <- args[5]
 output2 <- args[6]
-priordf.file <- args[7]
-grouping.file <- args[8]
-
-
 
 if(FALSE){
-####test arguments
-gds.file <- "../merged.gds"
-snpannot.file <- "../merged.gds.annot.RDS"
-  ##genes.file <- "test.bed"
-genes.file <- "cmcgenes1176"
-##genes.file <- "sample.genes.bed"
-##expr.file <- "expression/STARNET.SF.expr.txt.formatted"
-##expr.file <- "alvaro.gtex.brain.cerebellum.residuals"
-##expr.file <- "CMC.expr.txt.formatted"
-expr.file <- "cmc.phase1.synapse.withdiag.residuals.RDS.formatted"
-output1 <- "priortestoutput1"
-output2 <- "priortestoutput2"
-priordf.file <- "../full.anno.priors.txt.formatted"
-grouping.file <- "../genoCMCgroup.txt.formatted"
+  gds.file <- "merged.gds"
+  snpannot.file <- "merged.gds.annot.RDS"
+  pc.file <- "sienna.genes.PC1.expr"
+  qassoc.file <- "sienna.genes.PC1.qassoc"
+  out.file <- "testoutput"
+  out.file <- "testoutput"
 }
-
 ### * functions
 ### ** cvElastic
 cvElastic <- function(gene,
                       geneid,
                       snp,pfac,
-                      grouping.file,
+                      grouping.file=NA,
                       nfolds=10,
                       alpha=0.5){
   set.seed(1)
@@ -58,7 +45,6 @@ cvElastic <- function(gene,
                     foldid = groupid,
                     keep=TRUE,
                     parallel=FALSE,
-                    penalty.factor=pfac,
                     type.measure = "mse")
   fit1.df <- data.table(cvm=fit1$cvm, lambda=fit1$lambda,index=1:length(fit1$cvm))
   best.lambda <- fit1.df[cvm==min(cvm)]
@@ -88,8 +74,7 @@ cvElastic <- function(gene,
                         nfolds = nfolds, alpha=alpha,
                         foldid=groupid,
                         keep=TRUE,
-                        parallel=FALSE,
-                        penalty.factor=pfac)
+                        parallel=FALSE)
       fit2.df <- data.table(cvm=fit2$cvm,lambda=fit2$lambda,index=1:length(fit2$cvm))
     best.lambda2 <- fit2.df[cvm==min(cvm)]
     ##adjusted R2 #@@@2
@@ -119,7 +104,7 @@ cvElastic <- function(gene,
                                             n_k_folds=10,
                                             alpha=0.5,
                                             pfac=pfac,
-                                            grouping.file=grouping.file)
+                                            grouping.file=NA)
 
     cv.params <- data.table(do.call(cbind,cv.params))
     prf.stats <- data.table(do.call(cbind,prf.stats))
@@ -224,7 +209,8 @@ pfac_calc <- function(pfac){
 cv_params <- function(fit,
                       n_k_folds,
                       exppheno){
-  cv_fold_ids = manual_grouping(grouping.file,"grouping",exppheno)
+  ##cv_fold_ids = manual_grouping(grouping.file,"grouping",exppheno)
+  cv_fold_ids <- sample(1:n_k_folds,length(exppheno),replace=TRUE)
   cv_R2_folds <- rep(0, n_k_folds)
   cv_corr_folds <- rep(0, n_k_folds)
   cv_zscore_folds <- rep(0, n_k_folds)
@@ -308,7 +294,6 @@ nested_cv_elastic_net_perf <- function(x,
       # Fit model with training data.
       fit <- cv.glmnet(x_train,
                        y_train,
-                       penalty.factor=pfac,
                        nfolds = n_k_folds,
                        alpha = alpha,
                        type.measure='mse',
@@ -351,112 +336,55 @@ nested_cv_elastic_net_perf <- function(x,
        zscore_pval=zscore_pval)) #20
 }
 
-### * others
-genes <- fread(genes.file, header=FALSE)
-names(genes) <- c("gene","chr","start","end")
-genes$start <- genes$start - 1000000
-genes$end <- genes$end + 1000000
-expr <- fread(expr.file,header=TRUE, nrows = 2)
-###check later
-print(all(genes$gene %in% names(expr)))
-if(!any(genes$gene %in% names(expr))){
-  genesmodel1 <- list()
-  genesmodel2 <- list()
-  for(i in 1:length(genes$gene)){
-    r <- data.table(gene=genes$gene[i],error = "no expression info")
-    genesmodel1[[i]] <- r
-    genesmodel2[[i]] <- r
-  }
-  genesmodel1 <- do.call(bind_rows,genesmodel1)
-  genesmodel2 <- do.call(bind_rows,genesmodel2)
-} else {
-  expr <- fread(expr.file,header=TRUE)
-  snpannot <- readRDS(snpannot.file)
-  genes <- genes[gene %in% names(expr)]
-#####
-  expr <- expr[,c("sample",genes$gene),with=FALSE]
-  priordf <- fread(priordf.file) ##columns rsid and prior must
 
-  genesmodel1 <- list()
-  genesmodel2 <- list()
-  for(i in 1:nrow(genes)){
-    gene <- genes[i]
-    cat("training gene:",gene$gene,"\n")
-    gene.ranges <- with(gene, GRanges(seqnames = chr, IRanges(start=start,end=end), gene=gene))
-    snpannot.sub <- subsetByOverlaps(snpannot,gene.ranges)
-    if(nrow(as.data.frame(snpannot.sub)) < 2){
-      r <- data.table(gene=gene$gene,error = "genos is null")
-      gene.model <- list(r,r)
-    } else {
-      index <- as.data.frame(snpannot.sub)$index
-      tempgds <- paste0(".temp.",gene$gene,basename(output1),".gds")
-      gdsSubset(gds.file,tempgds, snp.include = index)
-      mgds <- snpgdsOpen(tempgds)
-      genos <- read.gdsn(index.gdsn(mgds, "genotype"))
-      ##snpids <- read.gdsn(index.gdsn(mgds,"snp.rs.id"))
-      snpids <- as.data.frame(snpannot.sub)$rsid
-      rsids <- gsub(",.*$","",snpids)
-      chromosomes <- gsub("^.*,","",snpids)
-      sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))
-      alleles <- read.gdsn(index.gdsn(mgds,"snp.allele"))
-      alleles <- as.data.frame(do.call(rbind,strsplit(alleles, split="/")))
-      names(alleles) <- c("ref_allele","eff_allele")
-      alleles$rsid <- rsids
-      closefn.gds(mgds)
-      rownames(genos) <- sampleids
-      colnames(genos) <- rsids
-      file.remove(tempgds)
-      expr1 <- expr[,gene$gene,with=FALSE]
-      expr1 <- unlist(expr1)
-      expr1 <- as.vector(scale(expr1,center=TRUE,scale=TRUE))
-      names(expr1) <- expr$sample
-      ##genos <- genos[rownames(genos)%in% names(expr1),]
-      commonids <- intersect(rownames(genos),names(expr1))
-      ##subset ids only in grouping #@
-      if(!is.na(grouping.file)){
-        grpdf <- fread(grouping.file)
-        commonids <- intersect(commonids,grpdf$vcfid)
-      }
-#####@
-      genos <- genos[commonids,]
-      expr1 <- expr1[commonids]
-      ## new additions<<<
-      ##check functions manual_grouping, pfac_calc
-      ##check modifications in nested elastic cv function (lines with #@)
-      ##check last argument for prior file should have columns rsid, prior 
-      priordf.sub <- data.table(rsid=rsids)
-      priordf.sub <- merge(priordf.sub,priordf, by="rsid",all.x=TRUE,
-                           sort=FALSE)
-      priordf.sub$prior <- ifelse(is.na(priordf.sub$prior),0,priordf.sub$prior)
-      priors <- priordf.sub$prior
-      names(priors) <- priordf.sub$rsid
-      priors <- priors[rsids] ##sort in the same order as genos column
-      pfac <- pfac_calc(priors)
-### new additions >>>
-      gene.model <- tryCatch(cvElastic(gene=expr1,
-                                       snp=genos,geneid=gene$gene,
-                                       pfac=pfac,
-                                       grouping.file = grouping.file),
-                             error=function(e) {
-                               r <- data.table(gene=gene$gene,error=paste0(e))
-                               return(list(r,r))
-                             } )
-      if(!all(is.na(gene.model[[1]]$rsid))){
-        gene.model[[1]] <- merge(gene.model[[1]],alleles,by="rsid")
-        gene.model[[1]] <- merge(gene.model[[1]],priordf.sub,by="rsid",
-                                 all.x=TRUE,sort=FALSE)
-      } 
-    }
-    genesmodel1[[i]] <- gene.model[[1]]
-    genesmodel2[[i]] <- gene.model[[2]]
-  }
+### * Main 
+###read gwas summary and extract snps from gds file
+qassoc <- fread(qassoc.file)
+qassoc.sig <- qassoc[P<0.0001]
+snpannot <- readRDS(snpannot.file)
+snpannot <- data.table(as.data.frame(snpannot))
+snpannot <- snpannot[rsid %in% qassoc.sig$SNP]
+tempgds <- paste0(output1,".temp.gds")
+gdsSubset(gds.file,tempgds,snp.include = snpannot$index)
+mgds <- snpgdsOpen(tempgds)
+genos <- read.gdsn(index.gdsn(mgds, "genotype"))
+rsids <- snpannot$rsid
+chromosomes <- read.gdsn(index.gdsn(mgds,"snp.chromosome"))
+sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))
+alleles <- read.gdsn(index.gdsn(mgds,"snp.allele"))
+alleles <- as.data.frame(do.call(rbind,strsplit(alleles, split="/")))
+names(alleles) <- c("ref_allele","eff_allele")
+alleles$rsid <- rsids
+closefn.gds(mgds)
+rownames(genos) <- sampleids
+colnames(genos) <- rsids
+file.remove(tempgds)
 
-  genesmodel1 <- do.call(bind_rows,genesmodel1)
-  genesmodel2 <- do.call(bind_rows,genesmodel2)
+##read pc file
+pc <- fread(pc.file)
+expr1.samples <- pc$sample
+expr1 <- unlist(pc[,2])
+expr1 <- as.vector(scale(expr1,center=TRUE,scale=TRUE))
+names(expr1) <- expr1.samples
+commonids <- intersect(rownames(genos),names(expr1))
+genos <- genos[commonids,]
+expr1 <- expr1[commonids]
+geneid = names(pc)[2]
+gene.model <- tryCatch(cvElastic(gene=expr1,
+                                 snp=genos,geneid=geneid,
+                                 pfac=NA,
+                                 grouping.file = NA),
+                       error=function(e) {
+                         r <- data.table(gene=geneid,error=paste0(e))
+                         return(list(r,r))
+                       } )
+if(!all(is.na(gene.model[[1]]$rsid))){
+  gene.model[[1]] <- merge(gene.model[[1]],alleles,by="rsid")
 }
+fwrite(gene.model[[1]],output1,na="NA")
+fwrite(gene.model[[2]],output2,na="NA")
 
-fwrite(genesmodel1,output1,na="NA")
-fwrite(genesmodel2,output2,na="NA")
+
 
 ### * org mode specific
 ### Local Variables:

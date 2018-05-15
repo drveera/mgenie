@@ -11,7 +11,9 @@ from os.path import basename
 ##from config
 gwas = process_list(config['--gwas'])
 db = process_list(config['--db'])
-genes = process_list(config['--genes'])
+genes = config['--genes']
+if not genes:
+    genes = ""
 isbrain = config['--brain']
 pfix = config['pfix_metax']
 
@@ -19,28 +21,19 @@ pfix = config['pfix_metax']
 metax_R=f"{methoddir}/metax.script.R"
 
 ##outfiles
-geneout = f"{pfix}_intermediatefiles/{{gwas}}-{{db}}-{{genes}}.out"
-geneout_part = f"{pfix}_intermediatefiles/{{{{gwas}}}}-{{{{db}}}}-{{genes}}.out"
-genemergeout = f"{pfix}_finalfiles/{{gwas}}-{{db}}.out"
+geneout = f"{pfix}_intermediatefiles/{{gwas}}-{{db}}.out"
+##geneout_part = f"{pfix}_intermediatefiles/{{{{gwas}}}}-{{{{db}}}}.out"
+##genemergeout = f"{pfix}_finalfiles/{{gwas}}-{{db}}.out"
 
 rule metaxcan_all:
-    input: expand(genemergeout, gwas=gwas, db=db)
+    input: expand(geneout, gwas=gwas, db=db)
 
 rule metaxcan_impute:
     input: gwas = lambda wildcards: gwas[wildcards.gwas],
-           db = lambda wildcards: db[wildcards.db],
-           genes = lambda wildcards: genes[wildcards.genes]
+           db = lambda wildcards: db[wildcards.db]
     output: geneout
-    params: script = metax_R
+    params: script = metax_R, genes=genes
     shell:
-        "Rscript {params.script} {input.gwas} {input.db} {input.genes} {output}"
-
-rule metaxcan_merge:
-    input: expand(geneout_part, genes=genes)
-    output: genemergeout
-    run:
-        shell("head -1 {input[0]} > {output}")
-        for i in input:
-            shell("sed 1d {i} >> {output}")
+        "Rscript {params.script} {input.gwas} {input.db} {output} {params.genes}"
 
 

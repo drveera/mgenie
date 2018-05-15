@@ -4,19 +4,19 @@
 '''
 
 usage:
- predixcan covmat [options] --gds=FILE --db=FILE --genes=FILE
+ predixcan train_module [options] --gds=FILE --expr=FILE --module=FILE --bfile=NAME
 
 options:
  --gds=FILE        genotype gds file
- --db=FILE         prediction model db file
- --genes=FILE      genes files
- --out=PREFIX      outname prefix [default: out]
- --module          if computing for modules
+ --bfile=NAME      plink base name
+ --expr=FILE       expression file
+ --module=FILE     file with list of module genes
+ --out=PREFIX      outname prefix [default: predixcan_module]
  --nojob           run in front end
  --dry-run         just show the codes
  --njobs=NUMBER    number of parallel jobs; applicable only when running 
                     in front end
- --int
+ --int 
 
 '''
 from docopt import docopt
@@ -26,4 +26,4 @@ import md
 
 arguments = docopt(__doc__)
 if __name__ == '__main__':
-    md.main(arguments,['covmat'])
+    md.main(arguments,['train_module'])

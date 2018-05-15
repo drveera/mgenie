@@ -9,7 +9,7 @@ usage:
 options:
  --gwas=FILE       gwas sumstats or file list
  --db=FILE         prediction model db file or file list  [default: |resources/metaxcan/alldb.list]
- --genes=FILE      a file or a list of files with list of genes  [default: |resources/metaxcan/genes.list.list]
+ --genes=FILE      a file or a list of files with list of genes
  --brain           If you want only brain tissues to be analysed ignored if u provide own db list
  --out=PREFIX      outname prefix [default: predixcan]
  --nojob           run in front end

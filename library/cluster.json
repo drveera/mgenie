@@ -18,7 +18,10 @@
     },
     "qcdna_harmonize":
     {
-        "M":"4000"
+        "M":"16000",
+        "q":"premium",
+        "W":"24:00"
+
     },
     "qcdna_gen2gds":
     {
@@ -77,5 +80,10 @@
         "q":"expressalloc",
         "W":"6:00",
         "M":"12000",
+    },
+    "metaxcan_impute":
+    {
+        "q":"premium",
+        "M":"16000"
     }
 }

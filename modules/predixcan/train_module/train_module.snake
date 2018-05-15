@@ -1,0 +1,105 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+gds = config['--gds']
+expr = config['--expr']
+snpannot = gds + ".annot.RDS"
+module = config['--module']
+module = process_list(module)
+bfile = config['--bfile']
+pfix = config['pfix_train_module']
+pcnum = list(range(1,6))
+
+##scripts
+pcs_R = f"{methoddir}/module.pcs.R"
+train_R = f"{methoddir}/module.elasticnet.R"
+mergefiles_R = f"{methoddir}/mergefiles.R"
+createdb_R = f"{methoddir}/createdb.R"
+
+##outfiles
+pcs_prefix = f"{pfix}_intermediatefiles/{{module}}.PC"
+pcs = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.expr"
+pcs_part = f"{pfix}_intermediatefiles/{{{{module}}}}.PC{{pcnum}}.expr"
+pheno = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.pheno"
+pheno_part = f"{pfix}_intermediatefiles/{{{{module}}}}.PC{{pcnum}}.pheno"
+
+wts_prefix = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}"
+wts = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.weights"
+summ = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.summary" 
+
+qassoc_prefix = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}"
+qassoc = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.qassoc"
+
+moduleweights = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.weights"
+modulesummary = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.summary"
+
+wtslist = f"{pfix}_intermediatefiles/weights.list"
+summarylist = f"{pfix}_intermediatefiles/summary.list"
+
+wtsmerged = f"{pfix}_finalfiles/module.weights"
+summarymerged = f"{pfix}_finalfiles/module.summary"
+
+db = f"{pfix}_finalfiles/module.db"
+
+
+rule trainmodule_all:
+    input: db
+
+rule trainmodule_computePCs:
+    message:"Compute PCs 1-5 for modules"
+    input: expr = expr, module = lambda wildcards: module[wildcards.module]
+    output: pcs = expand(pcs_part,pcnum=pcnum),
+            pheno = expand(pheno_part, pcnum=pcnum)
+    params: script = pcs_R, prefix=pcs_prefix
+    shell: "Rscript {params.script} {input.expr} {input.module} {params.prefix}"
+
+rule trainmodule_gwas:
+    message: "run gwas with the pcs"
+    input: bim = bfile+".bim", pheno = pheno
+    output: qassoc
+    params: bfile= bfile, script="module load plink/1.90  && plink" , prefix=qassoc_prefix
+    shell: "{params.script} --bfile {params.bfile} --pheno {input.pheno} --assoc --out {params.prefix} --allow-no-sex"
+           " --memory 4000"
+
+rule trainmodule_trainmodule:
+    message: "predixcan training"
+    input: pc = pcs, gds = gds, snpannot = snpannot,
+           qassoc=qassoc
+    output: wts = moduleweights,
+            summary = modulesummary
+    params: script = train_R
+    shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.qassoc} {input.pc} {output.wts} {output.summary}"
+
+rule trainmodule_modellist:
+    message: "list the weights and summaries"
+    input: wts = expand(moduleweights,module=module,pcnum=pcnum),
+           summary = expand(modulesummary,module=module,pcnum=pcnum)
+    output: wts = wtslist, summary=summarylist
+    run:
+        for i in input.wts:
+            shell("ls {i} >> {output.wts}")
+        for i in input.summary:
+            shell("ls {i} >> {output.summary}")
+
+rule trainmodule_mergelist:
+    message: "merge the list"
+    input: wts=wtslist,
+           summary=summarylist
+    output: wts = wtsmerged, summary=summarymerged
+    params: script = mergefiles_R
+    shell: "Rscript {params.script} {input.wts} {output.wts} && "
+           "Rscript {params.script} {input.summary} {output.summary}"
+
+rule trainmodule_createdb:
+    message: "building db files"
+    input: wts = wtsmerged, summary = summarymerged
+    output: db
+    params: script = createdb_R
+    shell: "Rscript {params.script} {input.wts} {input.summary} {output}"

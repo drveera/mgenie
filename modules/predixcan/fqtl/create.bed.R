@@ -18,6 +18,7 @@ expr <- t(expr)
 
 ### * read the input bed file
 c22 <- fread(bed.file)
+print(head(c22))
 
 ##change the names of expr
 genes <- colnames(expr)
