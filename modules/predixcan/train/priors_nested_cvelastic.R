@@ -17,7 +17,13 @@ expr.file <- args[4]
 output1 <- args[5]
 output2 <- args[6]
 priordf.file <- args[7]
+if(priordf.file == "NA"){
+  priordf.file <- NA
+}
 grouping.file <- args[8]
+if(grouping.file == "NA"){
+  grouping.file <- NA
+}
 
 
 
@@ -50,6 +56,7 @@ cvElastic <- function(gene,
   if(is.na(grouping.file)){
     groupid <- sample(1:10,length(gene),replace=TRUE)
   } else {
+    print("manually grouping")
     groupid <- manual_grouping(grouping.file,"grouping",gene)
   }
   fit1 <- cv.glmnet(x=snp,y=gene,
@@ -224,7 +231,11 @@ pfac_calc <- function(pfac){
 cv_params <- function(fit,
                       n_k_folds,
                       exppheno){
-  cv_fold_ids = manual_grouping(grouping.file,"grouping",exppheno)
+  if(is.na(grouping.file)){
+    cv_fold_ids <- generate_fold_ids(length(exppheno), n_folds=n_k_folds)
+  } else {
+    cv_fold_ids = manual_grouping(grouping.file,"grouping",exppheno)
+  }
   cv_R2_folds <- rep(0, n_k_folds)
   cv_corr_folds <- rep(0, n_k_folds)
   cv_zscore_folds <- rep(0, n_k_folds)
@@ -375,7 +386,6 @@ if(!any(genes$gene %in% names(expr))){
   genes <- genes[gene %in% names(expr)]
 #####
   expr <- expr[,c("sample",genes$gene),with=FALSE]
-  priordf <- fread(priordf.file) ##columns rsid and prior must
 
   genesmodel1 <- list()
   genesmodel2 <- list()
@@ -423,7 +433,11 @@ if(!any(genes$gene %in% names(expr))){
       ## new additions<<<
       ##check functions manual_grouping, pfac_calc
       ##check modifications in nested elastic cv function (lines with #@)
-      ##check last argument for prior file should have columns rsid, prior 
+      ##check last argument for prior file should have columns rsid, prior
+      if(is.na(priordf.file)){
+        pfac <- rep(1,ncol(genos))
+      } else {
+      priordf <- fread(priordf.file) ##columns rsid and prior must
       priordf.sub <- data.table(rsid=rsids)
       priordf.sub <- merge(priordf.sub,priordf, by="rsid",all.x=TRUE,
                            sort=FALSE)
@@ -432,7 +446,13 @@ if(!any(genes$gene %in% names(expr))){
       names(priors) <- priordf.sub$rsid
       priors <- priors[rsids] ##sort in the same order as genos column
       pfac <- pfac_calc(priors)
+      }
+
 ### new additions >>>
+      cat("is pfac 1:",all(pfac==1),"\n")
+      cat("is na grouping file :",is.na(grouping.file),"\n")
+      cat("dim of genos :", dim(genos),"\n")
+      cat("length of expression:",length(expr1),"\n")
       gene.model <- tryCatch(cvElastic(gene=expr1,
                                        snp=genos,geneid=gene$gene,
                                        pfac=pfac,
@@ -443,9 +463,11 @@ if(!any(genes$gene %in% names(expr))){
                              } )
       if(!all(is.na(gene.model[[1]]$rsid))){
         gene.model[[1]] <- merge(gene.model[[1]],alleles,by="rsid")
-        gene.model[[1]] <- merge(gene.model[[1]],priordf.sub,by="rsid",
-                                 all.x=TRUE,sort=FALSE)
-      } 
+        if(!is.na(priordf.file)){
+          gene.model[[1]] <- merge(gene.model[[1]],priordf.sub,by="rsid",
+                                   all.x=TRUE,sort=FALSE)
+        }
+      }
     }
     genesmodel1[[i]] <- gene.model[[1]]
     genesmodel2[[i]] <- gene.model[[2]]

@@ -2,16 +2,15 @@
 
 ### * arguments
 args <- commandArgs(trailingOnly = TRUE)
-covar.file <- args[1]
-peerfactors.file <- args[2]
-covarout <- args[3]
-npeer <- as.numeric(args[4])
+peerfactors.file <- args[1]
+covarout <- args[2]
+npeer <- as.numeric(args[3])
 
 ### * library
 library(data.table)
 
 ### * read files
-covar <- fread(covar.file)
+##covar <- fread(covar.file)
 peerfactors <- readRDS(peerfactors.file)
 
 ### * prepare peer added covar file

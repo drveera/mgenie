@@ -18,9 +18,9 @@
     },
     "qcdna_harmonize":
     {
-        "M":"16000",
+        "M":"32000",
         "q":"premium",
-        "W":"24:00"
+        "W":"48:00"
 
     },
     "qcdna_gen2gds":
@@ -85,5 +85,21 @@
     {
         "q":"premium",
         "M":"16000"
+    },
+    "wgcna_one":
+    {
+        "q":"premium",
+        "M":"32000",
+        "n":"32"
+    },
+    "trainmodule_trainmodule":
+    {
+        "q":"premium",
+        "M":"8000"
+    },
+    "covmat_covariance":
+    {
+        "M":"8000"
     }
+
 }

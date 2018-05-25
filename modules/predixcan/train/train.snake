@@ -16,17 +16,19 @@ genes = config['--genes']
 genes = process_list(genes) ##wildcard
 pfix_train = config['pfix_train']
 priors = config['--priors']
+if not priors:
+    priors = "NA"
 grouping = config['--grouping']
 if not grouping:
-    grouping = ""
+    grouping = "NA"
 
 ##scripts
 gds_subset_R = f"{methoddir}/gds.sub.R"
-trainmodel_R = f"{methoddir}/cvelastic.R"
-if config['--nested']:
-    trainmodel_R = f"{methoddir}/nested_cvelastic.R"
-if priors:
-    trainmodel_R = f"{methoddir}/priors_nested_cvelastic.R"
+##trainmodel_R = f"{methoddir}/cvelastic.R"
+##if config['--nested']:
+##    trainmodel_R = f"{methoddir}/nested_cvelastic.R"
+##if priors:
+trainmodel_R = f"{methoddir}/priors_nested_cvelastic.R"
 
 db_R = f"{methoddir}/createdb.R"
 mergefiles_R = f"{methoddir}/mergefiles.R"

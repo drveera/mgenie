@@ -13,6 +13,14 @@ outfile <- args[5]
 ##genes.file <- "cmcgene000"
 ##db.file <- "gtex_v7_Adipose_Subcutaneous_imputed_europeans_tw_0.5_signif.db"
 
+if(FALSE){
+  gds.file <- "1kg.gds"
+  snpannot.file <- "1kg.gds.annot.RDS"
+  genes.file <- "/hpc/users/xrajagv01/va-biobank/Veera/analysis/modules/GTEx/modulegenes/Adipose...Visceral._ob_Omentum_cb_.GTEX.expression.RDS.0.pcovar.residuals_color_beige.module.genes"
+  db.file <- "module.db"
+  outfile <- "testoutput"
+}
+
 library(SNPRelate)
 library(GenomicRanges)
 library(data.table)
@@ -26,21 +34,23 @@ library(reshape)
 
 genes <- fread(genes.file, header=FALSE)
 genes <- unlist(genes[,1])
-genes <- gsub("\\..*$","",genes)
+##genes <- gsub("\\..*$","",genes)
 
 db <- dbConnect(SQLite(), db.file)
 wts <- tbl(db, "weights")
 wts <- data.table(as.data.frame(wts))
-wts$gene1 <- gsub("\\..*$","",wts$gene)
+##wts$gene1 <- gsub("\\..*$","",wts$gene)
 
-genes <- intersect(genes,wts$gene1)
+print(head(genes))
+print(head(wts$gene))
+genes <- intersect(genes,wts$gene)
 
 snpannot <- readRDS(snpannot.file)
 ##mgds <- snpgdsOpen(gds.file)
 
 qgene <- genes[3]
 cvmat <- function(qgene,wts,snpannot,gds.file){
-  wts.sub <- wts[gene1==qgene]
+  wts.sub <- wts[gene==qgene]
   fgene <- wts.sub$gene[1] ## gene name to write to result
   qrsids <- wts.sub$rsid
   snpannot.sub <- snpannot[snpannot$rsid %in% qrsids,]
@@ -56,9 +66,10 @@ cvmat <- function(qgene,wts,snpannot,gds.file){
   closefn.gds(mgds)
   file.remove(tempgds)
   snps <- gsub(",.*$","",snps)
-  print(head(genos))
-  print(class(genos))
+##  print(head(genos))
+##  print(class(genos))
   colnames(genos) <- snps
+  print(dim(genos))
   covmat <- cov(genos)
   covmat.melt <- melt(covmat)
   covmat.melt <- data.table(covmat.melt)
@@ -74,8 +85,8 @@ for(i in genes){
   results[[i]] <- cvmat(i,wts,snpannot,gds.file)
 }
 covmat.merged <- do.call(rbind,results)
-print(head(covmat.merged))
-print(class(covmat.merged))
+##print(head(covmat.merged))
+##print(class(covmat.merged))
 if(is.null(covmat.merged)){
   system(paste0("touch ",outfile))
 } else {

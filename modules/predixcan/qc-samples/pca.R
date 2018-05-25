@@ -6,10 +6,6 @@ bfile <- args[1]
 reffam <- args[2]
 outfile <- args[3]
 
-##temp
-
-###
-
 library(SNPRelate)
 library(data.table)
 library(ggplot2)
@@ -57,9 +53,18 @@ plot2 <- paste0(outfile,".PCA.pdf")
 ggsave(plot2)
 
 fwrite(pca.eigen,paste0(outfile,".allsamples.mds"),sep="\t",na="NA")
-pca.eigen1 <- pca.eigen[ell2sd6==TRUE,]
-fwrite(pca.eigen1,paste0(outfile,".mds"),sep="\t",na="NA")
-fwrite(pca.eigen1[,"IID",with=FALSE],paste0(outfile,".samples"),sep="\t",col.names = FALSE, na="NA")
+pca.eigen1 <- pca.eigen[ell2sd6==TRUE & popgroup!="Referrence",]
+
+##repeat PCA
+pca2 <- snpgdsPCA(genofile,num.thread = 4,sample.id=pca.eigen1$IID)
+pca2.eigen <- pca2$eigenvect
+pca2.eigen <- data.table(pca2.eigen)
+IID <- pca2$sample.id
+pca2.eigen <- cbind(IID,pca2.eigen)
+
+fwrite(pca2.eigen,paste0(outfile,".mds"),sep="\t",na="NA")
+selected.fam <- data.table(IID=pca2.eigen$IID,FID=pca2.eigen$IID,PHENO=1)
+fwrite(selected.fam,paste0(outfile,".samples"),sep="\t",col.names = TRUE, na="NA")
 
 
 

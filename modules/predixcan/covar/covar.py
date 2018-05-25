@@ -4,11 +4,10 @@
 '''
 
 usage:
- predixcan covar [options] --expr=FILE --covar=FILE
+ predixcan covar [options] --expr=FILE 
 
 options:
  --expr=FILE       expression matrix file
- --covar=FILE      covariates preformatted
  --thold=NUMBER    correlation value to filter  [default: 0.8]
  --cutoff=NUMBER   filtering cutoff 20 or 50 percent [default: 0.2]
  --out=PREFIX      outname prefix [default: predixcan]

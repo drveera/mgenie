@@ -34,6 +34,7 @@ else:
     vcfout12_tbi = vcfout1_tbi
 vcfout2_prefix = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose"
 vcfout2_gen = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.gen"
+vcfout2_gen_OK = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.gen.OK"
 vcfout2_sample = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.sample"
 vcfout2_sample2 = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.sample2"
 vcfout2_vcf = f"{pfix}_intermediatefiles/{{vcf}}.harmonized.dose.vcf"
@@ -87,11 +88,12 @@ rule qcdna_tabix1:
 
 rule qcdna_harmonize:
     input: vcf=vcfout12, ref=ref, tbi=vcfout12_tbi
-    output: vcfout2_gen, vcfout2_sample
+    output: gen=vcfout2_gen, sample=vcfout2_sample,OK=vcfout2_gen_OK
     params: script = gh, prefix=vcfout2_prefix
     shell: "{params.script} --input {input.vcf} "
            "--inputType VCF --output {params.prefix} "
            "--outputType GEN -id -ura --ref {input.ref}"
+           " && touch {output.OK}"
 
 rule qcdna_genconcat:
     input: expand(vcfout2_gen, vcf=vcf)
@@ -107,7 +109,7 @@ rule qcdna_gen2gds:
     output: gds = mergedgds, OK = mergedgds_OK
     params: script = gen2gds_R
     shell:
-        "Rscript {params.script} {input.gen} {input.sample[1]} {output.gds} &&"
+        "Rscript {params.script} {input.gen} {input.sample[0]} {output.gds} &&"
         "touch {output.OK}"
 
 rule qcdna_gdsannot:

@@ -36,7 +36,11 @@ cnames.class <- summary.default(covar)[,"Mode"]
 cnames.class.numeric <- names(cnames.class[cnames.class=="numeric"])
 ##get variable names that are character
 cnames.class.chr <- names(cnames.class[cnames.class=="character"])
-cnames.class.chr <- paste0("(1|",cnames.class.chr,")")
+if(length(cnames.class.chr)>0){
+  cnames.class.chr <- paste0("(1|",cnames.class.chr,")")
+} else {
+  cnames.class.chr <- ""
+}
 ##make formula
 fvars <- c(cnames.class.chr,cnames.class.numeric)
 fmula <- as.formula(paste0("~",paste0(fvars,collapse = "+")))
@@ -44,6 +48,9 @@ fmula <- as.formula(paste0("~",paste0(fvars,collapse = "+")))
 ### ** set up cluster
 cl <- makeCluster(8)
 registerDoParallel(cl)
+print(fmula)
+print(dim(covar))
+print(table(covar$bsscode))
 ### ** variance parition
 vpart <- fitExtractVarPartModel(expr,fmula,covar)
 saveRDS(vpart,out.file)

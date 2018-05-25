@@ -9,7 +9,6 @@ usage:
 options:
  --vcf=FILE        vcf file
  --expr=RDS        expression rds file or list
- --covar=FILE      covariate file
  --oargs=ARGS      other arguments to pass within quotes
  --npeer=NUMBER    number of peer factors  [default: 10]
  --bed=annotation  bed file annotation for genes

@@ -1,0 +1,28 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+expr = config['--expr']
+expr = process_list(expr)
+outname = config['--out']
+
+##outfiles
+modules = f"{outname}.{{expr}}.clustering_modules.tsv"
+
+##scripts
+wgcna = f"{methoddir}/panos.wgcna.R"
+
+rule wgcna_all:
+    input: expand(modules,expr=expr)
+
+rule wgcna_one:
+    input: lambda wildcards: expr[wildcards.expr]
+    output: modules
+    params: script = wgcna, prefix = outname
+    shell: "module load R/3.3.1 && R CMD BATCH -{input} -{params.prefix} {params.script}"

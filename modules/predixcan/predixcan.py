@@ -13,6 +13,7 @@ predict  predict gene expressions
 qc-dna   qc vcf files
 qc-rna   qc gene expression matrix/covariates
 fqtl     run fqtl run
+wgcna    run WGCNA analysis
 
 type 'genie predixcan <method> --help' for more information on specific command
 For example, type 'genie predixcan train --help'
@@ -38,7 +39,7 @@ argv = [arguments['<method>']] + arguments['<args>']
 method = arguments['<method>']
 gwasmethods = ['train','qc-dna','predict','-h','--help',
                'qc-samples','metax','covar',
-               'fqtl','covmat','simu','train_v7','train_module']
+               'fqtl','covmat','simu','train_v7','train_module','wgcna']
 if method not in gwasmethods:
     exit(method + " is not valid")
 ########################################################################################################

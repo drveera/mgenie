@@ -3,13 +3,13 @@
 ### * arguments 
 args <- commandArgs(trailingOnly = TRUE)
 expr.file <- args[1]
-covar.file <- args[2]
-out.file.rds <- args[3]
-out.file.covar <- args[4]
-genelist.file <- args[5]
-thold <- as.numeric(args[6])
-out.file.voom <- args[7]
-cutoff <- as.numeric(args[8])
+covar.file <- paste0(expr.file, ".covar")
+out.file.rds <- args[2]
+out.file.covar <- args[3]
+genelist.file <- args[4]
+thold <- as.numeric(args[5])
+out.file.voom <- args[6]
+cutoff <- as.numeric(args[7])
 
 ### * test arguments commented
 ##expr.file <- "sample.raw.RDS"
@@ -121,7 +121,7 @@ covar.names <- covar.names[!covar.names %in% c("id")]
 
 ### ** check if the samples are in rows
 ids.merge <- intersect(rownames(expr),covar$id)
-if(length(ids.merge)==0) stop("no samples from covar file match with rownames of expression file")
+if(length(ids.merge)==0) stop("no samples from covar file match with rownames of expression file See if genes are in cols and samples are in rows")
 ### ** subset expression
 expr <- expr[ids.merge,]
 

@@ -41,7 +41,9 @@ rule covmat_covariance:
            db=lambda wildcards: db[wildcards.db]
     output: covmat_sub
     params: script = covmat_R
-    shell: "Rscript {params.script} {input.gds} {input.annot} {input.genes} {input.db} {output}"
+    shell:"module unload R && module load R/3.4.1 &&"
+          "Rscript {params.script} {input.gds} {input.annot} "
+          "{input.genes} {input.db} {output}"
 
 
 rule covmat_concat:

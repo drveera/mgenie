@@ -33,7 +33,7 @@ rule metaxcan_impute:
            db = lambda wildcards: db[wildcards.db]
     output: geneout
     params: script = metax_R, genes=genes
-    shell:
-        "Rscript {params.script} {input.gwas} {input.db} {output} {params.genes}"
+    shell: "module load R/3.4.3 && "
+           "Rscript {params.script} {input.gwas} {input.db} {output} {params.genes}"
 
 

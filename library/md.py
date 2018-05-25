@@ -75,14 +75,14 @@ def run_job(debugdir, outname, scmds, interactive=False):
 
     cmds = f"#!/bin/sh \n {scmds} " \
            f"--jobname {outname}.{{rulename}}.{{jobid}} " \
-           f"--cluster 'bsub -P {{cluster.P}} -q {{cluster.q}} -W {{cluster.W}} -M {{cluster.M}} -o {debugdir}/out/{{cluster.output}}' "
+           f"--cluster 'bsub -P {{cluster.P}} -q {{cluster.q}} -W {{cluster.W}} -M {{cluster.M}} -o {debugdir}/out/{{cluster.output}} -n {{cluster.n}}' "
     jobscript = debugdir + '/jobscript.sh'
     with open(jobscript, 'w') as outfile:
         outfile.write(cmds)
     if interactive:
         os.system(f"sh {jobscript}")
     else:
-        os.system(f"bsub -P acc_epigenAD -q alloc -W 12:00 -o logfile < {jobscript}")
+        os.system(f"bsub -n 1 -P acc_epigenAD -q premium -W 12:00 -o logfile < {jobscript}")
 
 
 def process_list(argument):

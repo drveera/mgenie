@@ -213,7 +213,7 @@ rule qcsamples_merged_PCA:
     input: bfile=bfile_merged_thin, ref=ref + ".fam"
     output: QC_plot, QC_PCs_raw, QC_PCs, QC_samples
     params: bfile = bfile_merged_thin_prefix, out = QC_prefix, script = pca_R
-    shell: "Rscript {params.script} {params.bfile} {input.ref} {params.out}"
+    shell: "Rscript {params.script} {params.bfile} {input.ref} {params.out} "
 
 rule qcsamples_remove_intermediates:
     message: "removing temperorary files"

@@ -13,7 +13,7 @@ from os.path import basename
 ### * config load
 vcf = config['--vcf']
 expr = process_list(config['--expr'])
-covar = config['--covar']
+##covar = config['--covar']
 pfix = config['pfix_fqtl']
 oargs = config['--oargs']
 pfactors = int(config['--npeer'])
@@ -53,9 +53,9 @@ countplot = f"{pfix}_finalfiles/{{expr}}.qtlcounts.pdf"
 localrules: fqtl_all, fqtl_prepareCovars, fqtl_createBed, fqtl_counthits, fqtl_plotcounts
 ### ** final files
 rule fqtl_all:
-    input: expand(countplot, expr=expr)
+    input: expand(covarout_residuals, expr=expr,peer=peer),
+           ##expand(countplot, expr=expr)
            ##expand(bedformatted, expr=expr, peer=peer)
-           ##expand(covarout_residuals, expr=expr,peer=peer)
            #expand(countplot, expr=expr),
            #expand(qtlcounts, expr=expr),
            #expand(nominalout, peer=peer, expr=expr),
@@ -63,20 +63,19 @@ rule fqtl_all:
            #expand(covarout,expr=expr,peer=peer)
 ### ** rule peer
 rule fqtl_peer:
-    input: expr = lambda wildcards: expr[wildcards.expr],
-           covar = covar
+    input: expr = lambda wildcards: expr[wildcards.expr]
     output: model=peermodel, factors=peerfactors, dge = expr_dge
     params: script = "module unload R && module load R/3.3.1 && Rscript",
             scriptfile = peer_R, pfactors=pfactors,
-    shell: "{params.script} {params.scriptfile} {input.expr} {input.covar} "
+    shell: "{params.script} {params.scriptfile} {input.expr} "
            "{output.model} {output.factors} {params.pfactors} {output.dge}"
 
 ### ** rule fqtl prepare Inputs
 rule fqtl_prepareCovars:
-    input: covar = covar, factors=peerfactors
+    input: factors=peerfactors
     output: covar = expand(covarout_part, peer=peer)
     params: script = prepare_covar_R, covarout=covarout_pre, npeer = pfactors
-    shell: "Rscript {params.script} {input.covar} {input.factors} {params.covarout} {params.npeer}"
+    shell: "Rscript {params.script} {input.factors} {params.covarout} {params.npeer}"
 
 ### ** calculate residuals
 rule fqtl_calculateResiduals:

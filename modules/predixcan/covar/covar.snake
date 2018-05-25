@@ -12,7 +12,7 @@ from os.path import basename
 
 ### * from config
 expr = process_list(config['--expr'])
-covar = config['--covar']
+##covar = config['--covar']
 pfix = config['pfix_covar']
 thold = config['--thold']
 cutoff = config['--cutoff']
@@ -40,18 +40,17 @@ bicplot_R=f"{methoddir}/bic.plot.R"
 ### ** mcovar all
 rule mcovar_all:
     input: expand(expr_filtered,expr=expr),
-           expand(vpart,expr=expr),
-           expand(bicplot1,expr=expr)
+           expand(vpart,expr=expr)
+           ##expand(bicplot1,expr=expr)
 
 ### ** mcovar one
 rule mcovar_one:
     message: "filter, TMM/Voom normalize and preselect covariates"
-    input: expr = lambda wildcards: expr[wildcards.expr],
-           covar= covar
+    input: expr = lambda wildcards: expr[wildcards.expr]
     output: expr=expr_filtered, covar=covar_filtered, genelist=genelist,
             voom=expr_filtered_voom
     params: script = filter_R, thold=thold, cutoff=cutoff
-    shell: "Rscript {params.script} {input.expr} {input.covar} {output.expr} {output.covar} "
+    shell: "Rscript {params.script} {input.expr} {output.expr} {output.covar} "
            "{output.genelist} {params.thold} {output.voom} {params.cutoff}"
 
 rule mcovar_vpart:
