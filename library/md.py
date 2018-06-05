@@ -82,7 +82,7 @@ def run_job(debugdir, outname, scmds, interactive=False):
     if interactive:
         os.system(f"sh {jobscript}")
     else:
-        os.system(f"bsub -n 1 -P acc_epigenAD -q premium -W 12:00 -o logfile < {jobscript}")
+        os.system(f"bsub -n 1 -P acc_epigenAD -q premium -W 12:00 -M 4000 -o logfile < {jobscript}")
 
 
 def process_list(argument):

@@ -4,7 +4,8 @@ args <- commandArgs(trailingOnly = TRUE)
 
 module.file <- args[1]
 out.file <- args[2]
-expr.file <- gsub("_color_.*$","",module.file)
+##expr.file <- gsub("_color_.*$","",module.file)
+expr.file <- args[3]
 
 if(FALSE){
   module.file <- "sample.residuals_color_.genes"
@@ -12,10 +13,15 @@ if(FALSE){
 
 library(data.table)
 
-expr <- t(readRDS(expr.file))
-sample <- rownames(expr)
-sample <- paste0(sample,"_",sample) ####temp
-rownames(expr) <- sample
+##expr <- t(readRDS(expr.file))
+expr <- fread(expr.file)
+samples <- expr$sample
+expr <- expr[,-c("sample"),with=FALSE]
+expr <- as.matrix(expr)
+rownames(expr) <- samples
+##sample <- rownames(expr)
+##sample <- paste0(sample,"_",sample) ####temp
+##rownames(expr) <- sample
 ##expr <- data.table(expr.rds)
 ##expr <- cbind(sample=sample,expr)
 ##samples <- expr$sample

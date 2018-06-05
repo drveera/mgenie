@@ -21,6 +21,7 @@ library(data.table)
 expr <- readRDS(expr.file)
 covar <- fread(covar.file)
 
+
 ### * functions
 createDm <- function(x){
   x <- x[,-c("id"),with=FALSE]
@@ -47,7 +48,7 @@ createDm <- function(x){
 
 ### * process data 
 ### ** subset samples common to expr and covar
-
+covar <- covar[complete.cases(covar)]
 ids.merge <- intersect(rownames(expr),covar$id)
 if(length(ids.merge)==0) stop("no samples from covar file match with rownames of expression file")
 covar <- covar[id %in% ids.merge]

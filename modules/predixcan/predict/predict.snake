@@ -14,7 +14,7 @@ db = config['--db']
 db = process_list(db)
 genes = config['--genes']
 genes = process_list(genes)
-snpannot = config['--snpannot']
+snpannot = gds + ".annot.RDS"
 pfix = config['pfix_predict']
 
 ##scripts
@@ -45,7 +45,7 @@ rule predict_subset_gds:
     shell: "Rscript {params.script} {input.gds} {input.snpannot} {input.genes} {output.gds} {output.annot}"
 
 rule predict_expressions:
-    input: gds = gds, snpannot = snpannot,
+    input: gds = subgds, snpannot = subannot,
            genes = lambda wildcards: genes[wildcards.genes],
            db = lambda wildcards: db[wildcards.db]
     output: expr=geneexpr, meta=genemeta

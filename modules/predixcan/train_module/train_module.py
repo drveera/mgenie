@@ -8,6 +8,7 @@ usage:
 
 options:
  --gds=FILE        genotype gds file
+ --expr=FILE       expression file
  --bfile=NAME      plink base name
  --module=FILE     file with list of module genes
  --out=PREFIX      outname prefix [default: predixcan_module]

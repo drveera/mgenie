@@ -25,4 +25,4 @@ rule wgcna_one:
     input: lambda wildcards: expr[wildcards.expr]
     output: modules
     params: script = wgcna, prefix = outname
-    shell: "module load R/3.3.1 && R CMD BATCH -{input} -{params.prefix} {params.script}"
+    shell: "module unload R && module load R/3.4.3 && R CMD BATCH -{input} -{params.prefix} {params.script}"

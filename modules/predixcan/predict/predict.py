@@ -10,7 +10,6 @@ options:
  --gds=FILE        genotype gds file
  --db=FILE         prediction model db file
  --genes=FILE      a file with list of genes with co-ordinates
- --snpannot=FILE   snpannot RDS file
  --out=PREFIX      outname prefix [default: predixcan]
  --nojob           run in front end
  --dry-run         just show the codes

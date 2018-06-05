@@ -9,7 +9,7 @@ from md import process_list
 from os.path import basename
 
 gds = config['--gds']
-##expr = config['--expr']
+expr = config['--expr']
 snpannot = gds + ".annot.RDS"
 module = config['--module']
 module = process_list(module)
@@ -52,17 +52,18 @@ db = f"{pfix}_finalfiles/module.db"
 
 
 rule trainmodule_all:
-    input: expand(siggenes, pcnum=pcnum,module=module)
-           ##db
+    input: expand(siggenes, pcnum=pcnum,module=module),
+           db
 
 rule trainmodule_computePCs:
     message:"Compute PCs 1-5 for modules"
-    input: module = lambda wildcards: module[wildcards.module]
+    input: module = lambda wildcards: module[wildcards.module],
+           expr = expr
     output: pcs = expand(pcs_part,pcnum=pcnum),
             pheno = expand(pheno_part, pcnum=pcnum),
             siggenes = expand(siggenes_part, pcnum=pcnum)
     params: script = pcs_R, prefix=pcs_prefix
-    shell: "Rscript {params.script} {input.module} {params.prefix}"
+    shell: "Rscript {params.script} {input.module} {params.prefix} {input.expr}"
 
 rule trainmodule_gwas:
     message: "run gwas with the pcs"

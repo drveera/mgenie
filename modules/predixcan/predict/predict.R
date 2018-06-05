@@ -11,10 +11,10 @@ output2 <- args[6]
 
 
 if(FALSE){
-gds.file <- "chrom22.gds"
-snpannot.file <- "snp.annot.RDS"
-genes.file <- "temp.genes"
-db.file <- "ebv.db"
+gds.file <- "philipshaw.gds"
+snpannot.file <- paste0(gds.file,".annot.RDS")
+genes.file <- "test.gene"
+db.file <- "cmcphase1.nopriors.nogroups.db"
 output1 <- "out1"
 output2 <- "out2"
 }
@@ -29,7 +29,7 @@ library(dplyr)
 library(RSQLite)
 
 snpannot <- readRDS(snpannot.file)
-genes <- readLines(genes.file)
+genes <- unlist(fread(genes.file)[,1,with=FALSE])
 db <- dbConnect(SQLite(), db.file)
 
 totalexpr <- list()
@@ -45,7 +45,7 @@ for(i in 1:length(genes)){
     mgds <- snpgdsOpen(gds.file)
     sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))
     closefn.gds(mgds)
-    predictedexpr <- matrix(NA,nrow=1,ncol=2504)
+    predictedexpr <- matrix(NA,nrow=1,ncol=length(sampleids))
     colnames(predictedexpr) <- sampleids
     totalexpr[[i]] <- predictedexpr
   } else {
@@ -59,7 +59,8 @@ for(i in 1:length(genes)){
     tempgds <- paste0(dirname(output1),"/.temp",ensid,".gds")
     gdsSubset(gds.file,tempgds,snp.include = index)
     mgds <- snpgdsOpen(tempgds)
-    genos <- read.gdsn(index.gdsn(mgds,"genotype"))
+    genos <- as.matrix(read.gdsn(index.gdsn(mgds,"genotype")))
+    ##as matrix because if only one SNP, then it loses matrix class
     snporder <- read.gdsn(index.gdsn(mgds,"snp.id"))
     sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))
     alleles <- read.gdsn(index.gdsn(mgds,"snp.allele"))
@@ -73,6 +74,8 @@ for(i in 1:length(genes)){
     ##so, check if A2 == eff_allele 
     genos <- 2 - genos
     ##first check the samples are in columns and genes in rows
+    print(length(snpwts))
+    print(dim(genos))
     if(length(snpwts) != nrow(genos)){
       genos <- t(genos)
     }
