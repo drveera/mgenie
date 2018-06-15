@@ -348,6 +348,9 @@ tempgds <- paste0(output1,".temp.gds")
 gdsSubset(gds.file,tempgds,snp.include = snpannot$index)
 mgds <- snpgdsOpen(tempgds)
 genos <- read.gdsn(index.gdsn(mgds, "genotype"))
+##in gds conversion, first allele is counted. But we need count of second allele
+##which is the eff_allele
+genos <- 2 - genos
 rsids <- snpannot$rsid
 chromosomes <- read.gdsn(index.gdsn(mgds,"snp.chromosome"))
 sampleids <- read.gdsn(index.gdsn(mgds,"sample.id"))

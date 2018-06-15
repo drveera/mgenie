@@ -15,6 +15,7 @@ if(!is.na(genes.file)){
 }
 
 library(metaxcanr)
+print(metaxcan)
 library(data.table)
 res <- metaxcan(gwas.file = gwas.file,
                 db.file = db.file, snpcov.file = cov.file,

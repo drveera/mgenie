@@ -11,6 +11,7 @@ from os.path import basename
 expr = config['--expr']
 expr = process_list(expr)
 outname = config['--out']
+beta = config['--beta']
 
 ##outfiles
 modules = f"{outname}.{{expr}}.clustering_modules.tsv"
@@ -24,5 +25,5 @@ rule wgcna_all:
 rule wgcna_one:
     input: lambda wildcards: expr[wildcards.expr]
     output: modules
-    params: script = wgcna, prefix = outname
-    shell: "module unload R && module load R/3.4.3 && R CMD BATCH -{input} -{params.prefix} {params.script}"
+    params: script = wgcna, prefix = outname, beta=beta
+    shell: "module unload R && module load R/3.4.3 && R CMD BATCH -{input} -{params.prefix} -{params.beta} {params.script}"

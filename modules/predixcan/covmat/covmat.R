@@ -32,18 +32,24 @@ library(GWASTools)
 library(reshape)
 
 
-genes <- fread(genes.file, header=FALSE)
-genes <- unlist(genes[,1])
-##genes <- gsub("\\..*$","",genes)
+
+
 
 db <- dbConnect(SQLite(), db.file)
 wts <- tbl(db, "weights")
 wts <- data.table(as.data.frame(wts))
 ##wts$gene1 <- gsub("\\..*$","",wts$gene)
+##print(head(genes))
+##print(head(wts$gene))
+if (!genes.file=="NA"){
+  genes <- fread(genes.file, header=FALSE)
+  genes <- unlist(genes[,1])
+  ##genes <- gsub("\\..*$","",genes)
+  genes <- intersect(genes,wts$gene)
+} else {
+  genes <- wts$gene
+}
 
-print(head(genes))
-print(head(wts$gene))
-genes <- intersect(genes,wts$gene)
 
 snpannot <- readRDS(snpannot.file)
 ##mgds <- snpgdsOpen(gds.file)

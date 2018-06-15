@@ -4,13 +4,14 @@
 '''
 
 usage:
- predixcan train_module [options] --expr=FILE --out=NAME
+ predixcan train_module1 [options] --expr=FILE --out=NAME
 
 options:
  --gds=FILE        genotype gds file  [default: merged.gds]
  --expr=FILE       expression file
  --bfile=NAME      plink base name  [default: merged]
  --module=FILE     file with list of module genes  [default: module.names.list]
+ --pcutoff=NUMBER  p value threshold  [default: 0.0001]
  --out=PREFIX      outname prefix
  --nojob           run in front end
  --dry-run         just show the codes
@@ -26,4 +27,4 @@ import md
 
 arguments = docopt(__doc__)
 if __name__ == '__main__':
-    md.main(arguments,['train_module'])
+    md.main(arguments,['train_module1'])

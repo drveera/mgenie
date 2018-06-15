@@ -2,6 +2,17 @@ args <- commandArgs(FALSE)
 
 expr.file <- gsub("^-","",args[7])
 output.name <- gsub("^-","",args[8])
+beta <- gsub("^-","",args[9])
+if(beta =="NULL"){
+  beta <- NULL
+  rcut <- 0.8
+} else {
+  beta <- as.numeric(beta)
+  rcut <- NULL
+}
+
+
+
 output.name <- paste0(output.name,".",basename(expr.file))
 
 
@@ -23,9 +34,8 @@ coexpression_network_pipeline <- function(
     NUM_HIGH_VAR_GENES_TO_RETAIN = NULL,
 
     REMOVE_SAMPLE_OUTLIERS = TRUE,
-    BETA = NULL, # 6 # (hard threshold default for unsigned networks)
-    R_SQUARED_CUT = 0.8, 
-
+    BETA = beta, # 6 # (hard threshold default for unsigned networks)
+    R_SQUARED_CUT = rcut,
     TOM_PLOT.RAISE_POWER = 10
 
     ) {
@@ -85,7 +95,11 @@ coexpression_network_pipeline <- function(
     ################################################################################
     
     writeLines(paste("\nStarting ", EXPRESSION_DATA_NAME, " analysis on ", ncol(NETWORK_EXPR_MAT), " genes in ", nrow(NETWORK_EXPR_MAT), " samples.", sep=""))
-    wgcnaCoexNet = coexpressionAnalysis(NETWORK_EXPR_MAT, beta=BETA, RsquaredCut=R_SQUARED_CUT, cut=CLUSTERING_CUT_METHOD)
+  ##    wgcnaCoexNet = coexpressionAnalysis(NETWORK_EXPR_MAT, beta=BETA, RsquaredCut=R_SQUARED_CUT, cut=CLUSTERING_CUT_METHOD)
+  wgcnaCoexNet = coexpressionAnalysis(NETWORK_EXPR_MAT,
+                                      beta=BETA,
+                                      RsquaredCut=R_SQUARED_CUT,
+                                      cut=CLUSTERING_CUT_METHOD)
 
     chosenBeta = wgcnaCoexNet$clusters@beta
     if (chosenBeta == 1) {
@@ -98,7 +112,6 @@ coexpression_network_pipeline <- function(
         pdf(SOFT_THRESHOLDING.FILE)
         cex1 = 0.9
         cex2 = 1.2
-        
         # Scale-free topology fit index as a function of the soft-thresholding power:
         softThreshStats = wgcnaCoexNet$clusters@sftStatistics
         softThresholds = softThreshStats[, "Power"]

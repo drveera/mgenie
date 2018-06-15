@@ -4,7 +4,7 @@
 '''
 
 usage:
- predixcan covmat [options] --gds=FILE --db=FILE --genes=FILE
+ predixcan covmat [options] --gds=FILE --db=FILE
 
 options:
  --gds=FILE        genotype gds file

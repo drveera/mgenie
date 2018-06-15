@@ -8,9 +8,9 @@ out.file <- args[2]
 expr.file <- args[3]
 
 if(FALSE){
-  module.file <- "modulegenes/starnet.AOR_black"
+  module.file <- "modules.names/Gx.WB_yellow"
   out.file <- "test.delete"
-  expr.file <- "aor.Rdata.formatted.RDS.0.pcovar.residuals.formatted"
+  expr.file <- "gtex.whole.blood.IDd.RDS.0.pcovar.residuals"
 }
 
 library(data.table)
@@ -36,10 +36,21 @@ modulegenes <- gsub("\\..*$","",modulegenes)
 expr <- expr[,intersect(colnames(expr),modulegenes)]
 
 expr.pca <- prcomp(expr,retx = TRUE)
-expr.pcs <- expr.pca$x[,1:5]
+##all PCs>1% variance
+expr.pca.importance.0 <- data.table(t(summary(expr.pca)$importance))
+names(expr.pca.importance.0) <- c("SD","V","PropV")
+expr.pca.importance <- expr.pca.importance.0[V>=0.01]
+npcs <- nrow(expr.pca.importance)
+if(npcs==0){
+  expr.pca.importance <- expr.pca.importance.0[1,]
+}
+fwrite(expr.pca.importance,paste0(out.file,".importance"),sep="\t",na="NA")
+###
+expr.pcs <- expr.pca$x[,1:npcs]
 pc.sample <- rownames(expr.pcs)
 expr.pcs <- as.data.table(expr.pcs)
-modulename <- gsub(".mgenes","",basename(module.file))
+##modulename <- gsub(".mgenes","",basename(module.file))
+modulename <- basename(module.file)
 names(expr.pcs) <- paste0(modulename,"_",names(expr.pcs))
 
 ###function to find correlated genes
@@ -58,15 +69,24 @@ findgenes <- function(expr,pc.dfm){
   siggenes <- names(gcor[gcor<0.05])
   return(siggenes)
 }
-
-for(i in 1:5){
-  df <- cbind(sample=pc.sample,expr.pcs[,i,with=FALSE])
-  fwrite(df,paste0(out.file,i,".expr"), na="NA")
+if(npcs==0){
+  df <- cbind(sample=pc.sample,expr.pcs[,1,with=FALSE])
+  fwrite(df,paste0(out.file,0,".expr"), na="NA")
   df.pheno <- cbind(sample=pc.sample,df)
-  fwrite(df.pheno,paste0(out.file,i,".pheno"), na="NA", sep="\t", col.names=FALSE)
+  fwrite(df.pheno,paste0(out.file,0,".pheno"), na="NA", sep="\t", col.names=FALSE)
   siggenes <- findgenes(expr,df)
-  writeLines(siggenes,paste0(out.file,i,".sigGenes"))
+  writeLines(siggenes,paste0(out.file,0,".sigGenes"))
+} else {
+  for(i in 1:npcs){
+    df <- cbind(sample=pc.sample,expr.pcs[,i,with=FALSE])
+    fwrite(df,paste0(out.file,i,".expr"), na="NA")
+    df.pheno <- cbind(sample=pc.sample,df)
+    fwrite(df.pheno,paste0(out.file,i,".pheno"), na="NA", sep="\t", col.names=FALSE)
+    siggenes <- findgenes(expr,df)
+    writeLines(siggenes,paste0(out.file,i,".sigGenes"))
+  }
 }
-expr.pca.importance <- data.table(t(summary(expr.pca)$importance))
-fwrite(expr.pca.importance,paste0(out.file,".importance"),sep="\t",na="NA")
+
+
+
 

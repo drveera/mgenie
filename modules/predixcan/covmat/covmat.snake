@@ -12,7 +12,12 @@ from os.path import basename
 gds = config['--gds']
 snpannot = gds + ".annot.RDS"
 db = process_list(config['--db'])
-genes = process_list(config['--genes'])
+genes = config['--genes']
+if not genes:
+    genes = {"NA":"NA"}
+else:
+    genes = process_list(genes)
+
 pfix = config['pfix_covmat']
 module = config['--module']
 
@@ -21,7 +26,7 @@ subgds = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds"
 subannot = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds.annot.RDS"
 covmat_sub = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.covmat"
 ##covmat_sub_part = f"{pfix}_intermediatefiles/{{{{db}}}}/{{genes}}.covmat"
-covmat_merged = f"{pfix}_intermediatefiles/{{db}}.covmat"
+covmat_merged = f"{pfix}_intermediatefiles/{{db}}.merged.covmat"
 
 ##scripts
 gds_subset_R = f"{methoddir}/gdssubset.R"
@@ -37,13 +42,13 @@ rule covmat_all:
     input: expand(covmat_merged, db=db)
 
 rule covmat_covariance:
-    input: gds = subgds, annot= subannot, genes=lambda wildcards: genes[wildcards.genes],
+    input: gds = subgds, annot= subannot, 
            db=lambda wildcards: db[wildcards.db]
     output: covmat_sub
-    params: script = covmat_R
+    params: script = covmat_R, genes=lambda wildcards: genes[wildcards.genes],
     shell:"module unload R && module load R/3.4.1 &&"
           "Rscript {params.script} {input.gds} {input.annot} "
-          "{input.genes} {input.db} {output}"
+          "{params.genes} {input.db} {output}"
 
 
 rule covmat_concat:

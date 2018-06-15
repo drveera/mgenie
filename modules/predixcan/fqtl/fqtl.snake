@@ -54,7 +54,7 @@ localrules: fqtl_all, fqtl_prepareCovars, fqtl_createBed, fqtl_counthits, fqtl_p
 ### ** final files
 rule fqtl_all:
     input: expand(covarout_residuals, expr=expr,peer=peer),
-           ##expand(countplot, expr=expr)
+           expand(countplot, expr=expr)
            ##expand(bedformatted, expr=expr, peer=peer)
            #expand(countplot, expr=expr),
            #expand(qtlcounts, expr=expr),

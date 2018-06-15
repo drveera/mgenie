@@ -8,6 +8,7 @@ usage:
 
 options:
  --expr=RDS        expression rds file
+ --beta=NUMBER     beta value  [default: NULL]
  --out=PREFIX      outname prefix [default: WGCNA]
  --nojob           run in front end
  --dry-run         just show the codes
