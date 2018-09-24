@@ -16,8 +16,9 @@ print(ifilter)
 ref = config['--ref']
 if ref == "hrc":
     ref = f"{maindir}/resources/qc-dna/hrc/.."
-else:
+elif ref == "1000g":
     ref = f"{maindir}/resources/qc-dna/1000g/1kg.eur.biallele.snps.maf0.01.nonAmbi.onlyRs.recode.vcf.gz"
+
 pfix = config['pfix_qc-dna']
 
 ##outfiles
