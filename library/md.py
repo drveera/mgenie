@@ -69,7 +69,7 @@ def process_arguments(args):
 def write_config(args, debugdir):
     try:
         if args['--cluster']=='minerva':
-            scriptcalls = f"{maindir}/library/minervascripts.json"
+            scriptcalls = f"{maindir}/library/minerva.json"
         else:
             scriptcalls = f"{maindir}/library/openscripts.json"
     except LookupError:
