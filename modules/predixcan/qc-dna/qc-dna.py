@@ -12,6 +12,7 @@ options:
  --ifilter=EXPRESSION   filter expression  [default: MAF>0.01 & R2>0.8]
  --renameINFO
  --out=PREFIX           outname prefix [default: predixcan]
+ --cluster=NAME         cluster name
  --nojob                run in front end
  --dry-run              just show the codes
  --int                  control job submission from frontend
