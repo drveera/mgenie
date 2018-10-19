@@ -1,0 +1,10 @@
+[
+  {
+  "plink":"plink",
+  "bcftools":"bcftools",
+  "bgzip":"bgzip",
+  "tabix":"tabix",
+  "genotype_harmonizer":"genotype_harmonizer",
+  "Rscript":"Rscript"
+  }
+]

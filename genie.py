@@ -1,6 +1,4 @@
-#!/bin/env python
-
-## this main docopt file. This will call all the sub docopt files based on the commands.
+#!/usr/bin/env python3
 
 '''genie
 

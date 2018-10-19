@@ -1,0 +1,10 @@
+[
+{
+"plink":"module load plink/1.90 && plink ",
+"bcftools":"module load bcftools && bcftools",
+"bgzip":"module load htslib && bgzip",
+"tabix":"module load htslib/1.7 && ",
+"genotype_harmonizer":"gh",
+"Rscript":"Rscript"
+}
+]

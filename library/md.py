@@ -67,6 +67,17 @@ def process_arguments(args):
 
 
 def write_config(args, debugdir):
+    try:
+        if args['--cluster']=='minerva':
+            scriptcalls = f"{maindir}/library/minervascripts.json"
+        else:
+            scriptcalls = f"{maindir}/library/openscripts.json"
+    except LookupError:
+        scriptcalls = f"{maindir}/library/openscripts.json"
+    with open(scriptcalls,'r') as s:
+        script_files = json.load(s)
+    script_files = script_files[0]
+    args.update(script_files)
     with open(debugdir + '/config.json', 'w') as outfile:
         json.dump(args, outfile, indent=4)
 

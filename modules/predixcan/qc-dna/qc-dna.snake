@@ -18,8 +18,15 @@ if ref == "hrc":
     ref = f"{maindir}/resources/qc-dna/hrc/.."
 elif ref == "1000g":
     ref = f"{maindir}/resources/qc-dna/1000g/1kg.eur.biallele.snps.maf0.01.nonAmbi.onlyRs.recode.vcf.gz"
-
 pfix = config['pfix_qc-dna']
+
+##load the script calls
+bcftools = config['bcftools']
+bgzip = config['bgzip']
+tabix = config['tabix']
+genotype_harmonizer = config['genotype_harmonizer']
+Rscript = config['Rscript']
+##
 
 ##outfiles
 vcfout1 = f"{pfix}_intermediatefiles/{{vcf}}.filtered.vcf.gz"
@@ -68,30 +75,28 @@ rule qcdna_all:
 rule qcdna_filter1:
     input: vcf = lambda wildcards: vcf[wildcards.vcf]
     output: vcfout1
-    params: script = "module load bcftools/1.6 && ",
-            ifilter = ifilter
+    params: ifilter = ifilter
     shell:
-        "{params.script} bcftools view -m2 -M2 -i '{params.ifilter}' -v snps -o {output} -O z {input.vcf} "
+        "{bcftools} view -m2 -M2 -i '{params.ifilter}' -v snps -o {output} -O z {input.vcf} "
 
 rule qcdna_renameINFO:
     input: vcfout1
     output: vcfout1a
     params: prefix = vcfout1a_prefix, script = "module load htslib && "
-    shell: "{params.script} zcat {input} | sed s/GT:GL:DS/GT:GP:DS/g - > {params.prefix} && "
-           "bgzip {params.prefix}"
+    shell: "zcat {input} | sed s/GT:GL:DS/GT:GP:DS/g - > {params.prefix} && "
+           "{bgzip} {params.prefix}"
 
 rule qcdna_tabix1:
     input: vcf = vcfout12
     output: index = vcfout12_tbi
     shell:
-        "module load htslib/1.7 && "
-        "tabix {input.vcf}"
+        "{tabix} {input.vcf}"
 
 rule qcdna_harmonize:
     input: vcf=vcfout12, ref=ref, tbi=vcfout12_tbi
     output: gen=vcfout2_gen, sample=vcfout2_sample,OK=vcfout2_gen_OK
     params: script = gh, prefix=vcfout2_prefix
-    shell: "{params.script} --input {input.vcf} "
+    shell: "{genotype_harmonizer} --input {input.vcf} "
            "--inputType VCF --output {params.prefix} "
            "--outputType GEN -id -ura --ref {input.ref}"
            " && touch {output.OK}"
@@ -110,7 +115,7 @@ rule qcdna_gen2gds:
     output: gds = mergedgds, OK = mergedgds_OK
     params: script = gen2gds_R
     shell:
-        "Rscript {params.script} {input.gen} {input.sample[0]} {output.gds} &&"
+        "{Rscript} {params.script} {input.gen} {input.sample[0]} {output.gds} &&"
         "touch {output.OK}"
 
 rule qcdna_gdsannot:
@@ -119,4 +124,4 @@ rule qcdna_gdsannot:
     output: gdsannot
     params: script = gdsannot_R
     shell:
-        "Rscript {params.script} {input.gds} {input.gen} {output}"
+        "{Rscript} {params.script} {input.gds} {input.gen} {output}"
