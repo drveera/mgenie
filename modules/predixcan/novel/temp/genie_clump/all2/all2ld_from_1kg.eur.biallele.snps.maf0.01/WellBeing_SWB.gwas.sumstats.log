@@ -1,0 +1,32 @@
+PLINK v1.90b3.35 64-bit (25 Mar 2016)
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/WellBeing_SWB.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_SWB.gwas.sumstats
+
+Hostname: node28-4
+Working directory: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp
+Start time: Thu Sep  6 05:44:33 2018
+
+Random number seed: 1536227073
+64316 MB RAM detected; reserving 32158 MB for main workspace.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_SWB.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+--clump: 1 clump formed from 8 top variants.
+Results written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_SWB.gwas.sumstats.clumped
+.
+
+End time: Thu Sep  6 06:27:31 2018

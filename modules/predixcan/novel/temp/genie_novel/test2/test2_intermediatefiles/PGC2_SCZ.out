@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/PGC2_SCZ,EpiXcan,324,205,119
+Sig_genes_for_traits/PGC2_SCZ,PrediXcan,282,178,104

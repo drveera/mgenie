@@ -24,7 +24,8 @@ if(FALSE){
 library(SNPRelate)
 library(GenomicRanges)
 library(data.table)
-library(dplyr)
+##library(dplyr)
+library(tidyverse)
 library(dbplyr)
 library(DBI)
 library(RSQLite)
@@ -45,9 +46,9 @@ if (!genes.file=="NA"){
   genes <- fread(genes.file, header=FALSE)
   genes <- unlist(genes[,1])
   ##genes <- gsub("\\..*$","",genes)
-  genes <- intersect(genes,wts$gene)
+  genes <- intersect(genes,unique(wts$gene))
 } else {
-  genes <- wts$gene
+  genes <- unique(wts$gene)
 }
 
 

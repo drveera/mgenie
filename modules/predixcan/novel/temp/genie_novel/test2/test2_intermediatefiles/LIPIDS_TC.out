@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/LIPIDS_TC,EpiXcan,276,256,20
+Sig_genes_for_traits/LIPIDS_TC,PrediXcan,271,253,18

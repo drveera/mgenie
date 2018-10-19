@@ -8,6 +8,15 @@ genes.file <- args[3]
 outgds <- args[4]
 outannot <- args[5]
 
+
+if (FALSE){
+  gds.file <- "philipshaw.gds"
+  snpannot.file <- "philipshaw.gds.annot.RDS"
+  genes.file <- "genebatch/genes000"
+  outgds <- "temp.del.gds"
+  outannot <- "temp.gds.annot"
+}
+
 library(GWASTools)
 library(SNPRelate)
 library(GenomicRanges)
@@ -21,7 +30,7 @@ genes$end <- genes$end + 1000000
 genes.ranges <- with(genes, GRanges(seqnames = chr, IRanges(start=start,end=end), gene=gene))
 snpannot.sub <- subsetByOverlaps(snpannot,genes.ranges)
 saveRDS(snpannot.sub,outannot)
-print(head(snpannot.sub))
+##print(head(snpannot.sub))
 index <- as.data.frame(snpannot.sub)$index
 
 ##subset gds

@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/Man_FastingInsulin,EpiXcan,13,7,6
+Sig_genes_for_traits/Man_FastingInsulin,PrediXcan,10,7,3

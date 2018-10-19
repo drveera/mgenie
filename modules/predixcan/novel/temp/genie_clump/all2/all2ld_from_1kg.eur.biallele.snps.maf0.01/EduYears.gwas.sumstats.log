@@ -1,0 +1,94 @@
+PLINK v1.90b3.35 64-bit (25 Mar 2016)
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EduYears.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EduYears.gwas.sumstats
+
+Hostname: node26-4
+Working directory: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp
+Start time: Thu Sep  6 05:45:15 2018
+
+Random number seed: 1536227115
+64450 MB RAM detected; reserving 32225 MB for main workspace.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EduYears.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs150940933' is missing from the main dataset, and is a top variant.
+Warning: 'rs139504914' is missing from the main dataset, and is a top variant.
+Warning: 'rs17264075' is missing from the main dataset, and is a top variant.
+Warning: 'rs73195301' is missing from the main dataset, and is a top variant.
+Warning: 'rs148026197' is missing from the main dataset, and is a top variant.
+Warning: 'rs11714799' is missing from the main dataset, and is a top variant.
+Warning: 'rs11711485' is missing from the main dataset, and is a top variant.
+Warning: 'rs12828755' is missing from the main dataset, and is a top variant.
+Warning: 'rs114552491' is missing from the main dataset, and is a top variant.
+Warning: 'rs1727312' is missing from the main dataset, and is a top variant.
+Warning: 'rs13083396' is missing from the main dataset, and is a top variant.
+Warning: 'rs115581542' is missing from the main dataset, and is a top variant.
+Warning: 'rs12996621' is missing from the main dataset, and is a top variant.
+Warning: 'rs114047674' is missing from the main dataset, and is a top variant.
+Warning: 'rs77562665' is missing from the main dataset, and is a top variant.
+Warning: 'rs144211745' is missing from the main dataset, and is a top variant.
+Warning: 'rs138676103' is missing from the main dataset, and is a top variant.
+Warning: 'rs75873872' is missing from the main dataset, and is a top variant.
+Warning: 'rs149379159' is missing from the main dataset, and is a top variant.
+Warning: 'rs1541049' is missing from the main dataset, and is a top variant.
+Warning: 'rs149730120' is missing from the main dataset, and is a top variant.
+Warning: 'rs116456234' is missing from the main dataset, and is a top variant.
+Warning: 'rs2682425' is missing from the main dataset, and is a top variant.
+Warning: 'rs1402671' is missing from the main dataset, and is a top variant.
+Warning: '2:100950112' is missing from the main dataset, and is a top variant.
+Warning: 'rs1871109' is missing from the main dataset, and is a top variant.
+Warning: 'rs141266524' is missing from the main dataset, and is a top variant.
+Warning: 'rs11684004' is missing from the main dataset, and is a top variant.
+Warning: 'rs694554' is missing from the main dataset, and is a top variant.
+Warning: 'rs11687170' is missing from the main dataset, and is a top variant.
+Warning: 'rs9795522' is missing from the main dataset, and is a top variant.
+Warning: 'rs10148215' is missing from the main dataset, and is a top variant.
+Warning: 'rs113164363' is missing from the main dataset, and is a top variant.
+Warning: 'rs10740103' is missing from the main dataset, and is a top variant.
+Warning: '17:43991515' is missing from the main dataset, and is a top variant.
+Warning: 'rs356993' is missing from the main dataset, and is a top variant.
+Warning: 'rs141186521' is missing from the main dataset, and is a top variant.
+Warning: '18:21124945' is missing from the main dataset, and is a top variant.
+Warning: 'rs1790089' is missing from the main dataset, and is a top variant.
+Warning: 'rs148108953' is missing from the main dataset, and is a top variant.
+Warning: 'rs6792911' is missing from the main dataset, and is a top variant.
+Warning: 'rs143930579' is missing from the main dataset, and is a top variant.
+Warning: 'rs143857844' is missing from the main dataset, and is a top variant.
+Warning: 'rs138349945' is missing from the main dataset, and is a top variant.
+Warning: 'rs72503497' is missing from the main dataset, and is a top variant.
+Warning: 'rs13206524' is missing from the main dataset, and is a top variant.
+Warning: '17:44090538' is missing from the main dataset, and is a top variant.
+Warning: 'rs1267494' is missing from the main dataset, and is a top variant.
+Warning: 'rs1790086' is missing from the main dataset, and is a top variant.
+Warning: 'rs2017445' is missing from the main dataset, and is a top variant.
+Warning: 'rs144045494' is missing from the main dataset, and is a top variant.
+Warning: '17:43766497' is missing from the main dataset, and is a top variant.
+Warning: 'rs113518470' is missing from the main dataset, and is a top variant.
+Warning: 'rs142792793' is missing from the main dataset, and is a top variant.
+Warning: 'rs1606974' is missing from the main dataset, and is a top variant.
+Warning: 'rs41285694' is missing from the main dataset, and is a top variant.
+Warning: 'rs580081' is missing from the main dataset, and is a top variant.
+Warning: 'rs2309825' is missing from the main dataset, and is a top variant.
+Warning: 'rs191632554' is missing from the main dataset, and is a top variant.
+Warning: '17:44045585' is missing from the main dataset, and is a top variant.
+Warning: 'rs147354196' is missing from the main dataset, and is a top variant.
+Warning: 'rs152590' is missing from the main dataset, and is a top variant.
+--clump: 116 clumps formed from 4942 top variants.
+Results written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EduYears.gwas.sumstats.clumped
+.
+
+End time: Thu Sep  6 05:45:24 2018

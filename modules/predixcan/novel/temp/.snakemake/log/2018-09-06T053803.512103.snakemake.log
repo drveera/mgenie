@@ -1,0 +1,1268 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cluster nodes: 100000
+Job counts:
+	count	jobs
+	1	clump_all
+	66	clump_one
+	66	clump_two
+	133
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/SCZ_PGC2.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SCZ_PGC2.gwas.sumstats.clumped
+    jobid: 121
+    wildcards: wcard=SCZ_PGC2.gwas.sumstats
+
+Submitted job 121 with external jobid 'Job <110455328> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/PGC2_BD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_BD.gwas.sumstats.clumped
+    jobid: 97
+    wildcards: wcard=PGC2_BD.gwas.sumstats
+
+Submitted job 97 with external jobid 'Job <110455329> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EGG_HC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_HC.gwas.sumstats.clumped
+    jobid: 7
+    wildcards: wcard=EGG_HC.gwas.sumstats
+
+Submitted job 7 with external jobid 'Job <110455331> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/UACR.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UACR.gwas.sumstats.clumped
+    jobid: 57
+    wildcards: wcard=UACR.gwas.sumstats
+
+Submitted job 57 with external jobid 'Job <110455332> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/PGC2_MDD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_MDD.gwas.sumstats.clumped
+    jobid: 60
+    wildcards: wcard=PGC2_MDD.gwas.sumstats
+
+Submitted job 60 with external jobid 'Job <110455334> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/WellBeing_DS.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_DS.gwas.sumstats.clumped
+    jobid: 117
+    wildcards: wcard=WellBeing_DS.gwas.sumstats
+
+Submitted job 117 with external jobid 'Job <110455338> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_TC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_TC.gwas.sumstats.clumped
+    jobid: 66
+    wildcards: wcard=LIPIDS_TC.gwas.sumstats
+
+Submitted job 66 with external jobid 'Job <110455339> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/FEMORAL_BMD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FEMORAL_BMD.gwas.sumstats.clumped
+    jobid: 111
+    wildcards: wcard=FEMORAL_BMD.gwas.sumstats
+
+Submitted job 111 with external jobid 'Job <110455340> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/iPSYCH_ADHD_EUR.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD_EUR.gwas.sumstats.clumped
+    jobid: 87
+    wildcards: wcard=iPSYCH_ADHD_EUR.gwas.sumstats
+
+Submitted job 87 with external jobid 'Job <110455341> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/HEIGHT.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HEIGHT.gwas.sumstats.clumped
+    jobid: 53
+    wildcards: wcard=HEIGHT.gwas.sumstats
+
+Submitted job 53 with external jobid 'Job <110455343> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MENARCHE.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENARCHE.gwas.sumstats.clumped
+    jobid: 23
+    wildcards: wcard=MENARCHE.gwas.sumstats
+
+Submitted job 23 with external jobid 'Job <110455344> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/iPSYCH_ADHD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD.gwas.sumstats.clumped
+    jobid: 128
+    wildcards: wcard=iPSYCH_ADHD.gwas.sumstats
+
+Submitted job 128 with external jobid 'Job <110455345> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/FOREARM_BMD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FOREARM_BMD.gwas.sumstats.clumped
+    jobid: 116
+    wildcards: wcard=FOREARM_BMD.gwas.sumstats
+
+Submitted job 116 with external jobid 'Job <110455346> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EGG_BW.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_BW.gwas.sumstats.clumped
+    jobid: 9
+    wildcards: wcard=EGG_BW.gwas.sumstats
+
+Submitted job 9 with external jobid 'Job <110455347> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_HDL.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_HDL.gwas.sumstats.clumped
+    jobid: 59
+    wildcards: wcard=LIPIDS_HDL.gwas.sumstats
+
+Submitted job 59 with external jobid 'Job <110455348> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MI_ADD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MI_ADD.gwas.sumstats.clumped
+    jobid: 126
+    wildcards: wcard=MI_ADD.gwas.sumstats
+
+Submitted job 126 with external jobid 'Job <110455350> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/TAG_ONSET.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_ONSET.gwas.sumstats.clumped
+    jobid: 69
+    wildcards: wcard=TAG_ONSET.gwas.sumstats
+
+Submitted job 69 with external jobid 'Job <110455351> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EGG_BMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_BMI.gwas.sumstats.clumped
+    jobid: 63
+    wildcards: wcard=EGG_BMI.gwas.sumstats
+
+Finished job 121.
+1 of 133 steps (0.75%) done
+    Error in rule clump_one:
+        jobid: 7
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_HC.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Finished job 57.
+2 of 133 steps (2%) done
+Submitted job 63 with external jobid 'Job <110455353> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/HBA1C.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HBA1C.gwas.sumstats.clumped
+    jobid: 48
+    wildcards: wcard=HBA1C.gwas.sumstats
+
+    Error in rule clump_one:
+        jobid: 60
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_MDD.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Submitted job 48 with external jobid 'Job <110455354> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/PGC2_SCZ.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped
+    jobid: 32
+    wildcards: wcard=PGC2_SCZ.gwas.sumstats
+
+Finished job 97.
+3 of 133 steps (2%) done
+Submitted job 32 with external jobid 'Job <110455355> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_WCadjBMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WCadjBMI.gwas.sumstats.clumped
+    jobid: 106
+    wildcards: wcard=GIANT_WCadjBMI.gwas.sumstats
+
+Submitted job 106 with external jobid 'Job <110455356> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/iPSYCH_ASD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ASD.gwas.sumstats.clumped
+    jobid: 112
+    wildcards: wcard=iPSYCH_ASD.gwas.sumstats
+
+Submitted job 112 with external jobid 'Job <110455357> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_WHR.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WHR.gwas.sumstats.clumped
+    jobid: 73
+    wildcards: wcard=GIANT_WHR.gwas.sumstats
+
+Submitted job 73 with external jobid 'Job <110455358> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/HOMAB.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HOMAB.gwas.sumstats.clumped
+    jobid: 44
+    wildcards: wcard=HOMAB.gwas.sumstats
+
+Submitted job 44 with external jobid 'Job <110455359> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MENOPAUSE.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENOPAUSE.gwas.sumstats.clumped
+    jobid: 50
+    wildcards: wcard=MENOPAUSE.gwas.sumstats
+
+Submitted job 50 with external jobid 'Job <110455360> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_HIPadjBMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_HIPadjBMI.gwas.sumstats.clumped
+    jobid: 78
+    wildcards: wcard=GIANT_HIPadjBMI.gwas.sumstats
+
+Finished job 59.
+4 of 133 steps (3%) done
+Finished job 117.
+5 of 133 steps (4%) done
+Finished job 66.
+6 of 133 steps (5%) done
+Finished job 111.
+7 of 133 steps (5%) done
+Finished job 87.
+8 of 133 steps (6%) done
+Finished job 53.
+9 of 133 steps (7%) done
+Finished job 23.
+10 of 133 steps (8%) done
+Submitted job 78 with external jobid 'Job <110455361> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/WellBeing_SWB.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_SWB.gwas.sumstats.clumped
+    jobid: 40
+    wildcards: wcard=WellBeing_SWB.gwas.sumstats
+
+    Error in rule clump_one:
+        jobid: 9
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_BW.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Submitted job 40 with external jobid 'Job <110455362> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_LDL.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_LDL.gwas.sumstats.clumped
+    jobid: 86
+    wildcards: wcard=LIPIDS_LDL.gwas.sumstats
+
+Submitted job 86 with external jobid 'Job <110455364> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ASD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ASD.gwas.sumstats.clumped
+    jobid: 55
+    wildcards: wcard=ASD.gwas.sumstats
+
+Submitted job 55 with external jobid 'Job <110455365> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EGG_OBESITY.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_OBESITY.gwas.sumstats.clumped
+    jobid: 75
+    wildcards: wcard=EGG_OBESITY.gwas.sumstats
+
+Submitted job 75 with external jobid 'Job <110455366> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/WellBeing_Neuroticism.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_Neuroticism.gwas.sumstats.clumped
+    jobid: 127
+    wildcards: wcard=WellBeing_Neuroticism.gwas.sumstats
+
+    Error in rule clump_one:
+        jobid: 116
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FOREARM_BMD.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Submitted job 127 with external jobid 'Job <110455367> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/SPINE_BMD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped
+    jobid: 3
+    wildcards: wcard=SPINE_BMD.gwas.sumstats
+
+Submitted job 3 with external jobid 'Job <110455368> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ANX_CC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ANX_CC.gwas.sumstats.clumped
+    jobid: 31
+    wildcards: wcard=ANX_CC.gwas.sumstats
+
+Submitted job 31 with external jobid 'Job <110455369> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/Man_FastingGlucose.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Man_FastingGlucose.gwas.sumstats.clumped
+    jobid: 132
+    wildcards: wcard=Man_FastingGlucose.gwas.sumstats
+
+Submitted job 132 with external jobid 'Job <110455370> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/BMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/BMI.gwas.sumstats.clumped
+    jobid: 52
+    wildcards: wcard=BMI.gwas.sumstats
+
+Submitted job 52 with external jobid 'Job <110455371> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/FastingInsulin.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FastingInsulin.gwas.sumstats.clumped
+    jobid: 122
+    wildcards: wcard=FastingInsulin.gwas.sumstats
+
+Finished job 126.
+11 of 133 steps (8%) done
+Finished job 63.
+12 of 133 steps (9%) done
+Finished job 48.
+13 of 133 steps (10%) done
+Finished job 32.
+14 of 133 steps (11%) done
+Finished job 106.
+15 of 133 steps (11%) done
+Finished job 112.
+16 of 133 steps (12%) done
+Finished job 73.
+17 of 133 steps (13%) done
+Submitted job 122 with external jobid 'Job <110455372> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ANX_FS.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ANX_FS.gwas.sumstats.clumped
+    jobid: 51
+    wildcards: wcard=ANX_FS.gwas.sumstats
+
+Submitted job 51 with external jobid 'Job <110455373> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EduYears.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EduYears.gwas.sumstats.clumped
+    jobid: 25
+    wildcards: wcard=EduYears.gwas.sumstats
+
+    Error in rule clump_one:
+        jobid: 69
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_ONSET.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Submitted job 25 with external jobid 'Job <110455374> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/Man_FastingInsulin.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Man_FastingInsulin.gwas.sumstats.clumped
+    jobid: 108
+    wildcards: wcard=Man_FastingInsulin.gwas.sumstats
+
+Submitted job 108 with external jobid 'Job <110455375> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/TAG_EVRSMK.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_EVRSMK.gwas.sumstats.clumped
+    jobid: 49
+    wildcards: wcard=TAG_EVRSMK.gwas.sumstats
+
+Submitted job 49 with external jobid 'Job <110455376> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/NEUROTICISM.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/NEUROTICISM.gwas.sumstats.clumped
+    jobid: 64
+    wildcards: wcard=NEUROTICISM.gwas.sumstats
+
+Submitted job 64 with external jobid 'Job <110455377> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/CAD_ADD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CAD_ADD.gwas.sumstats.clumped
+    jobid: 74
+    wildcards: wcard=CAD_ADD.gwas.sumstats
+
+Submitted job 74 with external jobid 'Job <110455378> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_WC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WC.gwas.sumstats.clumped
+    jobid: 20
+    wildcards: wcard=GIANT_WC.gwas.sumstats
+
+Submitted job 20 with external jobid 'Job <110455379> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/CD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CD.gwas.sumstats.clumped
+    jobid: 22
+    wildcards: wcard=CD.gwas.sumstats
+
+Submitted job 22 with external jobid 'Job <110455380> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/TAG_CPD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_CPD.gwas.sumstats.clumped
+    jobid: 68
+    wildcards: wcard=TAG_CPD.gwas.sumstats
+
+Submitted job 68 with external jobid 'Job <110455382> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/eGFRcrea.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/eGFRcrea.gwas.sumstats.clumped
+    jobid: 6
+    wildcards: wcard=eGFRcrea.gwas.sumstats
+
+Finished job 31.
+18 of 133 steps (14%) done
+Finished job 44.
+19 of 133 steps (14%) done
+Finished job 50.
+20 of 133 steps (15%) done
+Finished job 78.
+21 of 133 steps (16%) done
+Finished job 86.
+22 of 133 steps (17%) done
+Finished job 55.
+23 of 133 steps (17%) done
+Finished job 75.
+24 of 133 steps (18%) done
+Finished job 127.
+25 of 133 steps (19%) done
+Finished job 132.
+26 of 133 steps (20%) done
+Submitted job 6 with external jobid 'Job <110455383> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/RA.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/RA.gwas.sumstats.clumped
+    jobid: 43
+    wildcards: wcard=RA.gwas.sumstats
+
+Submitted job 43 with external jobid 'Job <110455385> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_WHRadjBMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WHRadjBMI.gwas.sumstats.clumped
+    jobid: 92
+    wildcards: wcard=GIANT_WHRadjBMI.gwas.sumstats
+
+Submitted job 92 with external jobid 'Job <110455386> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EXTRAVERSION.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EXTRAVERSION.gwas.sumstats.clumped
+    jobid: 100
+    wildcards: wcard=EXTRAVERSION.gwas.sumstats
+
+Finished job 3.
+27 of 133 steps (20%) done
+Submitted job 100 with external jobid 'Job <110455388> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EGG_BL.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_BL.gwas.sumstats.clumped
+    jobid: 85
+    wildcards: wcard=EGG_BL.gwas.sumstats
+
+Submitted job 85 with external jobid 'Job <110455391> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/CKD_smr.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CKD_smr.gwas.sumstats.clumped
+    jobid: 28
+    wildcards: wcard=CKD_smr.gwas.sumstats
+
+    Error in rule clump_one:
+        jobid: 122
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FastingInsulin.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Finished job 51.
+28 of 133 steps (21%) done
+Finished job 25.
+29 of 133 steps (22%) done
+Finished job 108.
+30 of 133 steps (23%) done
+    Error in rule clump_one:
+        jobid: 49
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_EVRSMK.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Finished job 64.
+31 of 133 steps (23%) done
+Finished job 74.
+32 of 133 steps (24%) done
+Submitted job 28 with external jobid 'Job <110455393> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/CAD_REC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CAD_REC.gwas.sumstats.clumped
+    jobid: 90
+    wildcards: wcard=CAD_REC.gwas.sumstats
+
+Finished job 20.
+33 of 133 steps (25%) done
+Finished job 22.
+34 of 133 steps (26%) done
+Submitted job 90 with external jobid 'Job <110455394> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ActDerm.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ActDerm.gwas.sumstats.clumped
+    jobid: 110
+    wildcards: wcard=ActDerm.gwas.sumstats
+
+Submitted job 110 with external jobid 'Job <110455397> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/HOMAIR.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HOMAIR.gwas.sumstats.clumped
+    jobid: 129
+    wildcards: wcard=HOMAIR.gwas.sumstats
+
+Finished job 52.
+35 of 133 steps (26%) done
+Submitted job 129 with external jobid 'Job <110455399> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/UC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped
+    jobid: 37
+    wildcards: wcard=UC.gwas.sumstats
+
+Submitted job 37 with external jobid 'Job <110455400> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/T2D.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/T2D.gwas.sumstats.clumped
+    jobid: 123
+    wildcards: wcard=T2D.gwas.sumstats
+
+    Error in rule clump_one:
+        jobid: 68
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_CPD.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Finished job 6.
+36 of 133 steps (27%) done
+Finished job 43.
+37 of 133 steps (28%) done
+Finished job 92.
+38 of 133 steps (29%) done
+    Error in rule clump_one:
+        jobid: 100
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EXTRAVERSION.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Submitted job 123 with external jobid 'Job <110455401> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/IBD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/IBD.gwas.sumstats.clumped
+    jobid: 67
+    wildcards: wcard=IBD.gwas.sumstats
+
+Submitted job 67 with external jobid 'Job <110455402> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/TAG_FORMER.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_FORMER.gwas.sumstats.clumped
+    jobid: 89
+    wildcards: wcard=TAG_FORMER.gwas.sumstats
+
+Submitted job 89 with external jobid 'Job <110455404> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_HIP.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_HIP.gwas.sumstats.clumped
+    jobid: 8
+    wildcards: wcard=GIANT_HIP.gwas.sumstats
+
+Submitted job 8 with external jobid 'Job <110455405> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/Glucose_BMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Glucose_BMI.gwas.sumstats.clumped
+    jobid: 102
+    wildcards: wcard=Glucose_BMI.gwas.sumstats
+
+Submitted job 102 with external jobid 'Job <110455406> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/cIMT_PLQ.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/cIMT_PLQ.gwas.sumstats.clumped
+    jobid: 13
+    wildcards: wcard=cIMT_PLQ.gwas.sumstats
+
+Submitted job 13 with external jobid 'Job <110455407> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/cIMT.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/cIMT.gwas.sumstats.clumped
+    jobid: 115
+    wildcards: wcard=cIMT.gwas.sumstats
+
+Submitted job 115 with external jobid 'Job <110455408> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/AD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/AD.gwas.sumstats.clumped
+    jobid: 130
+    wildcards: wcard=AD.gwas.sumstats
+
+Submitted job 130 with external jobid 'Job <110455409> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_TG.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_TG.gwas.sumstats.clumped
+    jobid: 15
+    wildcards: wcard=LIPIDS_TG.gwas.sumstats
+
+Submitted job 15 with external jobid 'Job <110455410> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/FastingGlucose.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FastingGlucose.gwas.sumstats.clumped
+    jobid: 131
+    wildcards: wcard=FastingGlucose.gwas.sumstats
+
+Submitted job 131 with external jobid 'Job <110455411> is submitted to queue <premium>.'.
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MA.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MA.gwas.sumstats.clumped
+    jobid: 84
+    wildcards: wcard=MA.gwas.sumstats
+
+Finished job 90.
+39 of 133 steps (29%) done
+Finished job 28.
+40 of 133 steps (30%) done
+Submitted job 84 with external jobid 'Job <110455412> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENOPAUSE.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MENOPAUSE.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENOPAUSE.gwas.sumstats.clumped.formatted
+    jobid: 93
+    wildcards: wcard=MENOPAUSE.gwas.sumstats
+
+Finished job 110.
+41 of 133 steps (31%) done
+Submitted job 93 with external jobid 'Job <110455413> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_OBESITY.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EGG_OBESITY.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_OBESITY.gwas.sumstats.clumped.formatted
+    jobid: 124
+    wildcards: wcard=EGG_OBESITY.gwas.sumstats
+
+Finished job 85.
+42 of 133 steps (32%) done
+Submitted job 124 with external jobid 'Job <110455414> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SCZ_PGC2.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/SCZ_PGC2.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SCZ_PGC2.gwas.sumstats.clumped.formatted
+    jobid: 113
+    wildcards: wcard=SCZ_PGC2.gwas.sumstats
+
+Submitted job 113 with external jobid 'Job <110455415> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HEIGHT.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/HEIGHT.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HEIGHT.gwas.sumstats.clumped.formatted
+    jobid: 56
+    wildcards: wcard=HEIGHT.gwas.sumstats
+
+Submitted job 56 with external jobid 'Job <110455416> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENARCHE.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MENARCHE.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENARCHE.gwas.sumstats.clumped.formatted
+    jobid: 65
+    wildcards: wcard=MENARCHE.gwas.sumstats
+
+Submitted job 65 with external jobid 'Job <110455417> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/eGFRcrea.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/eGFRcrea.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/eGFRcrea.gwas.sumstats.clumped.formatted
+    jobid: 105
+    wildcards: wcard=eGFRcrea.gwas.sumstats
+
+Submitted job 105 with external jobid 'Job <110455418> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WC.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_WC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WC.gwas.sumstats.clumped.formatted
+    jobid: 12
+    wildcards: wcard=GIANT_WC.gwas.sumstats
+
+Submitted job 12 with external jobid 'Job <110455419> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CAD_ADD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/CAD_ADD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CAD_ADD.gwas.sumstats.clumped.formatted
+    jobid: 80
+    wildcards: wcard=CAD_ADD.gwas.sumstats
+
+    Error in rule clump_one:
+        jobid: 8
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_HIP.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Finished job 102.
+43 of 133 steps (32%) done
+Finished job 115.
+44 of 133 steps (33%) done
+Finished job 130.
+45 of 133 steps (34%) done
+Finished job 15.
+46 of 133 steps (35%) done
+Submitted job 80 with external jobid 'Job <110455420> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ANX_FS.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ANX_FS.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ANX_FS.gwas.sumstats.clumped.formatted
+    jobid: 77
+    wildcards: wcard=ANX_FS.gwas.sumstats
+
+Submitted job 77 with external jobid 'Job <110455422> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Man_FastingInsulin.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/Man_FastingInsulin.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Man_FastingInsulin.gwas.sumstats.clumped.formatted
+    jobid: 27
+    wildcards: wcard=Man_FastingInsulin.gwas.sumstats
+
+    Error in rule clump_one:
+        jobid: 129
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HOMAIR.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Finished job 67.
+47 of 133 steps (35%) done
+    Error in rule clump_one:
+        jobid: 89
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_FORMER.gwas.sumstats.clumped
+
+Job failed, going on with independent jobs.
+Finished job 13.
+48 of 133 steps (36%) done
+Submitted job 27 with external jobid 'Job <110455423> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HOMAB.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/HOMAB.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HOMAB.gwas.sumstats.clumped.formatted
+    jobid: 10
+    wildcards: wcard=HOMAB.gwas.sumstats
+
+Submitted job 10 with external jobid 'Job <110455424> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WCadjBMI.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_WCadjBMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WCadjBMI.gwas.sumstats.clumped.formatted
+    jobid: 70
+    wildcards: wcard=GIANT_WCadjBMI.gwas.sumstats
+
+Submitted job 70 with external jobid 'Job <110455425> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HBA1C.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/HBA1C.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HBA1C.gwas.sumstats.clumped.formatted
+    jobid: 98
+    wildcards: wcard=HBA1C.gwas.sumstats
+
+Submitted job 98 with external jobid 'Job <110455426> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ASD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ASD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ASD.gwas.sumstats.clumped.formatted
+    jobid: 39
+    wildcards: wcard=ASD.gwas.sumstats
+
+Submitted job 39 with external jobid 'Job <110455427> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_BD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/PGC2_BD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_BD.gwas.sumstats.clumped.formatted
+    jobid: 82
+    wildcards: wcard=PGC2_BD.gwas.sumstats
+
+Submitted job 82 with external jobid 'Job <110455428> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD_EUR.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/iPSYCH_ADHD_EUR.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD_EUR.gwas.sumstats.clumped.formatted
+    jobid: 26
+    wildcards: wcard=iPSYCH_ADHD_EUR.gwas.sumstats
+
+Submitted job 26 with external jobid 'Job <110455429> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FEMORAL_BMD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/FEMORAL_BMD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FEMORAL_BMD.gwas.sumstats.clumped.formatted
+    jobid: 14
+    wildcards: wcard=FEMORAL_BMD.gwas.sumstats
+
+Submitted job 14 with external jobid 'Job <110455430> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_TC.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_TC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_TC.gwas.sumstats.clumped.formatted
+    jobid: 107
+    wildcards: wcard=LIPIDS_TC.gwas.sumstats
+
+Submitted job 107 with external jobid 'Job <110455431> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CKD_smr.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/CKD_smr.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CKD_smr.gwas.sumstats.clumped.formatted
+    jobid: 2
+    wildcards: wcard=CKD_smr.gwas.sumstats
+
+Finished job 131.
+49 of 133 steps (37%) done
+Finished job 84.
+50 of 133 steps (38%) done
+Submitted job 2 with external jobid 'Job <110455433> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Man_FastingGlucose.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/Man_FastingGlucose.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Man_FastingGlucose.gwas.sumstats.clumped.formatted
+    jobid: 96
+    wildcards: wcard=Man_FastingGlucose.gwas.sumstats
+
+Finished job 124.
+51 of 133 steps (38%) done
+Finished job 56.
+52 of 133 steps (39%) done
+Finished job 65.
+53 of 133 steps (40%) done
+Finished job 105.
+54 of 133 steps (41%) done
+Submitted job 96 with external jobid 'Job <110455435> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/BMI.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/BMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/BMI.gwas.sumstats.clumped.formatted
+    jobid: 114
+    wildcards: wcard=BMI.gwas.sumstats
+
+Submitted job 114 with external jobid 'Job <110455436> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/RA.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/RA.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/RA.gwas.sumstats.clumped.formatted
+    jobid: 99
+    wildcards: wcard=RA.gwas.sumstats
+
+Submitted job 99 with external jobid 'Job <110455437> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_DS.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/WellBeing_DS.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_DS.gwas.sumstats.clumped.formatted
+    jobid: 30
+    wildcards: wcard=WellBeing_DS.gwas.sumstats
+
+Submitted job 30 with external jobid 'Job <110455438> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WHRadjBMI.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_WHRadjBMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WHRadjBMI.gwas.sumstats.clumped.formatted
+    jobid: 45
+    wildcards: wcard=GIANT_WHRadjBMI.gwas.sumstats
+
+Finished job 93.
+55 of 133 steps (41%) done
+Submitted job 45 with external jobid 'Job <110455439> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/PGC2_SCZ.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped.formatted
+    jobid: 125
+    wildcards: wcard=PGC2_SCZ.gwas.sumstats
+
+Submitted job 125 with external jobid 'Job <110455440> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ASD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/iPSYCH_ASD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ASD.gwas.sumstats.clumped.formatted
+    jobid: 24
+    wildcards: wcard=iPSYCH_ASD.gwas.sumstats
+
+Submitted job 24 with external jobid 'Job <110455441> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_LDL.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_LDL.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_LDL.gwas.sumstats.clumped.formatted
+    jobid: 62
+    wildcards: wcard=LIPIDS_LDL.gwas.sumstats
+
+Submitted job 62 with external jobid 'Job <110455443> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_HIPadjBMI.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_HIPadjBMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_HIPadjBMI.gwas.sumstats.clumped.formatted
+    jobid: 119
+    wildcards: wcard=GIANT_HIPadjBMI.gwas.sumstats
+
+Submitted job 119 with external jobid 'Job <110455444> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_HDL.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_HDL.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_HDL.gwas.sumstats.clumped.formatted
+    jobid: 21
+    wildcards: wcard=LIPIDS_HDL.gwas.sumstats
+
+Finished job 10.
+56 of 133 steps (42%) done
+Finished job 12.
+57 of 133 steps (43%) done
+Finished job 27.
+58 of 133 steps (44%) done
+Finished job 70.
+59 of 133 steps (44%) done
+Finished job 98.
+60 of 133 steps (45%) done
+Submitted job 21 with external jobid 'Job <110455447> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ANX_CC.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ANX_CC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ANX_CC.gwas.sumstats.clumped.formatted
+    jobid: 71
+    wildcards: wcard=ANX_CC.gwas.sumstats
+
+Finished job 37.
+61 of 133 steps (46%) done
+Finished job 113.
+62 of 133 steps (47%) done
+Submitted job 71 with external jobid 'Job <110455449> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/SPINE_BMD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped.formatted
+    jobid: 4
+    wildcards: wcard=SPINE_BMD.gwas.sumstats
+
+Finished job 77.
+63 of 133 steps (47%) done
+    Error in rule clump_two:
+        jobid: 82
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_BD.gwas.sumstats.clumped.formatted
+
+Job failed, going on with independent jobs.
+Submitted job 4 with external jobid 'Job <110455450> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WHR.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/GIANT_WHR.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/GIANT_WHR.gwas.sumstats.clumped.formatted
+    jobid: 17
+    wildcards: wcard=GIANT_WHR.gwas.sumstats
+
+Submitted job 17 with external jobid 'Job <110455452> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_BMI.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EGG_BMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_BMI.gwas.sumstats.clumped.formatted
+    jobid: 47
+    wildcards: wcard=EGG_BMI.gwas.sumstats
+
+Finished job 26.
+64 of 133 steps (48%) done
+Finished job 107.
+65 of 133 steps (49%) done
+Finished job 2.
+66 of 133 steps (50%) done
+Finished job 114.
+67 of 133 steps (50%) done
+Submitted job 47 with external jobid 'Job <110455454> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UACR.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/UACR.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UACR.gwas.sumstats.clumped.formatted
+    jobid: 94
+    wildcards: wcard=UACR.gwas.sumstats
+
+Submitted job 94 with external jobid 'Job <110455455> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MI_ADD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MI_ADD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MI_ADD.gwas.sumstats.clumped.formatted
+    jobid: 88
+    wildcards: wcard=MI_ADD.gwas.sumstats
+
+Finished job 80.
+68 of 133 steps (51%) done
+    Error in rule clump_two:
+        jobid: 14
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FEMORAL_BMD.gwas.sumstats.clumped.formatted
+
+Job failed, going on with independent jobs.
+Submitted job 88 with external jobid 'Job <110455456> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CAD_REC.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/CAD_REC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CAD_REC.gwas.sumstats.clumped.formatted
+    jobid: 91
+    wildcards: wcard=CAD_REC.gwas.sumstats
+
+Finished job 39.
+69 of 133 steps (52%) done
+Finished job 96.
+70 of 133 steps (53%) done
+Finished job 45.
+71 of 133 steps (53%) done
+Submitted job 91 with external jobid 'Job <110455457> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_Neuroticism.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/WellBeing_Neuroticism.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_Neuroticism.gwas.sumstats.clumped.formatted
+    jobid: 41
+    wildcards: wcard=WellBeing_Neuroticism.gwas.sumstats
+
+Submitted job 41 with external jobid 'Job <110455458> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/CD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CD.gwas.sumstats.clumped.formatted
+    jobid: 76
+    wildcards: wcard=CD.gwas.sumstats
+
+Submitted job 76 with external jobid 'Job <110455459> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/NEUROTICISM.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/NEUROTICISM.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/NEUROTICISM.gwas.sumstats.clumped.formatted
+    jobid: 79
+    wildcards: wcard=NEUROTICISM.gwas.sumstats
+
+Submitted job 79 with external jobid 'Job <110455461> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EduYears.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EduYears.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EduYears.gwas.sumstats.clumped.formatted
+    jobid: 11
+    wildcards: wcard=EduYears.gwas.sumstats
+
+Finished job 30.
+72 of 133 steps (54%) done
+Submitted job 11 with external jobid 'Job <110455462> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/cIMT_PLQ.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/cIMT_PLQ.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/cIMT_PLQ.gwas.sumstats.clumped.formatted
+    jobid: 58
+    wildcards: wcard=cIMT_PLQ.gwas.sumstats
+
+Submitted job 58 with external jobid 'Job <110455463> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/IBD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/IBD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/IBD.gwas.sumstats.clumped.formatted
+    jobid: 1
+    wildcards: wcard=IBD.gwas.sumstats
+
+Submitted job 1 with external jobid 'Job <110455464> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/AD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/AD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/AD.gwas.sumstats.clumped.formatted
+    jobid: 29
+    wildcards: wcard=AD.gwas.sumstats
+
+Submitted job 29 with external jobid 'Job <110455465> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/cIMT.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/cIMT.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/cIMT.gwas.sumstats.clumped.formatted
+    jobid: 54
+    wildcards: wcard=cIMT.gwas.sumstats
+
+Finished job 99.
+73 of 133 steps (55%) done
+Finished job 62.
+74 of 133 steps (56%) done
+Finished job 119.
+75 of 133 steps (56%) done
+Finished job 21.
+76 of 133 steps (57%) done
+Submitted job 54 with external jobid 'Job <110455466> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/UC.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped.formatted
+    jobid: 120
+    wildcards: wcard=UC.gwas.sumstats
+
+Submitted job 120 with external jobid 'Job <110455467> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MA.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MA.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MA.gwas.sumstats.clumped.formatted
+    jobid: 118
+    wildcards: wcard=MA.gwas.sumstats
+
+Submitted job 118 with external jobid 'Job <110455468> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_TG.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_TG.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_TG.gwas.sumstats.clumped.formatted
+    jobid: 46
+    wildcards: wcard=LIPIDS_TG.gwas.sumstats
+
+Submitted job 46 with external jobid 'Job <110455470> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ActDerm.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ActDerm.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ActDerm.gwas.sumstats.clumped.formatted
+    jobid: 5
+    wildcards: wcard=ActDerm.gwas.sumstats
+
+Submitted job 5 with external jobid 'Job <110455471> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Glucose_BMI.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/Glucose_BMI.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/Glucose_BMI.gwas.sumstats.clumped.formatted
+    jobid: 83
+    wildcards: wcard=Glucose_BMI.gwas.sumstats
+
+Finished job 71.
+77 of 133 steps (58%) done
+Submitted job 83 with external jobid 'Job <110455473> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_BL.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/EGG_BL.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/EGG_BL.gwas.sumstats.clumped.formatted
+    jobid: 42
+    wildcards: wcard=EGG_BL.gwas.sumstats
+
+Submitted job 42 with external jobid 'Job <110455476> is submitted to queue <premium>.'.
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FastingGlucose.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/FastingGlucose.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/FastingGlucose.gwas.sumstats.clumped.formatted
+    jobid: 72
+    wildcards: wcard=FastingGlucose.gwas.sumstats
+
+    Error in rule clump_two:
+        jobid: 4
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped.formatted
+
+Job failed, going on with independent jobs.
+Finished job 24.
+78 of 133 steps (59%) done
+Submitted job 72 with external jobid 'Job <110455478> is submitted to queue <premium>.'.
+Finished job 125.
+79 of 133 steps (59%) done
+Finished job 17.
+80 of 133 steps (60%) done
+Finished job 47.
+81 of 133 steps (61%) done
+Finished job 94.
+82 of 133 steps (62%) done
+Finished job 41.
+83 of 133 steps (62%) done
+Finished job 91.
+84 of 133 steps (63%) done
+    Error in rule clump_two:
+        jobid: 76
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/CD.gwas.sumstats.clumped.formatted
+
+Job failed, going on with independent jobs.
+Finished job 79.
+85 of 133 steps (64%) done
+Finished job 11.
+86 of 133 steps (65%) done
+Finished job 118.
+87 of 133 steps (65%) done
+Finished job 46.
+88 of 133 steps (66%) done
+Finished job 83.
+89 of 133 steps (67%) done
+Finished job 88.
+90 of 133 steps (68%) done
+Finished job 29.
+91 of 133 steps (68%) done
+Finished job 58.
+92 of 133 steps (69%) done
+    Error in rule clump_two:
+        jobid: 1
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/IBD.gwas.sumstats.clumped.formatted
+
+Job failed, going on with independent jobs.
+Finished job 54.
+93 of 133 steps (70%) done
+    Error in rule clump_two:
+        jobid: 120
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped.formatted
+
+Job failed, going on with independent jobs.
+    Error in rule clump_two:
+        jobid: 5
+        output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/ActDerm.gwas.sumstats.clumped.formatted
+
+Job failed, going on with independent jobs.
+Finished job 42.
+94 of 133 steps (71%) done
+Finished job 72.
+95 of 133 steps (71%) done
+Finished job 128.
+96 of 133 steps (72%) done
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/iPSYCH_ADHD.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD.gwas.sumstats.clumped.formatted
+    jobid: 38
+    wildcards: wcard=iPSYCH_ADHD.gwas.sumstats
+
+Submitted job 38 with external jobid 'Job <110455500> is submitted to queue <premium>.'.
+Finished job 38.
+97 of 133 steps (73%) done
+Finished job 123.
+98 of 133 steps (74%) done
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/T2D.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/T2D.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/T2D.gwas.sumstats.clumped.formatted
+    jobid: 33
+    wildcards: wcard=T2D.gwas.sumstats
+
+Submitted job 33 with external jobid 'Job <110455524> is submitted to queue <premium>.'.
+Finished job 33.
+99 of 133 steps (74%) done
+Finished job 40.
+100 of 133 steps (75%) done
+
+rule clump_two:
+    input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_SWB.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/WellBeing_SWB.gwas.sumstats
+    output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_SWB.gwas.sumstats.clumped.formatted
+    jobid: 19
+    wildcards: wcard=WellBeing_SWB.gwas.sumstats
+
+Submitted job 19 with external jobid 'Job <110455577> is submitted to queue <premium>.'.
+Finished job 19.
+101 of 133 steps (76%) done
+Exiting because a job execution failed. Look above for error message
+Complete log: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/log/2018-09-06T053803.512103.snakemake.log

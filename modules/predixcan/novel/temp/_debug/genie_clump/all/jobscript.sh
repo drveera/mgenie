@@ -1,0 +1,2 @@
+#!/bin/sh 
+ snakemake -j 100000 --use-conda --keep-going --cluster-config /sc/orga/projects/va-biobank/Veera/genie//library/cluster.json --configfile _debug/genie_clump/all/config.json --nolock -s /sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/clump.snake --jobname all.{rulename}.{jobid} --cluster 'bsub -P {cluster.P} -q {cluster.q} -W {cluster.W} -M {cluster.M} -o _debug/genie_clump/all/out/{cluster.output} -n {cluster.n}' 

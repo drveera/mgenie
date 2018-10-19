@@ -1,0 +1,29 @@
+Building DAG of jobs...
+File path /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	novel_all
+	1	novel_one
+	2
+
+rule novel_one:
+    input: PGC2_SCZ, /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt
+    output: genie_novel/test/test_intermediatefiles/PGC2_SCZ.out
+    jobid: 1
+    wildcards: gwas=PGC2_SCZ
+
+    Error in rule novel_one:
+        jobid: 1
+        output: genie_novel/test/test_intermediatefiles/PGC2_SCZ.out
+
+RuleException:
+CalledProcessError in line 31 of /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake:
+Command ' set -euo pipefail;  Rscript /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.R PGC2_SCZ /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt genie_novel/test/test_intermediatefiles/PGC2_SCZ.out ' returned non-zero exit status 1.
+  File "/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake", line 31, in __rule_novel_one
+  File "/hpc/users/xrajagv01/.conda/envs/genie/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+Job failed, going on with independent jobs.
+Exiting because a job execution failed. Look above for error message
+Complete log: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/log/2018-09-06T075053.518719.snakemake.log

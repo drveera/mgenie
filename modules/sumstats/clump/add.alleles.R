@@ -10,7 +10,7 @@ library(data.table)
 
 sumstats <- fread(sumstats.file)
 sumstats <- sumstats[,-c("P")]
-names(sumstats) <- gsub("Z","BETA",names(sumstats))
+##names(sumstats) <- gsub("Z","BETA",names(sumstats))
 clump <- read.table(clump.file, header = TRUE)
 
 dfm <- merge(sumstats,clump, by = "SNP")

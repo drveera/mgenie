@@ -1,0 +1,112 @@
+Sender: LSF System <lsfadmin@node22-9>
+Subject: Job 110455790: </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.g562ykg8/test.novel_one.5> in cluster <minerva> Exited
+
+Job </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.g562ykg8/test.novel_one.5> was submitted from host <minerva2> by user <xrajagv01> in cluster <minerva>.
+Job was executed on host(s) <node22-9>, in queue <premium>, as user <xrajagv01> in cluster <minerva>.
+</hpc/users/xrajagv01> was used as the home directory.
+</hpc/users/xrajagv01/genie/novel/temp> was used as the working directory.
+Started at Thu Sep  6 08:07:51 2018
+Results reported on Thu Sep  6 08:07:55 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.g562ykg8/test.novel_one.5
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   2.39 sec.
+    Max Memory :                                 191 MB
+    Average Memory :                             90.50 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1809.00 MB
+    Max Processes :                              6
+    Max Threads :                                8
+
+The output (if any) follows:
+
+[Thu Sep  6 08:07:52 2018] Building DAG of jobs...
+[Thu Sep  6 08:07:52 2018] File path /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+[Thu Sep  6 08:07:52 2018] Using shell: /bin/bash
+[Thu Sep  6 08:07:52 2018] Provided cores: 1
+[Thu Sep  6 08:07:52 2018] Rules claiming more threads will be scaled down.
+[Thu Sep  6 08:07:52 2018] Job counts:
+[Thu Sep  6 08:07:52 2018] 	count	jobs
+[Thu Sep  6 08:07:52 2018] 	1	novel_one
+[Thu Sep  6 08:07:52 2018] 	1
+
+[Thu Sep  6 08:07:52 2018] rule novel_one:
+[Thu Sep  6 08:07:52 2018]     input: Sig_genes_for_traits/GIANT_WHRadjBMI, /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt
+[Thu Sep  6 08:07:52 2018]     output: genie_novel/test/test_intermediatefiles/GIANT_WHRadjBMI.out
+[Thu Sep  6 08:07:52 2018]     jobid: 0
+[Thu Sep  6 08:07:52 2018]     wildcards: gwas=GIANT_WHRadjBMI
+
+Loading required package: methods
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: 'BiocGenerics'
+
+The following objects are masked from 'package:parallel':
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from 'package:stats':
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from 'package:base':
+
+    Filter, Find, Map, Position, Reduce, anyDuplicated, append,
+    as.data.frame, cbind, colMeans, colSums, colnames, do.call,
+    duplicated, eval, evalq, get, grep, grepl, intersect, is.unsorted,
+    lapply, lengths, mapply, match, mget, order, paste, pmax, pmax.int,
+    pmin, pmin.int, rank, rbind, rowMeans, rowSums, rownames, sapply,
+    setdiff, sort, table, tapply, union, unique, unsplit, which,
+    which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: 'S4Vectors'
+
+The following objects are masked from 'package:data.table':
+
+    first, second
+
+The following object is masked from 'package:base':
+
+    expand.grid
+
+Loading required package: IRanges
+
+Attaching package: 'IRanges'
+
+The following object is masked from 'package:data.table':
+
+    shift
+
+Loading required package: GenomeInfoDb
+Error in file(con, "r") : cannot open the connection
+Calls: getcounts -> readLines -> file
+In addition: Warning message:
+In file(con, "r") :
+  cannot open file 'EpiXcan_Sig_genes_for_traits/GIANT_WHRadjBMI': No such file or directory
+Execution halted
+[Thu Sep  6 08:07:54 2018]     Error in rule novel_one:
+[Thu Sep  6 08:07:54 2018]         jobid: 0
+[Thu Sep  6 08:07:54 2018]         output: genie_novel/test/test_intermediatefiles/GIANT_WHRadjBMI.out
+
+[Thu Sep  6 08:07:54 2018] RuleException:
+[Thu Sep  6 08:07:54 2018] CalledProcessError in line 33 of /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake:
+[Thu Sep  6 08:07:54 2018] Command ' set -euo pipefail;  Rscript /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.R Sig_genes_for_traits/GIANT_WHRadjBMI /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt genie_novel/test/test_intermediatefiles/GIANT_WHRadjBMI.out ' returned non-zero exit status 1.
+[Thu Sep  6 08:07:54 2018]   File "/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake", line 33, in __rule_novel_one
+[Thu Sep  6 08:07:54 2018]   File "/hpc/users/xrajagv01/.conda/envs/genie/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Thu Sep  6 08:07:54 2018] Shutting down, this might take some time.
+[Thu Sep  6 08:07:54 2018] Exiting because a job execution failed. Look above for error message

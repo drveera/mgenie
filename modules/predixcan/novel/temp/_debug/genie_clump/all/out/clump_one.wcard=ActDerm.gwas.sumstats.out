@@ -1,0 +1,58 @@
+Sender: LSF System <lsfadmin@node28-61>
+Subject: Job 110437432: </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.8th7fvzf/all.clump_one.94> in cluster <minerva> Exited
+
+Job </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.8th7fvzf/all.clump_one.94> was submitted from host <node25-15> by user <xrajagv01> in cluster <minerva>.
+Job was executed on host(s) <node28-61>, in queue <premium>, as user <xrajagv01> in cluster <minerva>.
+</hpc/users/xrajagv01> was used as the home directory.
+</hpc/users/xrajagv01/va-biobank/Veera/genie/modules/predixcan/novel/temp> was used as the working directory.
+Started at Wed Sep  5 11:11:51 2018
+Results reported on Wed Sep  5 11:13:05 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.8th7fvzf/all.clump_one.94
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   1.57 sec.
+    Max Memory :                                 34 MB
+    Average Memory :                             19.28 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1966.00 MB
+    Max Processes :                              7
+    Max Threads :                                8
+
+The output (if any) follows:
+
+[Wed Sep  5 11:12:04 2018] Building DAG of jobs...
+[Wed Sep  5 11:12:36 2018] Using shell: /bin/bash
+[Wed Sep  5 11:12:36 2018] Provided cores: 1
+[Wed Sep  5 11:12:36 2018] Rules claiming more threads will be scaled down.
+[Wed Sep  5 11:12:36 2018] Job counts:
+[Wed Sep  5 11:12:36 2018] 	count	jobs
+[Wed Sep  5 11:12:36 2018] 	1	clump_one
+[Wed Sep  5 11:12:36 2018] 	1
+
+[Wed Sep  5 11:12:36 2018] rule clump_one:
+[Wed Sep  5 11:12:36 2018]     input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ActDerm.gwas.sumstats
+[Wed Sep  5 11:12:36 2018]     output: genie_clump/all/allld_from_1kg.eur.biallele.snps.maf0.01/ActDerm.gwas.sumstats.clumped
+[Wed Sep  5 11:12:36 2018]     jobid: 0
+[Wed Sep  5 11:12:36 2018]     wildcards: wcard=ActDerm.gwas.sumstats
+
+/bin/bash: plink: command not found
+[Wed Sep  5 11:12:40 2018]     Error in rule clump_one:
+[Wed Sep  5 11:12:40 2018]         jobid: 0
+[Wed Sep  5 11:12:40 2018]         output: genie_clump/all/allld_from_1kg.eur.biallele.snps.maf0.01/ActDerm.gwas.sumstats.clumped
+
+[Wed Sep  5 11:12:40 2018] RuleException:
+[Wed Sep  5 11:12:40 2018] CalledProcessError in line 37 of /sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/clump.snake:
+[Wed Sep  5 11:12:40 2018] Command ' set -euo pipefail;  plink --bfile 1kg.eur.biallele.snps.maf0.01 --clump /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/ActDerm.gwas.sumstats --out genie_clump/all/allld_from_1kg.eur.biallele.snps.maf0.01/ActDerm.gwas.sumstats --clump-p1 0.00000005 --clump-p2 0.00000005 --clump-r2 0.1 --clump-kb 250 ' returned non-zero exit status 127.
+[Wed Sep  5 11:12:40 2018]   File "/sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/clump.snake", line 37, in __rule_clump_one
+[Wed Sep  5 11:12:40 2018]   File "/hpc/users/xrajagv01/.conda/envs/genie/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Wed Sep  5 11:12:40 2018] Shutting down, this might take some time.
+[Wed Sep  5 11:12:40 2018] Exiting because a job execution failed. Look above for error message

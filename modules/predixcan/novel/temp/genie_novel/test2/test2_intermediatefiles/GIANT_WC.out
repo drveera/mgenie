@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/GIANT_WC,EpiXcan,95,67,28
+Sig_genes_for_traits/GIANT_WC,PrediXcan,97,73,24

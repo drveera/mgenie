@@ -1,0 +1,2 @@
+#!/bin/sh 
+ snakemake -j 100000 --use-conda --keep-going --cluster-config /sc/orga/projects/va-biobank/Veera/genie//library/cluster.json --configfile _debug/genie_novel/test/config.json --nolock -s /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake --jobname test.{rulename}.{jobid} --cluster 'bsub -P {cluster.P} -q {cluster.q} -W {cluster.W} -M {cluster.M} -o _debug/genie_novel/test/out/{cluster.output} -n {cluster.n}' 

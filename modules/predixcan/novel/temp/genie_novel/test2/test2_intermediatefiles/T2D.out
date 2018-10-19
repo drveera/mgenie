@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/T2D,EpiXcan,15,6,9
+Sig_genes_for_traits/T2D,PrediXcan,14,6,8

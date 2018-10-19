@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 32 of /sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/clump.snake:
+Missing input files for rule clump_one:
+lipids.hdl.sumstats.gz

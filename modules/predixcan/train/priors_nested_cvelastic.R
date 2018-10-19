@@ -90,7 +90,7 @@ cvElastic <- function(gene,
     nfit <- ncol(snp.new)
     adjR2 <- 1 - (1-corvalue_sq)*(nsamples-1)/(nsamples-1-nfit)
     ##new pvalue by Wen
-    pval_all <- ifelse(sd(predicted_all)!=0, cor.test(predicted_all, exppheno)$p.value, runif(1))
+    pval_all <- ifelse(sd(predicted_all)!=0, cor.test(predicted_all, gene)$p.value, runif(1))
     training_R2 <- calc_R2(gene,predicted_all)
       ##second fit with only the useful snps
       fit2 <- cv.glmnet(x=snp.new, y=gene,

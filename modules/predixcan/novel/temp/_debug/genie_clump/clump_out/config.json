@@ -1,0 +1,17 @@
+{
+    "clump": true,
+    "--nojob": true,
+    "--njobs": null,
+    "--int": false,
+    "--distance": "250",
+    "--r2": "0.1",
+    "--p1": "0.00000005",
+    "--out": "clump_out",
+    "--dry-run": false,
+    "--p2": "0.00000005",
+    "--other": null,
+    "--sumstats": "PGC2_SCZ.gwas.sumstats",
+    "--ld": "1kg.eur.biallele.snps.maf0.01",
+    "pfix_clump": "genie_clump/clump_out/clump_out",
+    "--outfolder": "genie_clump/clump_out"
+}

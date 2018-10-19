@@ -1,0 +1,235 @@
+PLINK v1.90b3.35 64-bit (25 Mar 2016)
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/HEIGHT.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HEIGHT.gwas.sumstats
+
+Hostname: node24-7
+Working directory: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp
+Start time: Thu Sep  6 05:41:48 2018
+
+Random number seed: 1536226908
+64399 MB RAM detected; reserving 32199 MB for main workspace.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HEIGHT.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs6789653' is missing from the main dataset, and is a top variant.
+Warning: 'rs6845078' is missing from the main dataset, and is a top variant.
+Warning: 'rs1713919' is missing from the main dataset, and is a top variant.
+Warning: 'rs798536' is missing from the main dataset, and is a top variant.
+Warning: 'rs6120880' is missing from the main dataset, and is a top variant.
+Warning: 'rs882367' is missing from the main dataset, and is a top variant.
+Warning: 'rs2064511' is missing from the main dataset, and is a top variant.
+Warning: 'rs17499829' is missing from the main dataset, and is a top variant.
+Warning: 'rs9388487' is missing from the main dataset, and is a top variant.
+Warning: 'rs2527687' is missing from the main dataset, and is a top variant.
+Warning: 'rs11049646' is missing from the main dataset, and is a top variant.
+Warning: 'rs17199740' is missing from the main dataset, and is a top variant.
+Warning: 'rs1529897' is missing from the main dataset, and is a top variant.
+Warning: 'rs893770' is missing from the main dataset, and is a top variant.
+Warning: 'rs3800392' is missing from the main dataset, and is a top variant.
+Warning: 'rs16910870' is missing from the main dataset, and is a top variant.
+Warning: 'rs8099594' is missing from the main dataset, and is a top variant.
+Warning: 'rs12983357' is missing from the main dataset, and is a top variant.
+Warning: 'rs6107847' is missing from the main dataset, and is a top variant.
+Warning: 'rs9574' is missing from the main dataset, and is a top variant.
+Warning: 'rs3743399' is missing from the main dataset, and is a top variant.
+Warning: 'rs12625149' is missing from the main dataset, and is a top variant.
+Warning: 'rs201961303' is missing from the main dataset, and is a top variant.
+Warning: 'rs6119516' is missing from the main dataset, and is a top variant.
+Warning: 'rs6899744' is missing from the main dataset, and is a top variant.
+Warning: 'rs11966736' is missing from the main dataset, and is a top variant.
+Warning: 'rs13404123' is missing from the main dataset, and is a top variant.
+Warning: 'rs6934246' is missing from the main dataset, and is a top variant.
+Warning: 'rs6937510' is missing from the main dataset, and is a top variant.
+Warning: 'rs4909608' is missing from the main dataset, and is a top variant.
+Warning: 'rs6919734' is missing from the main dataset, and is a top variant.
+Warning: 'rs6457821' is missing from the main dataset, and is a top variant.
+Warning: 'rs11054439' is missing from the main dataset, and is a top variant.
+Warning: 'rs1872529' is missing from the main dataset, and is a top variant.
+Warning: 'rs7750906' is missing from the main dataset, and is a top variant.
+Warning: 'rs2897882' is missing from the main dataset, and is a top variant.
+Warning: 'rs6923894' is missing from the main dataset, and is a top variant.
+Warning: 'rs892044' is missing from the main dataset, and is a top variant.
+Warning: 'rs11961212' is missing from the main dataset, and is a top variant.
+Warning: 'rs7821178' is missing from the main dataset, and is a top variant.
+Warning: 'rs10185077' is missing from the main dataset, and is a top variant.
+Warning: 'rs13197442' is missing from the main dataset, and is a top variant.
+Warning: 'rs7762809' is missing from the main dataset, and is a top variant.
+Warning: 'rs872937' is missing from the main dataset, and is a top variant.
+Warning: 'rs7765510' is missing from the main dataset, and is a top variant.
+Warning: 'rs9658134' is missing from the main dataset, and is a top variant.
+Warning: 'rs10801678' is missing from the main dataset, and is a top variant.
+Warning: 'rs699370' is missing from the main dataset, and is a top variant.
+Warning: 'rs7759268' is missing from the main dataset, and is a top variant.
+Warning: 'rs2490244' is missing from the main dataset, and is a top variant.
+Warning: 'rs2062708' is missing from the main dataset, and is a top variant.
+Warning: 'rs11282805' is missing from the main dataset, and is a top variant.
+Warning: 'rs4764685' is missing from the main dataset, and is a top variant.
+Warning: 'rs12357172' is missing from the main dataset, and is a top variant.
+Warning: 'rs790041' is missing from the main dataset, and is a top variant.
+Warning: '6:152310613' is missing from the main dataset, and is a top variant.
+Warning: 'rs31201' is missing from the main dataset, and is a top variant.
+Warning: 'rs10843091' is missing from the main dataset, and is a top variant.
+Warning: 'rs61768094' is missing from the main dataset, and is a top variant.
+Warning: 'rs4652773' is missing from the main dataset, and is a top variant.
+Warning: 'rs115295339' is missing from the main dataset, and is a top variant.
+Warning: 'rs2076168' is missing from the main dataset, and is a top variant.
+Warning: 'rs9470086' is missing from the main dataset, and is a top variant.
+Warning: 'rs1579496' is missing from the main dataset, and is a top variant.
+Warning: 'rs8077092' is missing from the main dataset, and is a top variant.
+Warning: 'rs2766597' is missing from the main dataset, and is a top variant.
+Warning: 'rs2159764' is missing from the main dataset, and is a top variant.
+Warning: 'rs1541374' is missing from the main dataset, and is a top variant.
+Warning: 'rs16964221' is missing from the main dataset, and is a top variant.
+Warning: 'rs6457861' is missing from the main dataset, and is a top variant.
+Warning: 'rs1958113' is missing from the main dataset, and is a top variant.
+Warning: 'rs7128819' is missing from the main dataset, and is a top variant.
+Warning: 'rs17792659' is missing from the main dataset, and is a top variant.
+Warning: 'rs32238' is missing from the main dataset, and is a top variant.
+Warning: 'rs71129870' is missing from the main dataset, and is a top variant.
+Warning: 'rs1894650' is missing from the main dataset, and is a top variant.
+Warning: 'rs2780103' is missing from the main dataset, and is a top variant.
+Warning: 'rs9447476' is missing from the main dataset, and is a top variant.
+Warning: 'rs6726915' is missing from the main dataset, and is a top variant.
+Warning: 'rs2138628' is missing from the main dataset, and is a top variant.
+Warning: 'rs1025048' is missing from the main dataset, and is a top variant.
+Warning: 'rs56216332' is missing from the main dataset, and is a top variant.
+Warning: 'rs2647232' is missing from the main dataset, and is a top variant.
+Warning: 'rs2581358' is missing from the main dataset, and is a top variant.
+Warning: 'rs17365084' is missing from the main dataset, and is a top variant.
+Warning: '7:20408874' is missing from the main dataset, and is a top variant.
+Warning: 'rs16865791' is missing from the main dataset, and is a top variant.
+Warning: 'rs12913951' is missing from the main dataset, and is a top variant.
+Warning: 'rs7114040' is missing from the main dataset, and is a top variant.
+Warning: 'rs145574370' is missing from the main dataset, and is a top variant.
+Warning: 'rs3805926' is missing from the main dataset, and is a top variant.
+Warning: 'rs699700' is missing from the main dataset, and is a top variant.
+Warning: 'rs238165' is missing from the main dataset, and is a top variant.
+Warning: 'rs6780175' is missing from the main dataset, and is a top variant.
+Warning: 'rs7761870' is missing from the main dataset, and is a top variant.
+Warning: 'rs3821008' is missing from the main dataset, and is a top variant.
+Warning: 'rs1980654' is missing from the main dataset, and is a top variant.
+Warning: 'rs1123462' is missing from the main dataset, and is a top variant.
+Warning: 'rs13028951' is missing from the main dataset, and is a top variant.
+Warning: 'rs272750' is missing from the main dataset, and is a top variant.
+Warning: 'rs6834673' is missing from the main dataset, and is a top variant.
+Warning: 'rs698763' is missing from the main dataset, and is a top variant.
+Warning: 'rs9344089' is missing from the main dataset, and is a top variant.
+Warning: 'rs11098210' is missing from the main dataset, and is a top variant.
+Warning: 'rs12904334' is missing from the main dataset, and is a top variant.
+Warning: 'rs12914829' is missing from the main dataset, and is a top variant.
+Warning: 'rs3847502' is missing from the main dataset, and is a top variant.
+Warning: 'rs200442025' is missing from the main dataset, and is a top variant.
+Warning: 'rs622502' is missing from the main dataset, and is a top variant.
+Warning: 'rs2959933' is missing from the main dataset, and is a top variant.
+Warning: 'rs2118740' is missing from the main dataset, and is a top variant.
+Warning: 'rs6603985' is missing from the main dataset, and is a top variant.
+Warning: 'rs138298867' is missing from the main dataset, and is a top variant.
+Warning: 'rs9752576' is missing from the main dataset, and is a top variant.
+Warning: 'rs7742332' is missing from the main dataset, and is a top variant.
+Warning: 'rs7858810' is missing from the main dataset, and is a top variant.
+Warning: 'rs1950501' is missing from the main dataset, and is a top variant.
+Warning: 'rs2245143' is missing from the main dataset, and is a top variant.
+Warning: 'rs2675806' is missing from the main dataset, and is a top variant.
+Warning: 'rs2722298' is missing from the main dataset, and is a top variant.
+Warning: 'rs7678418' is missing from the main dataset, and is a top variant.
+Warning: 'rs12731056' is missing from the main dataset, and is a top variant.
+Warning: 'rs6119507' is missing from the main dataset, and is a top variant.
+Warning: 'rs12371532' is missing from the main dataset, and is a top variant.
+Warning: 'rs17141600' is missing from the main dataset, and is a top variant.
+Warning: 'rs751857' is missing from the main dataset, and is a top variant.
+Warning: 'rs11118329' is missing from the main dataset, and is a top variant.
+Warning: 'rs9706162' is missing from the main dataset, and is a top variant.
+Warning: 'rs2912224' is missing from the main dataset, and is a top variant.
+Warning: 'rs2232248' is missing from the main dataset, and is a top variant.
+Warning: 'rs1126' is missing from the main dataset, and is a top variant.
+Warning: 'rs12908883' is missing from the main dataset, and is a top variant.
+Warning: 'rs2292607' is missing from the main dataset, and is a top variant.
+Warning: 'rs263102' is missing from the main dataset, and is a top variant.
+Warning: 'rs2791648' is missing from the main dataset, and is a top variant.
+Warning: 'rs2899824' is missing from the main dataset, and is a top variant.
+Warning: 'rs9361707' is missing from the main dataset, and is a top variant.
+Warning: 'rs6792502' is missing from the main dataset, and is a top variant.
+Warning: 'rs139428014' is missing from the main dataset, and is a top variant.
+Warning: 'rs6581155' is missing from the main dataset, and is a top variant.
+Warning: 'rs1983658' is missing from the main dataset, and is a top variant.
+Warning: 'rs2094182' is missing from the main dataset, and is a top variant.
+Warning: 'rs373592697' is missing from the main dataset, and is a top variant.
+Warning: 'rs424032' is missing from the main dataset, and is a top variant.
+Warning: 'rs561171' is missing from the main dataset, and is a top variant.
+Warning: 'rs13094707' is missing from the main dataset, and is a top variant.
+Warning: 'rs4869518' is missing from the main dataset, and is a top variant.
+Warning: 'rs13238327' is missing from the main dataset, and is a top variant.
+Warning: 'rs1112806' is missing from the main dataset, and is a top variant.
+Warning: 'rs79131127' is missing from the main dataset, and is a top variant.
+Warning: 'rs6580240' is missing from the main dataset, and is a top variant.
+Warning: 'rs12408981' is missing from the main dataset, and is a top variant.
+Warning: 'rs1124751' is missing from the main dataset, and is a top variant.
+Warning: 'rs7120775' is missing from the main dataset, and is a top variant.
+Warning: 'rs11740716' is missing from the main dataset, and is a top variant.
+Warning: 'rs10817134' is missing from the main dataset, and is a top variant.
+Warning: 'rs8028115' is missing from the main dataset, and is a top variant.
+Warning: 'rs4881767' is missing from the main dataset, and is a top variant.
+Warning: 'rs2959918' is missing from the main dataset, and is a top variant.
+Warning: 'rs2912225' is missing from the main dataset, and is a top variant.
+Warning: 'rs2959916' is missing from the main dataset, and is a top variant.
+Warning: 'rs2959919' is missing from the main dataset, and is a top variant.
+Warning: 'rs6598325' is missing from the main dataset, and is a top variant.
+Warning: 'rs589699' is missing from the main dataset, and is a top variant.
+Warning: 'rs9425628' is missing from the main dataset, and is a top variant.
+Warning: 'rs754694' is missing from the main dataset, and is a top variant.
+Warning: 'rs3768919' is missing from the main dataset, and is a top variant.
+Warning: 'rs2912222' is missing from the main dataset, and is a top variant.
+Warning: 'rs2912204' is missing from the main dataset, and is a top variant.
+Warning: 'rs922838' is missing from the main dataset, and is a top variant.
+Warning: 'rs1019075' is missing from the main dataset, and is a top variant.
+Warning: 'rs12907707' is missing from the main dataset, and is a top variant.
+Warning: 'rs820854' is missing from the main dataset, and is a top variant.
+Warning: 'rs2633948' is missing from the main dataset, and is a top variant.
+Warning: 'rs4903293' is missing from the main dataset, and is a top variant.
+Warning: 'rs10422388' is missing from the main dataset, and is a top variant.
+Warning: 'rs491447' is missing from the main dataset, and is a top variant.
+Warning: 'rs1151851' is missing from the main dataset, and is a top variant.
+Warning: 'rs12904378' is missing from the main dataset, and is a top variant.
+Warning: 'rs9293437' is missing from the main dataset, and is a top variant.
+Warning: 'rs17542466' is missing from the main dataset, and is a top variant.
+Warning: 'rs1420023' is missing from the main dataset, and is a top variant.
+Warning: 'rs1506022' is missing from the main dataset, and is a top variant.
+Warning: 'rs4783581' is missing from the main dataset, and is a top variant.
+Warning: 'rs8083289' is missing from the main dataset, and is a top variant.
+Warning: 'rs16857611' is missing from the main dataset, and is a top variant.
+Warning: 'rs1034705' is missing from the main dataset, and is a top variant.
+Warning: 'rs1559281' is missing from the main dataset, and is a top variant.
+Warning: 'rs17320616' is missing from the main dataset, and is a top variant.
+Warning: 'rs2384082' is missing from the main dataset, and is a top variant.
+Warning: 'rs9459954' is missing from the main dataset, and is a top variant.
+Warning: 'rs2061794' is missing from the main dataset, and is a top variant.
+Warning: 'rs2959935' is missing from the main dataset, and is a top variant.
+Warning: 'rs461521' is missing from the main dataset, and is a top variant.
+Warning: 'rs13094915' is missing from the main dataset, and is a top variant.
+Warning: 'rs3014241' is missing from the main dataset, and is a top variant.
+Warning: 'rs11819955' is missing from the main dataset, and is a top variant.
+Warning: 'rs11158248' is missing from the main dataset, and is a top variant.
+Warning: 'rs6487083' is missing from the main dataset, and is a top variant.
+Warning: 'rs745798' is missing from the main dataset, and is a top variant.
+Warning: 'rs3759809' is missing from the main dataset, and is a top variant.
+Warning: 'rs11084874' is missing from the main dataset, and is a top variant.
+Warning: 'rs7588221' is missing from the main dataset, and is a top variant.
+--clump: 1122 clumps formed from 23994 top variants.
+Results written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/HEIGHT.gwas.sumstats.clumped
+.
+
+End time: Thu Sep  6 05:41:55 2018

@@ -1,0 +1,60 @@
+Sender: LSF System <lsfadmin@node24-3>
+Subject: Job 110455467: </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.120> in cluster <minerva> Exited
+
+Job </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.120> was submitted from host <node26-55> by user <xrajagv01> in cluster <minerva>.
+Job was executed on host(s) <node24-3>, in queue <premium>, as user <xrajagv01> in cluster <minerva>.
+</hpc/users/xrajagv01> was used as the home directory.
+</hpc/users/xrajagv01/va-biobank/Veera/genie/modules/predixcan/novel/temp> was used as the working directory.
+Started at Thu Sep  6 05:55:33 2018
+Results reported on Thu Sep  6 05:56:53 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.120
+------------------------------------------------------------
+
+TERM_MEMLIMIT: job killed after reaching LSF memory usage limit.
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   77.95 sec.
+    Max Memory :                                 2000 MB
+    Average Memory :                             1496.53 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               0.00 MB
+    Max Processes :                              6
+    Max Threads :                                8
+
+The output (if any) follows:
+
+[Thu Sep  6 05:55:34 2018] Building DAG of jobs...
+[Thu Sep  6 05:55:34 2018] Using shell: /bin/bash
+[Thu Sep  6 05:55:34 2018] Provided cores: 1
+[Thu Sep  6 05:55:34 2018] Rules claiming more threads will be scaled down.
+[Thu Sep  6 05:55:34 2018] Job counts:
+[Thu Sep  6 05:55:34 2018] 	count	jobs
+[Thu Sep  6 05:55:34 2018] 	1	clump_two
+[Thu Sep  6 05:55:34 2018] 	1
+
+[Thu Sep  6 05:55:34 2018] rule clump_two:
+[Thu Sep  6 05:55:34 2018]     input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/UC.gwas.sumstats
+[Thu Sep  6 05:55:34 2018]     output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped.formatted
+[Thu Sep  6 05:55:34 2018]     jobid: 0
+[Thu Sep  6 05:55:34 2018]     wildcards: wcard=UC.gwas.sumstats
+
+Read 3.9% of 11348061 rowsRead 6.2% of 11348061 rowsRead 10.1% of 11348061 rowsRead 13.4% of 11348061 rowsRead 16.6% of 11348061 rowsRead 20.7% of 11348061 rowsRead 25.7% of 11348061 rowsRead 31.7% of 11348061 rowsRead 36.6% of 11348061 rowsRead 38.9% of 11348061 rowsRead 47.6% of 11348061 rowsRead 56.5% of 11348061 rowsRead 57.9% of 11348061 rowsRead 66.6% of 11348061 rowsRead 70.4% of 11348061 rowsRead 72.1% of 11348061 rowsRead 81.4% of 11348061 rowsRead 85.3% of 11348061 rowsRead 94.4% of 11348061 rowsRead 11348061 rows and 7 (of 7) columns from 0.481 GB file in 00:00:31
+/bin/bash: line 1:  5001 Killed                  Rscript /sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/add.alleles.R /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/UC.gwas.sumstats genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped.formatted
+[Thu Sep  6 05:56:51 2018]     Error in rule clump_two:
+[Thu Sep  6 05:56:51 2018]         jobid: 0
+[Thu Sep  6 05:56:51 2018]         output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped.formatted
+
+[Thu Sep  6 05:56:51 2018] RuleException:
+[Thu Sep  6 05:56:51 2018] CalledProcessError in line 44 of /sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/clump.snake:
+[Thu Sep  6 05:56:51 2018] Command ' set -euo pipefail;  Rscript /sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/add.alleles.R /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/UC.gwas.sumstats genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/UC.gwas.sumstats.clumped.formatted ' returned non-zero exit status 137.
+[Thu Sep  6 05:56:51 2018]   File "/sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/clump.snake", line 44, in __rule_clump_two
+[Thu Sep  6 05:56:51 2018]   File "/hpc/users/xrajagv01/.conda/envs/genie/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Thu Sep  6 05:56:51 2018] Shutting down, this might take some time.
+[Thu Sep  6 05:56:51 2018] Exiting because a job execution failed. Look above for error message

@@ -4,11 +4,10 @@
 '''
 
 usage:
- predixcan train_module [options] --expr=FILE --out=NAME
+ predixcan train_module [options] --module=FILE --out=NAME
 
 options:
  --gds=FILE        genotype gds file  [default: merged.gds]
- --expr=FILE       expression file
  --bfile=NAME      plink base name  [default: merged]
  --module=FILE     file with list of module genes  [default: module.names.list]
  --out=PREFIX      outname prefix

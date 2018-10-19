@@ -1,0 +1,3 @@
+TypeError in line 28 of /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake:
+must be str, not dict
+  File "/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake", line 28, in <module>

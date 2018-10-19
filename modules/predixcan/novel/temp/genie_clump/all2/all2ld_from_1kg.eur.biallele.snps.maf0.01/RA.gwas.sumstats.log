@@ -1,0 +1,62 @@
+PLINK v1.90b3.35 64-bit (25 Mar 2016)
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/RA.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/RA.gwas.sumstats
+
+Hostname: node22-12
+Working directory: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp
+Start time: Thu Sep  6 05:45:59 2018
+
+Random number seed: 1536227159
+64398 MB RAM detected; reserving 32199 MB for main workspace.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/RA.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs147957176' is missing from the main dataset, and is a top variant.
+Warning: 'rs188515420' is missing from the main dataset, and is a top variant.
+Warning: 'rs141168909' is missing from the main dataset, and is a top variant.
+Warning: 'rs186758851' is missing from the main dataset, and is a top variant.
+Warning: 'rs79487171' is missing from the main dataset, and is a top variant.
+Warning: 'rs79577229' is missing from the main dataset, and is a top variant.
+Warning: 'rs192663504' is missing from the main dataset, and is a top variant.
+Warning: 'rs55811970' is missing from the main dataset, and is a top variant.
+Warning: 'rs61819426' is missing from the main dataset, and is a top variant.
+Warning: 'rs147725925' is missing from the main dataset, and is a top variant.
+Warning: '6:138135621' is missing from the main dataset, and is a top variant.
+Warning: 'rs61819425' is missing from the main dataset, and is a top variant.
+Warning: 'rs138545978' is missing from the main dataset, and is a top variant.
+Warning: 'rs147101418' is missing from the main dataset, and is a top variant.
+Warning: 'rs75582746' is missing from the main dataset, and is a top variant.
+Warning: 'rs375608089' is missing from the main dataset, and is a top variant.
+Warning: 'rs61819363' is missing from the main dataset, and is a top variant.
+Warning: 'rs61819372' is missing from the main dataset, and is a top variant.
+Warning: 'rs143516985' is missing from the main dataset, and is a top variant.
+Warning: 'rs74434895' is missing from the main dataset, and is a top variant.
+Warning: 'rs148488077' is missing from the main dataset, and is a top variant.
+Warning: 'rs78995277' is missing from the main dataset, and is a top variant.
+Warning: 'rs139605600' is missing from the main dataset, and is a top variant.
+Warning: 'rs78186115' is missing from the main dataset, and is a top variant.
+Warning: 'rs139008840' is missing from the main dataset, and is a top variant.
+Warning: '1:113958859' is missing from the main dataset, and is a top variant.
+Warning: 'rs61817534' is missing from the main dataset, and is a top variant.
+Warning: 'rs76268993' is missing from the main dataset, and is a top variant.
+Warning: 'rs112049950' is missing from the main dataset, and is a top variant.
+Warning: 'rs183605557' is missing from the main dataset, and is a top variant.
+--clump: 62 clumps formed from 1991 top variants.
+Results written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/RA.gwas.sumstats.clumped
+.
+
+End time: Thu Sep  6 05:46:05 2018

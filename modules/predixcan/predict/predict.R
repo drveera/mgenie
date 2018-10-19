@@ -11,12 +11,12 @@ output2 <- args[6]
 
 
 if(FALSE){
-gds.file <- "philipshaw.gds"
-snpannot.file <- paste0(gds.file,".annot.RDS")
-genes.file <- "test.gene"
+gds.file <- "temp.del.gds"
+snpannot.file <- "temp.gds.annot"
+genes.file <- "genebatch/genes000"
 db.file <- "cmcphase1.nopriors.nogroups.db"
-output1 <- "out1"
-output2 <- "out2"
+output1 <- "temp.del.out1"
+output2 <- "temp.del.out2"
 }
 
 library(DBI, lib.loc = "~/va-biobank/Veera/Rlibraries/")
@@ -80,11 +80,11 @@ for(i in 1:length(genes)){
       genos <- t(genos)
     }
     ##check alleles
-    for(i in nrow(genos)){
-      if(alleles$A2[i] != dbwts$eff_allele[i]
-         & alleles$A2[i] == dbwts$ref_allele[i]
+    for(j in nrow(genos)){
+      if(alleles$A2[j] != dbwts$eff_allele[j]
+         & alleles$A2[j] == dbwts$ref_allele[j]
          ){
-        genos[i,] <- 2 - genos[i,]
+        genos[j,] <- 2 - genos[j,]
       }
     }
     predictedexpr <- snpwts %*% genos

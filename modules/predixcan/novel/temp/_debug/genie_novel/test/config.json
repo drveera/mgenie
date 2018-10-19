@@ -1,0 +1,12 @@
+{
+    "novel": true,
+    "--int": true,
+    "--out": "test",
+    "--njobs": null,
+    "--dry-run": false,
+    "--nojob": false,
+    "--annot": "/sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt",
+    "--gwas": "clumps.new.list",
+    "pfix_novel": "genie_novel/test/test",
+    "--outfolder": "genie_novel/test"
+}

@@ -1,0 +1,49 @@
+PLINK v1.90b3.35 64-bit (25 Mar 2016)
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MENARCHE.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENARCHE.gwas.sumstats
+
+Hostname: node21-6
+Working directory: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp
+Start time: Thu Sep  6 05:41:49 2018
+
+Random number seed: 1536226909
+64398 MB RAM detected; reserving 32199 MB for main workspace.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENARCHE.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs2138628' is missing from the main dataset, and is a top variant.
+Warning: 'rs1398217' is missing from the main dataset, and is a top variant.
+Warning: 'rs2137289' is missing from the main dataset, and is a top variant.
+Warning: 'rs7821178' is missing from the main dataset, and is a top variant.
+Warning: 'rs9930333' is missing from the main dataset, and is a top variant.
+Warning: 'rs2811529' is missing from the main dataset, and is a top variant.
+Warning: 'rs7644030' is missing from the main dataset, and is a top variant.
+Warning: 'rs1006441' is missing from the main dataset, and is a top variant.
+Warning: 'rs2513191' is missing from the main dataset, and is a top variant.
+Warning: 'rs2508733' is missing from the main dataset, and is a top variant.
+Warning: 'rs9388487' is missing from the main dataset, and is a top variant.
+Warning: 'rs2683992' is missing from the main dataset, and is a top variant.
+Warning: 'rs12207559' is missing from the main dataset, and is a top variant.
+Warning: 'rs9475001' is missing from the main dataset, and is a top variant.
+Warning: 'rs10750614' is missing from the main dataset, and is a top variant.
+Warning: 'rs9816879' is missing from the main dataset, and is a top variant.
+Warning: 'rs9843745' is missing from the main dataset, and is a top variant.
+--clump: 90 clumps formed from 2413 top variants.
+Results written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MENARCHE.gwas.sumstats.clumped
+.
+
+End time: Thu Sep  6 05:41:56 2018

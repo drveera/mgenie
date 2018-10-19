@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/CKD_smr,EpiXcan,22,8,14
+Sig_genes_for_traits/CKD_smr,PrediXcan,22,10,12

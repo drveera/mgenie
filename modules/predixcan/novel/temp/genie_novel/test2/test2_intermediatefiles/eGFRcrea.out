@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/eGFRcrea,EpiXcan,193,116,77
+Sig_genes_for_traits/eGFRcrea,PrediXcan,169,104,65

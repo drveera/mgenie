@@ -1,0 +1,26 @@
+Building DAG of jobs...
+File path /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	novel_all
+	1	novel_two
+	2
+
+rule novel_two:
+    input: genie_novel/test/test_intermediatefiles/PGC2_SCZ.out
+    output: genie_novel/test/test_finalfiles/merged.out
+    jobid: 2
+
+Finished job 2.
+1 of 2 steps (50%) done
+
+localrule novel_all:
+    input: genie_novel/test/test_intermediatefiles/PGC2_SCZ.out, genie_novel/test/test_finalfiles/merged.out
+    jobid: 0
+
+Finished job 0.
+2 of 2 steps (100%) done
+Complete log: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/log/2018-09-06T075549.728213.snakemake.log

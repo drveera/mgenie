@@ -1,0 +1,70 @@
+PLINK v1.90b3.35 64-bit (25 Mar 2016)
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/iPSYCH_ADHD.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD.gwas.sumstats
+
+Hostname: node28-4
+Working directory: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp
+Start time: Thu Sep  6 05:42:05 2018
+
+Random number seed: 1536226925
+64316 MB RAM detected; reserving 32158 MB for main workspace.
+Allocated 18088 MB successfully, after larger attempt(s) failed.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs11420276' is missing from the main dataset, and is a top variant.
+Warning: 'rs58097850' is missing from the main dataset, and is a top variant.
+Warning: 'rs11275853' is missing from the main dataset, and is a top variant.
+Warning: 'rs60879458' is missing from the main dataset, and is a top variant.
+Warning: 'rs3838464' is missing from the main dataset, and is a top variant.
+Warning: 'rs112767823' is missing from the main dataset, and is a top variant.
+Warning: 'rs201546697' is missing from the main dataset, and is a top variant.
+Warning: 'rs3838466' is missing from the main dataset, and is a top variant.
+Warning: 'rs34264939' is missing from the main dataset, and is a top variant.
+Warning: 'rs10692321' is missing from the main dataset, and is a top variant.
+Warning: 'rs139754583' is missing from the main dataset, and is a top variant.
+Warning: 'rs147154109' is missing from the main dataset, and is a top variant.
+Warning: 'rs58829390' is missing from the main dataset, and is a top variant.
+Warning: 'rs150623615' is missing from the main dataset, and is a top variant.
+Warning: 'rs55803885' is missing from the main dataset, and is a top variant.
+Warning: 'rs35025013' is missing from the main dataset, and is a top variant.
+Warning: 'rs35928531' is missing from the main dataset, and is a top variant.
+Warning: 'rs34427804' is missing from the main dataset, and is a top variant.
+Warning: 'rs35891206' is missing from the main dataset, and is a top variant.
+Warning: 'rs60474271' is missing from the main dataset, and is a top variant.
+Warning: 'rs3838475' is missing from the main dataset, and is a top variant.
+Warning: 'rs11320873' is missing from the main dataset, and is a top variant.
+Warning: 'rs10599480' is missing from the main dataset, and is a top variant.
+Warning: 'rs3842543' is missing from the main dataset, and is a top variant.
+Warning: 'rs55722803' is missing from the main dataset, and is a top variant.
+Warning: 'rs35947542' is missing from the main dataset, and is a top variant.
+Warning: 'rs607296' is missing from the main dataset, and is a top variant.
+Warning: 'rs145902657' is missing from the main dataset, and is a top variant.
+Warning: 'rs5886709' is missing from the main dataset, and is a top variant.
+Warning: 'rs34291892' is missing from the main dataset, and is a top variant.
+Warning: 'rs11318191' is missing from the main dataset, and is a top variant.
+Warning: 'rs36124295' is missing from the main dataset, and is a top variant.
+Warning: 'rs281324' is missing from the main dataset, and is a top variant.
+Warning: 'rs11357443' is missing from the main dataset, and is a top variant.
+Warning: 'rs34927403' is missing from the main dataset, and is a top variant.
+Warning: 'rs72329266' is missing from the main dataset, and is a top variant.
+Warning: 'rs11429972' is missing from the main dataset, and is a top variant.
+--clump: 15 clumps formed from 264 top variants.
+Results written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/iPSYCH_ADHD.gwas.sumstats.clumped
+.
+
+End time: Thu Sep  6 06:01:23 2018

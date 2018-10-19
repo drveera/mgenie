@@ -1,0 +1,17 @@
+{
+    "clump": true,
+    "--r2": "0.1",
+    "--njobs": null,
+    "--dry-run": false,
+    "--p1": "0.00000005",
+    "--nojob": false,
+    "--int": false,
+    "--p2": "0.00000005",
+    "--other": null,
+    "--out": "all",
+    "--distance": "250",
+    "--sumstats": "gwas.list",
+    "--ld": "1kg.eur.biallele.snps.maf0.01",
+    "pfix_clump": "genie_clump/all/all",
+    "--outfolder": "genie_clump/all"
+}

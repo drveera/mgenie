@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/iPSYCH_ADHD_EUR,EpiXcan,41,11,30
+Sig_genes_for_traits/iPSYCH_ADHD_EUR,PrediXcan,38,12,26

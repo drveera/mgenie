@@ -7,15 +7,17 @@ sys.path.insert(1,maindir + "/library")
 import md
 from md import process_list
 from os.path import basename
+import re
 
 gds = config['--gds']
-expr = config['--expr']
+##expr = config['--expr']
 snpannot = gds + ".annot.RDS"
 module = config['--module']
 module = process_list(module)
 bfile = config['--bfile']
 pfix = config['pfix_train_module']
 pcnum = list(range(1,6))
+##pcnum = list(range(1,2))
 
 ##scripts
 pcs_R = f"{methoddir}/module.pcs.R"
@@ -57,18 +59,17 @@ rule trainmodule_all:
 
 rule trainmodule_computePCs:
     message:"Compute PCs 1-5 for modules"
-    input: module = lambda wildcards: module[wildcards.module],
-           expr = expr
+    input: module = lambda wildcards: module[wildcards.module]
     output: pcs = expand(pcs_part,pcnum=pcnum),
             pheno = expand(pheno_part, pcnum=pcnum),
             siggenes = expand(siggenes_part, pcnum=pcnum)
     params: script = pcs_R, prefix=pcs_prefix
-    shell: "Rscript {params.script} {input.module} {params.prefix} {input.expr}"
+    shell: "Rscript {params.script} {input.module} {params.prefix}"
 
 rule trainmodule_gwas:
     message: "run gwas with the pcs"
     input: bim = bfile+".bim", pheno = pheno
-    output: qassoc
+    output: temp(qassoc)
     params: bfile= bfile, script="module load plink/1.90  && plink" , prefix=qassoc_prefix
     shell: "{params.script} --bfile {params.bfile} --pheno {input.pheno} --assoc --out {params.prefix} --allow-no-sex"
            " --memory 4000"

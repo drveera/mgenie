@@ -41,14 +41,14 @@ qassoc = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.qassoc"
 
 wts_prefix = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}"
 wts = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.weights"
-summ = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.summary" 
+summ = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.summary"
 
 moduleweights = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.weights"
 moduleweights_d = f"{pfix}_intermediatefiles/{{module}}.PC{{{{pcnum}}}}.weights"
 modulesummary = f"{pfix}_intermediatefiles/{{module}}.PC{{pcnum}}.summary"
 modulesummary_d = f"{pfix}_intermediatefiles/{{module}}.PC{{{{pcnum}}}}.summary"
 
-tempout=f"{pfix}_intermediatefiles/{{module}}.moduleweight.list"
+tempout=f"{pfix}_intermediatefiles/{{module}}.rt.list"
 
 ###
 moduleweights1 = f"{pfix}_intermediatefiles/{{module}}.weights.list1"
@@ -67,6 +67,7 @@ db = f"{pfix}_finalfiles/module.db"
 
 rule trainmodule_all:
     input: db
+        ##expand(tempout, module=module)
 
 rule trainmodule_computePCs:
     message:"Compute PCs 1-5 for modules"
@@ -78,11 +79,18 @@ rule trainmodule_computePCs:
     params: script = pcs_R, prefix=pcs_prefix
     shell: "Rscript {params.script} {input.module} {params.prefix} {input.expr}"
 
+rule trainmodule_temp:
+    message: "collect random test results"
+    input: dynamic(pcs)
+    output: tempout
+    run:
+        for i in input:
+            shell("ls {i} > {output}")
 
 rule trainmodule_gwas:
     message: "run gwas with the pcs"
     input: bim = bfile+".bim", pheno = pheno
-    output: qassoc
+    output: temp(qassoc)
     params: bfile= bfile, script="module load plink/1.90  && plink" , prefix=qassoc_prefix
     shell: "{params.script} --bfile {params.bfile} --pheno {input.pheno} --assoc --out {params.prefix} --allow-no-sex"
            " --memory 4000"

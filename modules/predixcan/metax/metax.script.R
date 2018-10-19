@@ -4,7 +4,7 @@ args <- commandArgs(trailingOnly = TRUE)
 
 gwas.file <- args[1]
 db.file <- args[2]
-cov.file <- paste0(db.file,".covmat")
+cov.file <- paste0(db.file,".merged.covmat")
 out.file <- args[3]
 genes.file <- args[4]
 print(genes.file)

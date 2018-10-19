@@ -4,15 +4,16 @@
 '''
 
 usage:
- predixcan fqtl [options] --vcf=FILE --expr=RDS
+ predixcan fqtl [options] --expr=RDS
 
 options:
- --vcf=FILE        vcf file
+ --vcf=FILE        vcf file  [default: c22.vcf.gz]
+ --bfile=PLINK     plink base name  [default: merged]
  --expr=RDS        expression rds file or list
  --oargs=ARGS      other arguments to pass within quotes
- --npeer=NUMBER    number of peer factors  [default: 10]
- --bed=annotation  bed file annotation for genes
- --out=PREFIX      outname prefix [default: predixcan]
+ --npeer=NUMBER    number of peer factors  [default: 40]
+ --bed=annotation  bed file annotation for genes  [default: genes.bed]
+ --out=PREFIX      outname prefix [default: fqtl]
  --nojob           run in front end
  --dry-run         just show the codes
  --int             submit jobs from front end

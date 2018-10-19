@@ -1,0 +1,16 @@
+Building DAG of jobs...
+File path /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt contains double '/'. This is likely unintended. It can also lead to inconsistent results of the file-matching approach used by Snakemake.
+Job counts:
+	count	jobs
+	1	novel_all
+	1	novel_one
+	2
+
+rule novel_one:
+    input: PGC2_SCZ, /sc/orga/projects/va-biobank/Veera/genie//resources/predixcan/gencode.v27.build37.txt
+    output: genie_novel/test/test_intermediatefiles/PGC2_SCZ.out
+    jobid: 1
+    wildcards: gwas=PGC2_SCZ
+
+RuleException in line 26 of /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake:
+'Params' object has no attribute 'script'

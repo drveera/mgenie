@@ -1,0 +1,79 @@
+Sender: LSF System <lsfadmin@node21-41>
+Subject: Job 110455300: </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.m98a2zz0/test2.clump_one.1> in cluster <minerva> Done
+
+Job </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.m98a2zz0/test2.clump_one.1> was submitted from host <minerva2> by user <xrajagv01> in cluster <minerva>.
+Job was executed on host(s) <node21-41>, in queue <premium>, as user <xrajagv01> in cluster <minerva>.
+</hpc/users/xrajagv01> was used as the home directory.
+</hpc/users/xrajagv01/va-biobank/Veera/genie/modules/predixcan/novel/temp> was used as the working directory.
+Started at Thu Sep  6 05:30:20 2018
+Results reported on Thu Sep  6 05:30:40 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.m98a2zz0/test2.clump_one.1
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   8.52 sec.
+    Max Memory :                                 575 MB
+    Average Memory :                             197.90 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1425.00 MB
+    Max Processes :                              6
+    Max Threads :                                8
+
+The output (if any) follows:
+
+[Thu Sep  6 05:30:24 2018] Building DAG of jobs...
+[Thu Sep  6 05:30:31 2018] Using shell: /bin/bash
+[Thu Sep  6 05:30:31 2018] Provided cores: 1
+[Thu Sep  6 05:30:31 2018] Rules claiming more threads will be scaled down.
+[Thu Sep  6 05:30:31 2018] Job counts:
+[Thu Sep  6 05:30:31 2018] 	count	jobs
+[Thu Sep  6 05:30:31 2018] 	1	clump_one
+[Thu Sep  6 05:30:31 2018] 	1
+
+[Thu Sep  6 05:30:31 2018] rule clump_one:
+[Thu Sep  6 05:30:31 2018]     input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, PGC2_SCZ.gwas.sumstats
+[Thu Sep  6 05:30:31 2018]     output: genie_clump/test2/test2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped
+[Thu Sep  6 05:30:31 2018]     jobid: 0
+[Thu Sep  6 05:30:31 2018]     wildcards: wcard=PGC2_SCZ.gwas.sumstats
+
+PLINK v1.90b3.35 64-bit (25 Mar 2016)      https://www.cog-genomics.org/plink2
+(C) 2005-2016 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to genie_clump/test2/test2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.log.
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump PGC2_SCZ.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/test2/test2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats
+
+64398 MB RAM detected; reserving 32199 MB for main workspace.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/test2/test2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... 0%1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99% done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs58294881' is missing from the main dataset, and is a top variant.
+Warning: 'rs66815818' is missing from the main dataset, and is a top variant.
+Warning: 'rs138172222' is missing from the main dataset, and is a top variant.
+453 more top variant IDs missing; see log file.
+--clump: 133 clumps formed from 5505 top variants.
+Results written to
+genie_clump/test2/test2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped
+.
+[Thu Sep  6 05:30:39 2018] Finished job 0.
+[Thu Sep  6 05:30:39 2018] 1 of 1 steps (100%) done

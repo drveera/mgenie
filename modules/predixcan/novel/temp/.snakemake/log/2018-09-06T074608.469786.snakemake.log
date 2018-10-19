@@ -1,0 +1,3 @@
+AttributeError in line 21 of /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake:
+'dict' object has no attribute 'out1'
+  File "/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/novel.snake", line 21, in <module>

@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/MENOPAUSE,EpiXcan,184,141,43
+Sig_genes_for_traits/MENOPAUSE,PrediXcan,145,113,32

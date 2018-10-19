@@ -1,0 +1,5 @@
+trait,method,ngenes,known,novel
+AD,EpiXcan,51,24,27
+AD,PrediXcan,51,29,22
+PGC2_SCZ,EpiXcan,324,205,119
+PGC2_SCZ,PrediXcan,282,178,104

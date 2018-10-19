@@ -1,0 +1,61 @@
+Sender: LSF System <lsfadmin@node28-4>
+Subject: Job 110455450: </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.4> in cluster <minerva> Exited
+
+Job </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.4> was submitted from host <node26-55> by user <xrajagv01> in cluster <minerva>.
+Job was executed on host(s) <node28-4>, in queue <premium>, as user <xrajagv01> in cluster <minerva>.
+</hpc/users/xrajagv01> was used as the home directory.
+</hpc/users/xrajagv01/va-biobank/Veera/genie/modules/predixcan/novel/temp> was used as the working directory.
+Started at Thu Sep  6 05:54:19 2018
+Results reported on Thu Sep  6 05:54:29 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.4
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   4.52 sec.
+    Max Memory :                                 835 MB
+    Average Memory :                             282.20 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1165.00 MB
+    Max Processes :                              6
+    Max Threads :                                8
+
+The output (if any) follows:
+
+[Thu Sep  6 05:54:19 2018] Building DAG of jobs...
+[Thu Sep  6 05:54:20 2018] Using shell: /bin/bash
+[Thu Sep  6 05:54:20 2018] Provided cores: 1
+[Thu Sep  6 05:54:20 2018] Rules claiming more threads will be scaled down.
+[Thu Sep  6 05:54:20 2018] Job counts:
+[Thu Sep  6 05:54:20 2018] 	count	jobs
+[Thu Sep  6 05:54:20 2018] 	1	clump_two
+[Thu Sep  6 05:54:20 2018] 	1
+
+[Thu Sep  6 05:54:20 2018] rule clump_two:
+[Thu Sep  6 05:54:20 2018]     input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/SPINE_BMD.gwas.sumstats
+[Thu Sep  6 05:54:20 2018]     output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped.formatted
+[Thu Sep  6 05:54:20 2018]     jobid: 0
+[Thu Sep  6 05:54:20 2018]     wildcards: wcard=SPINE_BMD.gwas.sumstats
+
+Read 3.1% of 9831214 rowsError: memory exhausted (limit reached?)
+Execution halted
+Warning message:
+system call failed: Cannot allocate memory 
+[Thu Sep  6 05:54:28 2018]     Error in rule clump_two:
+[Thu Sep  6 05:54:28 2018]         jobid: 0
+[Thu Sep  6 05:54:28 2018]         output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped.formatted
+
+[Thu Sep  6 05:54:28 2018] RuleException:
+[Thu Sep  6 05:54:28 2018] CalledProcessError in line 44 of /sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/clump.snake:
+[Thu Sep  6 05:54:28 2018] Command ' set -euo pipefail;  Rscript /sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/add.alleles.R /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/SPINE_BMD.gwas.sumstats genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/SPINE_BMD.gwas.sumstats.clumped.formatted ' returned non-zero exit status 1.
+[Thu Sep  6 05:54:28 2018]   File "/sc/orga/projects/va-biobank/Veera/genie/modules/sumstats/clump/clump.snake", line 44, in __rule_clump_two
+[Thu Sep  6 05:54:28 2018]   File "/hpc/users/xrajagv01/.conda/envs/genie/lib/python3.6/concurrent/futures/thread.py", line 56, in run
+[Thu Sep  6 05:54:28 2018] Shutting down, this might take some time.
+[Thu Sep  6 05:54:28 2018] Exiting because a job execution failed. Look above for error message

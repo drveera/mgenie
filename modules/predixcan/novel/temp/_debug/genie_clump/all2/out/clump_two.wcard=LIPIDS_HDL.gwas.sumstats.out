@@ -1,0 +1,52 @@
+Sender: LSF System <lsfadmin@node24-18>
+Subject: Job 110455447: </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.21> in cluster <minerva> Done
+
+Job </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.21> was submitted from host <node26-55> by user <xrajagv01> in cluster <minerva>.
+Job was executed on host(s) <node24-18>, in queue <premium>, as user <xrajagv01> in cluster <minerva>.
+</hpc/users/xrajagv01> was used as the home directory.
+</hpc/users/xrajagv01/va-biobank/Veera/genie/modules/predixcan/novel/temp> was used as the working directory.
+Started at Thu Sep  6 05:53:08 2018
+Results reported on Thu Sep  6 05:53:24 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.21
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   14.55 sec.
+    Max Memory :                                 595 MB
+    Average Memory :                             442.75 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1405.00 MB
+    Max Processes :                              6
+    Max Threads :                                8
+
+The output (if any) follows:
+
+[Thu Sep  6 05:53:08 2018] Building DAG of jobs...
+[Thu Sep  6 05:53:09 2018] Using shell: /bin/bash
+[Thu Sep  6 05:53:09 2018] Provided cores: 1
+[Thu Sep  6 05:53:09 2018] Rules claiming more threads will be scaled down.
+[Thu Sep  6 05:53:09 2018] Job counts:
+[Thu Sep  6 05:53:09 2018] 	count	jobs
+[Thu Sep  6 05:53:09 2018] 	1	clump_two
+[Thu Sep  6 05:53:09 2018] 	1
+
+[Thu Sep  6 05:53:09 2018] rule clump_two:
+[Thu Sep  6 05:53:09 2018]     input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_HDL.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/LIPIDS_HDL.gwas.sumstats
+[Thu Sep  6 05:53:09 2018]     output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/LIPIDS_HDL.gwas.sumstats.clumped.formatted
+[Thu Sep  6 05:53:09 2018]     jobid: 0
+[Thu Sep  6 05:53:09 2018]     wildcards: wcard=LIPIDS_HDL.gwas.sumstats
+
+Read 43.0% of 2420280 rowsRead 61.1% of 2420280 rowsRead 81.8% of 2420280 rowsRead 97.1% of 2420280 rowsRead 2420280 rows and 7 (of 7) columns from 0.093 GB file in 00:00:06
+Warning message:
+In fread(sumstats.file) :
+  C function strtod() returned ERANGE for one or more fields. The first was string input '1.1125944292536e-308'. It was read using (double)strtold() as numeric value 1.1125944292535998E-308 (displayed here using %.16E); loss of accuracy likely occurred. This message is designed to tell you exactly what has been done by fread's C code, so you can search yourself online for many references about double precision accuracy and these specific C functions. You may wish to use colClasses to read the column as character instead and then coerce that column using the Rmpfr package for greater accuracy.
+[Thu Sep  6 05:53:23 2018] Finished job 0.
+[Thu Sep  6 05:53:23 2018] 1 of 1 steps (100%) done

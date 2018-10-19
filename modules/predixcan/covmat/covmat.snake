@@ -25,37 +25,35 @@ module = config['--module']
 subgds = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds"
 subannot = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds.annot.RDS"
 covmat_sub = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.covmat"
-##covmat_sub_part = f"{pfix}_intermediatefiles/{{{{db}}}}/{{genes}}.covmat"
+covmat_sub_part = f"{pfix}_intermediatefiles/{{{{db}}}}/{{genes}}.covmat"
 covmat_merged = f"{pfix}_intermediatefiles/{{db}}.merged.covmat"
 
 ##scripts
 gds_subset_R = f"{methoddir}/gdssubset.R"
 covmat_R = f"{methoddir}/covmat.R"
 
-if module:
-    subgds = gds
-    subannot = snpannot
-else:
-    include: f"{methoddir}/subsetgds.snake"
+#if module:
+#    subgds = gds
+#    subannot = snpannot
+#else:
+include: f"{methoddir}/subsetgds.snake"
 
 rule covmat_all:
     input: expand(covmat_merged, db=db)
 
 rule covmat_covariance:
-    input: gds = subgds, annot= subannot, 
+    input: gds = subgds, annot= subannot,
            db=lambda wildcards: db[wildcards.db]
     output: covmat_sub
     params: script = covmat_R, genes=lambda wildcards: genes[wildcards.genes],
-    shell:"module unload R && module load R/3.4.1 &&"
+    shell:"module unload R && module load R/3.5.1 &&"
           "Rscript {params.script} {input.gds} {input.annot} "
           "{params.genes} {input.db} {output}"
 
-
 rule covmat_concat:
-    input: expand(covmat_sub, genes=genes,db=db)
+    input: expand(covmat_sub_part, genes=genes)
     output: covmat_merged
     run:
         shell("head -1 {input[0]} >> {output}")
         for i in input:
             shell("cat {i} | sed 1d >> {output}")
-

@@ -4,8 +4,9 @@ args <- commandArgs(trailingOnly = TRUE)
 
 module.file <- args[1]
 out.file <- args[2]
-##expr.file <- gsub("_color_.*$","",module.file)
-expr.file <- args[3]
+expr.file <- gsub("_color_.*$","",module.file)
+print(expr.file)
+##expr.file <- args[3]
 
 if(FALSE){
   module.file <- "modulegenes/starnet.AOR_black"
@@ -16,6 +17,7 @@ if(FALSE){
 library(data.table)
 
 expr <- t(readRDS(expr.file))
+print(expr[1:4,1:4])
 expr <- cbind(sample=rownames(expr),data.table(expr))
 ##expr <- fread(expr.file)
 samples <- expr$sample
@@ -33,6 +35,7 @@ rownames(expr) <- samples
 
 modulegenes <- readLines(module.file)
 modulegenes <- gsub("\\..*$","",modulegenes)
+colnames(expr)  <- gsub("\\..*$","",colnames(expr))
 expr <- expr[,intersect(colnames(expr),modulegenes)]
 
 expr.pca <- prcomp(expr,retx = TRUE)

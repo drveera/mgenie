@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/Man_FastingGlucose,EpiXcan,55,50,5
+Sig_genes_for_traits/Man_FastingGlucose,PrediXcan,49,45,4

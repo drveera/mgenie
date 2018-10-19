@@ -4,11 +4,11 @@
 '''
 
 usage:
- predixcan covmat [options] --gds=FILE --db=FILE
+ predixcan covmat [options]
 
 options:
- --gds=FILE        genotype gds file
- --db=FILE         prediction model db file
+ --gds=FILE        genotype gds file  [default: 1kg.gds]
+ --db=FILE         prediction model db file  [default: module.db]
  --genes=FILE      genes files
  --out=PREFIX      outname prefix [default: out]
  --module          if computing for modules

@@ -1,0 +1,49 @@
+Sender: LSF System <lsfadmin@node21-41>
+Subject: Job 110455308: </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.m98a2zz0/test2.clump_two.2> in cluster <minerva> Done
+
+Job </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.m98a2zz0/test2.clump_two.2> was submitted from host <minerva2> by user <xrajagv01> in cluster <minerva>.
+Job was executed on host(s) <node21-41>, in queue <premium>, as user <xrajagv01> in cluster <minerva>.
+</hpc/users/xrajagv01> was used as the home directory.
+</hpc/users/xrajagv01/va-biobank/Veera/genie/modules/predixcan/novel/temp> was used as the working directory.
+Started at Thu Sep  6 05:32:42 2018
+Results reported on Thu Sep  6 05:34:50 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.m98a2zz0/test2.clump_two.2
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   80.67 sec.
+    Max Memory :                                 2000 MB
+    Average Memory :                             966.73 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               0.00 MB
+    Max Processes :                              6
+    Max Threads :                                8
+
+The output (if any) follows:
+
+[Thu Sep  6 05:32:43 2018] Building DAG of jobs...
+[Thu Sep  6 05:32:43 2018] Using shell: /bin/bash
+[Thu Sep  6 05:32:43 2018] Provided cores: 1
+[Thu Sep  6 05:32:43 2018] Rules claiming more threads will be scaled down.
+[Thu Sep  6 05:32:43 2018] Job counts:
+[Thu Sep  6 05:32:43 2018] 	count	jobs
+[Thu Sep  6 05:32:43 2018] 	1	clump_two
+[Thu Sep  6 05:32:43 2018] 	1
+
+[Thu Sep  6 05:32:43 2018] rule clump_two:
+[Thu Sep  6 05:32:43 2018]     input: genie_clump/test2/test2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped, PGC2_SCZ.gwas.sumstats
+[Thu Sep  6 05:32:43 2018]     output: genie_clump/test2/test2ld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped.formatted
+[Thu Sep  6 05:32:43 2018]     jobid: 0
+[Thu Sep  6 05:32:43 2018]     wildcards: wcard=PGC2_SCZ.gwas.sumstats
+
+Read 4.8% of 9508407 rowsRead 9.3% of 9508407 rowsRead 13.9% of 9508407 rowsRead 18.2% of 9508407 rowsRead 21.3% of 9508407 rowsRead 24.7% of 9508407 rowsRead 30.7% of 9508407 rowsRead 37.9% of 9508407 rowsRead 44.6% of 9508407 rowsRead 46.5% of 9508407 rowsRead 56.8% of 9508407 rowsRead 67.0% of 9508407 rowsRead 69.1% of 9508407 rowsRead 78.2% of 9508407 rowsRead 84.0% of 9508407 rowsRead 87.5% of 9508407 rowsRead 98.1% of 9508407 rowsRead 9508407 rows and 7 (of 7) columns from 0.405 GB file in 00:00:27
+[Thu Sep  6 05:34:49 2018] Finished job 0.
+[Thu Sep  6 05:34:49 2018] 1 of 1 steps (100%) done

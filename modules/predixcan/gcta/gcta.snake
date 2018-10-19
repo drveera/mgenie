@@ -1,0 +1,51 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+import re
+
+grm = config['--grm']
+pheno = process_list(config['--pheno'])
+pfix = config['pfix_gcta']
+out = config['--out']
+
+##scripts
+hsq_R = f"{methoddir}/hsq.R"
+
+##outfiles
+hsq = f"{pfix}_intermediatefiles/{{pheno}}.hsq"
+hsq_base = f"{pfix}_intermediatefiles/{{pheno}}"
+hsq_tbl = f"{pfix}_intermediatefiles/{{pheno}}.hsq.tbl"
+hsq_full = f"{pfix}_finalfiles/{out}.hsq.tbl"
+
+
+rule px_gcta_all:
+    input: hsq_full
+
+rule px_gcta_reml:
+    input: pheno = lambda wildcards: pheno[wildcards.pheno],
+           grm = grm + ".grm.N.bin"
+    output: hsq
+    params: script = "module load gcta && gcta64",
+            grm = grm, out = hsq_base
+    shell: "{params.script} --reml --pheno {input.pheno} "
+           "--grm {params.grm} --out {params.out}"
+
+rule px_gcta_hsq:
+    input: hsq
+    output: hsq_tbl
+    params: script = hsq_R
+    shell: "Rscript {params.script} {input} {output}"
+
+rule px_gcta_cat:
+    input: expand(hsq_tbl,pheno=pheno)
+    output: hsq_full
+    run:
+        shell("head -1 {input[0]} >> {output}")
+        for i in input:
+            shell("cat {i} | sed 1d >> {output}")

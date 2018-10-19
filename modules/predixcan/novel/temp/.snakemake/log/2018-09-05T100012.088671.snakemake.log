@@ -1,0 +1,36 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	clump_all
+	1	clump_one
+	1	clump_two
+	3
+
+rule clump_one:
+    input: 1kg.eur.biallele.snps.maf0.01.bed, 1kg.eur.biallele.snps.maf0.01.bim, 1kg.eur.biallele.snps.maf0.01.fam, PGC2_SCZ.gwas.sumstats
+    output: genie_clump/clump_out/clump_outld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped
+    jobid: 2
+    wildcards: wcard=PGC2_SCZ.gwas.sumstats
+
+Finished job 2.
+1 of 3 steps (33%) done
+
+rule clump_two:
+    input: genie_clump/clump_out/clump_outld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped, PGC2_SCZ.gwas.sumstats
+    output: genie_clump/clump_out/clump_outld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped.formatted
+    jobid: 1
+    wildcards: wcard=PGC2_SCZ.gwas.sumstats
+
+Finished job 1.
+2 of 3 steps (67%) done
+
+localrule clump_all:
+    input: genie_clump/clump_out/clump_outld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped, genie_clump/clump_out/clump_outld_from_1kg.eur.biallele.snps.maf0.01/PGC2_SCZ.gwas.sumstats.clumped.formatted
+    jobid: 0
+
+Finished job 0.
+3 of 3 steps (100%) done
+Complete log: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/log/2018-09-05T100012.088671.snakemake.log

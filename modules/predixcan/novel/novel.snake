@@ -1,0 +1,41 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+gwas = config['--gwas']
+gwas = process_list(gwas)
+annot = config['--annot']
+pfix = config['pfix_novel']
+
+
+##scripts
+novel=f"{methoddir}/novel.R"
+
+##outfiles
+gwasout1 = f"{pfix}_intermediatefiles/{{gwas}}.out"
+gwasout2 = f"{pfix}_finalfiles/merged.out"
+##rules
+rule novel_all:
+    input: expand(gwasout1,gwas=gwas),
+           gwasout2
+
+rule novel_one:
+    input: gwas = lambda wildcards: gwas[wildcards.gwas],
+           annot = annot
+    output: gwasout1
+    params: script = novel
+    shell: "Rscript {params.script} {input.gwas} {input.annot} {output}"
+
+rule novel_two:
+    input: expand(gwasout1,gwas=gwas)
+    output: gwasout2
+    run:
+        shell("head -1 {input[0]} >> {output}")
+        for i in input:
+            shell("cat {i} | sed 1d >> {output}")

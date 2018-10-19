@@ -10,7 +10,9 @@ library(dplyr)
 flist <- readLines(flist)
 df <- list()
 fread_special <- function(x){
-  xdf <- fread(x)
+  ##xdf <- fread(x)
+  xdf <- read.table(x,header = TRUE, stringsAsFactors = FALSE, sep=",")
+  xdf <- data.table(xdf)
   if("ref_allele" %in% names(xdf)){
     xdf <- fread(x,colClasses = list(character=5:6))
   }
@@ -19,4 +21,4 @@ fread_special <- function(x){
 for(i in flist) df[[i]] <- fread_special(i)
 df <- do.call(bind_rows,df)
 
-fwrite(df,out.file,na="NA")
+fwrite(df,out.file,na="NA",sep="\t")

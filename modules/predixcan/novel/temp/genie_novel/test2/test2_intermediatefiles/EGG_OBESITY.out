@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/EGG_OBESITY,EpiXcan,16,8,8
+Sig_genes_for_traits/EGG_OBESITY,PrediXcan,10,7,3

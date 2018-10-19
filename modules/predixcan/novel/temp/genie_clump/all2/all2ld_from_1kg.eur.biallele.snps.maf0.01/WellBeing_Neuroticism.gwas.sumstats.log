@@ -1,0 +1,289 @@
+PLINK v1.90b3.35 64-bit (25 Mar 2016)
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/WellBeing_Neuroticism.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_Neuroticism.gwas.sumstats
+
+Hostname: node22-29
+Working directory: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp
+Start time: Thu Sep  6 05:44:27 2018
+
+Random number seed: 1536227067
+64399 MB RAM detected; reserving 32199 MB for main workspace.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_Neuroticism.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs77639044' is missing from the main dataset, and is a top variant.
+Warning: 'rs17683510' is missing from the main dataset, and is a top variant.
+Warning: '17:44142332' is missing from the main dataset, and is a top variant.
+Warning: 'rs116793410' is missing from the main dataset, and is a top variant.
+Warning: '17:44142334' is missing from the main dataset, and is a top variant.
+Warning: 'rs200553010' is missing from the main dataset, and is a top variant.
+Warning: 'rs62060796' is missing from the main dataset, and is a top variant.
+Warning: '17:44090538' is missing from the main dataset, and is a top variant.
+Warning: 'rs76927677' is missing from the main dataset, and is a top variant.
+Warning: 'rs62063685' is missing from the main dataset, and is a top variant.
+Warning: '17:44090536' is missing from the main dataset, and is a top variant.
+Warning: '17:44122354' is missing from the main dataset, and is a top variant.
+Warning: 'rs767059' is missing from the main dataset, and is a top variant.
+Warning: '17:44122348' is missing from the main dataset, and is a top variant.
+Warning: 'rs112402370' is missing from the main dataset, and is a top variant.
+Warning: '17:44122345' is missing from the main dataset, and is a top variant.
+Warning: 'rs78136862' is missing from the main dataset, and is a top variant.
+Warning: 'rs2572437' is missing from the main dataset, and is a top variant.
+Warning: 'rs113894932' is missing from the main dataset, and is a top variant.
+Warning: '17:44137676' is missing from the main dataset, and is a top variant.
+Warning: '17:44137678' is missing from the main dataset, and is a top variant.
+Warning: '17:44153909' is missing from the main dataset, and is a top variant.
+Warning: '17:44121917' is missing from the main dataset, and is a top variant.
+Warning: '17:44122484' is missing from the main dataset, and is a top variant.
+Warning: '17:44122626' is missing from the main dataset, and is a top variant.
+Warning: '17:44121469' is missing from the main dataset, and is a top variant.
+Warning: '17:44220454' is missing from the main dataset, and is a top variant.
+Warning: '17:44213934' is missing from the main dataset, and is a top variant.
+Warning: '17:44213712' is missing from the main dataset, and is a top variant.
+Warning: '17:44156180' is missing from the main dataset, and is a top variant.
+Warning: '17:44156181' is missing from the main dataset, and is a top variant.
+Warning: '17:44098862' is missing from the main dataset, and is a top variant.
+Warning: '17:43991515' is missing from the main dataset, and is a top variant.
+Warning: '17:43757777' is missing from the main dataset, and is a top variant.
+Warning: '17:43766497' is missing from the main dataset, and is a top variant.
+Warning: '17:43757776' is missing from the main dataset, and is a top variant.
+Warning: '17:44062993' is missing from the main dataset, and is a top variant.
+Warning: 'rs62061813' is missing from the main dataset, and is a top variant.
+Warning: '17:43723929' is missing from the main dataset, and is a top variant.
+Warning: 'rs77132763' is missing from the main dataset, and is a top variant.
+Warning: '17:44061898' is missing from the main dataset, and is a top variant.
+Warning: 'rs71369809' is missing from the main dataset, and is a top variant.
+Warning: 'rs141943637' is missing from the main dataset, and is a top variant.
+Warning: '17:44220785' is missing from the main dataset, and is a top variant.
+Warning: '17:44224686' is missing from the main dataset, and is a top variant.
+Warning: 'rs142488006' is missing from the main dataset, and is a top variant.
+Warning: 'rs3108318' is missing from the main dataset, and is a top variant.
+Warning: '17:44225802' is missing from the main dataset, and is a top variant.
+Warning: '17:44213921' is missing from the main dataset, and is a top variant.
+Warning: '17:43670754' is missing from the main dataset, and is a top variant.
+Warning: '17:44220790' is missing from the main dataset, and is a top variant.
+Warning: '17:44215823' is missing from the main dataset, and is a top variant.
+Warning: '17:44064208' is missing from the main dataset, and is a top variant.
+Warning: '17:44064759' is missing from the main dataset, and is a top variant.
+Warning: '17:44226030' is missing from the main dataset, and is a top variant.
+Warning: 'rs145932064' is missing from the main dataset, and is a top variant.
+Warning: '17:44063563' is missing from the main dataset, and is a top variant.
+Warning: '17:44226561' is missing from the main dataset, and is a top variant.
+Warning: '17:44216158' is missing from the main dataset, and is a top variant.
+Warning: '17:44063140' is missing from the main dataset, and is a top variant.
+Warning: '17:44098861' is missing from the main dataset, and is a top variant.
+Warning: '17:44217112' is missing from the main dataset, and is a top variant.
+Warning: '17:44061696' is missing from the main dataset, and is a top variant.
+Warning: '17:44064334' is missing from the main dataset, and is a top variant.
+Warning: '17:43516739' is missing from the main dataset, and is a top variant.
+Warning: '17:44062337' is missing from the main dataset, and is a top variant.
+Warning: '17:44227196' is missing from the main dataset, and is a top variant.
+Warning: '17:44227186' is missing from the main dataset, and is a top variant.
+Warning: 'rs10096194' is missing from the main dataset, and is a top variant.
+Warning: '17:44226126' is missing from the main dataset, and is a top variant.
+Warning: '17:44215045' is missing from the main dataset, and is a top variant.
+Warning: '17:44225234' is missing from the main dataset, and is a top variant.
+Warning: '17:44213204' is missing from the main dataset, and is a top variant.
+Warning: '17:44062915' is missing from the main dataset, and is a top variant.
+Warning: 'rs111392251' is missing from the main dataset, and is a top variant.
+Warning: '17:44221602' is missing from the main dataset, and is a top variant.
+Warning: '17:44214094' is missing from the main dataset, and is a top variant.
+Warning: '17:43834873' is missing from the main dataset, and is a top variant.
+Warning: '17:44063393' is missing from the main dataset, and is a top variant.
+Warning: '17:44227510' is missing from the main dataset, and is a top variant.
+Warning: '17:44225485' is missing from the main dataset, and is a top variant.
+Warning: 'rs142792793' is missing from the main dataset, and is a top variant.
+Warning: '17:44231326' is missing from the main dataset, and is a top variant.
+Warning: '17:44230647' is missing from the main dataset, and is a top variant.
+Warning: 'rs117793085' is missing from the main dataset, and is a top variant.
+Warning: '17:44062689' is missing from the main dataset, and is a top variant.
+Warning: '17:44220942' is missing from the main dataset, and is a top variant.
+Warning: '17:44223060' is missing from the main dataset, and is a top variant.
+Warning: '17:44217293' is missing from the main dataset, and is a top variant.
+Warning: '17:44223387' is missing from the main dataset, and is a top variant.
+Warning: '17:44231617' is missing from the main dataset, and is a top variant.
+Warning: '17:44223243' is missing from the main dataset, and is a top variant.
+Warning: '17:44228824' is missing from the main dataset, and is a top variant.
+Warning: 'rs139237746' is missing from the main dataset, and is a top variant.
+Warning: '17:44217226' is missing from the main dataset, and is a top variant.
+Warning: '17:44045585' is missing from the main dataset, and is a top variant.
+Warning: '17:44214814' is missing from the main dataset, and is a top variant.
+Warning: 'rs147866440' is missing from the main dataset, and is a top variant.
+Warning: '17:44232959' is missing from the main dataset, and is a top variant.
+Warning: 'rs62055477' is missing from the main dataset, and is a top variant.
+Warning: 'rs62055476' is missing from the main dataset, and is a top variant.
+Warning: '17:44214815' is missing from the main dataset, and is a top variant.
+Warning: '17:44229986' is missing from the main dataset, and is a top variant.
+Warning: 'rs146746174' is missing from the main dataset, and is a top variant.
+Warning: '17:44231295' is missing from the main dataset, and is a top variant.
+Warning: 'rs62553392' is missing from the main dataset, and is a top variant.
+Warning: '17:44228529' is missing from the main dataset, and is a top variant.
+Warning: '17:44222335' is missing from the main dataset, and is a top variant.
+Warning: '17:44231117' is missing from the main dataset, and is a top variant.
+Warning: 'rs111644193' is missing from the main dataset, and is a top variant.
+Warning: '17:44228770' is missing from the main dataset, and is a top variant.
+Warning: '17:44233433' is missing from the main dataset, and is a top variant.
+Warning: 'rs117169618' is missing from the main dataset, and is a top variant.
+Warning: '17:44228609' is missing from the main dataset, and is a top variant.
+Warning: 'rs35354512' is missing from the main dataset, and is a top variant.
+Warning: 'rs112916880' is missing from the main dataset, and is a top variant.
+Warning: '17:44252197' is missing from the main dataset, and is a top variant.
+Warning: '17:44252098' is missing from the main dataset, and is a top variant.
+Warning: '17:44218242' is missing from the main dataset, and is a top variant.
+Warning: 'rs7459547' is missing from the main dataset, and is a top variant.
+Warning: '17:44227531' is missing from the main dataset, and is a top variant.
+Warning: '17:44251769' is missing from the main dataset, and is a top variant.
+Warning: 'rs4840512' is missing from the main dataset, and is a top variant.
+Warning: '17:43688042' is missing from the main dataset, and is a top variant.
+Warning: '17:44238938' is missing from the main dataset, and is a top variant.
+Warning: 'rs192006062' is missing from the main dataset, and is a top variant.
+Warning: 'rs13268072' is missing from the main dataset, and is a top variant.
+Warning: '17:44234526' is missing from the main dataset, and is a top variant.
+Warning: '17:44245766' is missing from the main dataset, and is a top variant.
+Warning: '17:44238966' is missing from the main dataset, and is a top variant.
+Warning: '17:44252510' is missing from the main dataset, and is a top variant.
+Warning: 'rs62061734' is missing from the main dataset, and is a top variant.
+Warning: '17:44252416' is missing from the main dataset, and is a top variant.
+Warning: 'rs17762073' is missing from the main dataset, and is a top variant.
+Warning: '17:44251972' is missing from the main dataset, and is a top variant.
+Warning: '17:44241664' is missing from the main dataset, and is a top variant.
+Warning: '17:44235893' is missing from the main dataset, and is a top variant.
+Warning: '17:44244397' is missing from the main dataset, and is a top variant.
+Warning: '17:44237372' is missing from the main dataset, and is a top variant.
+Warning: '17:44245876' is missing from the main dataset, and is a top variant.
+Warning: '17:44251698' is missing from the main dataset, and is a top variant.
+Warning: '17:44243863' is missing from the main dataset, and is a top variant.
+Warning: '17:44246997' is missing from the main dataset, and is a top variant.
+Warning: '17:43679132' is missing from the main dataset, and is a top variant.
+Warning: '17:44250108' is missing from the main dataset, and is a top variant.
+Warning: '17:44241304' is missing from the main dataset, and is a top variant.
+Warning: '17:44236725' is missing from the main dataset, and is a top variant.
+Warning: '17:44239958' is missing from the main dataset, and is a top variant.
+Warning: '17:44243979' is missing from the main dataset, and is a top variant.
+Warning: '17:44237068' is missing from the main dataset, and is a top variant.
+Warning: '17:44234060' is missing from the main dataset, and is a top variant.
+Warning: '17:44238424' is missing from the main dataset, and is a top variant.
+Warning: '17:44240107' is missing from the main dataset, and is a top variant.
+Warning: '17:44242788' is missing from the main dataset, and is a top variant.
+Warning: 'rs145819712' is missing from the main dataset, and is a top variant.
+Warning: '17:44244926' is missing from the main dataset, and is a top variant.
+Warning: '17:44233776' is missing from the main dataset, and is a top variant.
+Warning: 'rs116240233' is missing from the main dataset, and is a top variant.
+Warning: '17:44246405' is missing from the main dataset, and is a top variant.
+Warning: 'rs74352130' is missing from the main dataset, and is a top variant.
+Warning: '17:44251230' is missing from the main dataset, and is a top variant.
+Warning: '17:44240986' is missing from the main dataset, and is a top variant.
+Warning: '17:44249621' is missing from the main dataset, and is a top variant.
+Warning: '17:44242969' is missing from the main dataset, and is a top variant.
+Warning: '17:44233811' is missing from the main dataset, and is a top variant.
+Warning: '17:43665906' is missing from the main dataset, and is a top variant.
+Warning: '17:44248769' is missing from the main dataset, and is a top variant.
+Warning: '17:44251548' is missing from the main dataset, and is a top variant.
+Warning: '17:44247314' is missing from the main dataset, and is a top variant.
+Warning: '17:44237790' is missing from the main dataset, and is a top variant.
+Warning: '17:44272000' is missing from the main dataset, and is a top variant.
+Warning: '17:43666511' is missing from the main dataset, and is a top variant.
+Warning: '17:43669250' is missing from the main dataset, and is a top variant.
+Warning: '17:44248042' is missing from the main dataset, and is a top variant.
+Warning: 'rs370338299' is missing from the main dataset, and is a top variant.
+Warning: '17:44249800' is missing from the main dataset, and is a top variant.
+Warning: '17:44247673' is missing from the main dataset, and is a top variant.
+Warning: '17:44251582' is missing from the main dataset, and is a top variant.
+Warning: '17:44244581' is missing from the main dataset, and is a top variant.
+Warning: '17:44063787' is missing from the main dataset, and is a top variant.
+Warning: '17:43670940' is missing from the main dataset, and is a top variant.
+Warning: '17:43792091' is missing from the main dataset, and is a top variant.
+Warning: '17:44233589' is missing from the main dataset, and is a top variant.
+Warning: '17:43668455' is missing from the main dataset, and is a top variant.
+Warning: '17:44243868' is missing from the main dataset, and is a top variant.
+Warning: '8:9086392' is missing from the main dataset, and is a top variant.
+Warning: '17:43665379' is missing from the main dataset, and is a top variant.
+Warning: '17:43679121' is missing from the main dataset, and is a top variant.
+Warning: '17:44243870' is missing from the main dataset, and is a top variant.
+Warning: '17:43792090' is missing from the main dataset, and is a top variant.
+Warning: '17:44285142' is missing from the main dataset, and is a top variant.
+Warning: '17:44247164' is missing from the main dataset, and is a top variant.
+Warning: '17:43670018' is missing from the main dataset, and is a top variant.
+Warning: '17:44287310' is missing from the main dataset, and is a top variant.
+Warning: '17:43669704' is missing from the main dataset, and is a top variant.
+Warning: '17:43665468' is missing from the main dataset, and is a top variant.
+Warning: '17:44250616' is missing from the main dataset, and is a top variant.
+Warning: '17:44222067' is missing from the main dataset, and is a top variant.
+Warning: '17:44222460' is missing from the main dataset, and is a top variant.
+Warning: '17:43666385' is missing from the main dataset, and is a top variant.
+Warning: 'rs10092340' is missing from the main dataset, and is a top variant.
+Warning: '17:43666906' is missing from the main dataset, and is a top variant.
+Warning: 'rs56302057' is missing from the main dataset, and is a top variant.
+Warning: '17:43670073' is missing from the main dataset, and is a top variant.
+Warning: '17:44286089' is missing from the main dataset, and is a top variant.
+Warning: '17:44296251' is missing from the main dataset, and is a top variant.
+Warning: 'rs34898647' is missing from the main dataset, and is a top variant.
+Warning: 'rs11250200' is missing from the main dataset, and is a top variant.
+Warning: '17:44284734' is missing from the main dataset, and is a top variant.
+Warning: '17:43693462' is missing from the main dataset, and is a top variant.
+Warning: '17:44238571' is missing from the main dataset, and is a top variant.
+Warning: '17:43671099' is missing from the main dataset, and is a top variant.
+Warning: '17:44285531' is missing from the main dataset, and is a top variant.
+Warning: '17:44286128' is missing from the main dataset, and is a top variant.
+Warning: '17:44286198' is missing from the main dataset, and is a top variant.
+Warning: 'rs7008161' is missing from the main dataset, and is a top variant.
+Warning: '17:44283022' is missing from the main dataset, and is a top variant.
+Warning: '17:43665343' is missing from the main dataset, and is a top variant.
+Warning: '17:43668815' is missing from the main dataset, and is a top variant.
+Warning: '17:43668187' is missing from the main dataset, and is a top variant.
+Warning: 'rs148807263' is missing from the main dataset, and is a top variant.
+Warning: '17:44282892' is missing from the main dataset, and is a top variant.
+Warning: 'rs147670174' is missing from the main dataset, and is a top variant.
+Warning: '17:43668239' is missing from the main dataset, and is a top variant.
+Warning: '17:44284542' is missing from the main dataset, and is a top variant.
+Warning: '17:43688317' is missing from the main dataset, and is a top variant.
+Warning: 'rs149371219' is missing from the main dataset, and is a top variant.
+Warning: '17:43667836' is missing from the main dataset, and is a top variant.
+Warning: '17:44310101' is missing from the main dataset, and is a top variant.
+Warning: '17:43666431' is missing from the main dataset, and is a top variant.
+Warning: '17:44248814' is missing from the main dataset, and is a top variant.
+Warning: '17:44284420' is missing from the main dataset, and is a top variant.
+Warning: '17:43682323' is missing from the main dataset, and is a top variant.
+Warning: '17:43679193' is missing from the main dataset, and is a top variant.
+Warning: '17:43681222' is missing from the main dataset, and is a top variant.
+Warning: '17:44305252' is missing from the main dataset, and is a top variant.
+Warning: 'rs148992948' is missing from the main dataset, and is a top variant.
+Warning: '17:44276618' is missing from the main dataset, and is a top variant.
+Warning: '17:44284057' is missing from the main dataset, and is a top variant.
+Warning: '17:44276578' is missing from the main dataset, and is a top variant.
+Warning: '17:44283139' is missing from the main dataset, and is a top variant.
+Warning: '17:44253203' is missing from the main dataset, and is a top variant.
+Warning: '17:43695197' is missing from the main dataset, and is a top variant.
+Warning: 'rs7830077' is missing from the main dataset, and is a top variant.
+Warning: '17:44310234' is missing from the main dataset, and is a top variant.
+Warning: '17:43714190' is missing from the main dataset, and is a top variant.
+Warning: '17:44302881' is missing from the main dataset, and is a top variant.
+Warning: '17:44305026' is missing from the main dataset, and is a top variant.
+Warning: 'rs12681142' is missing from the main dataset, and is a top variant.
+Warning: '17:44304740' is missing from the main dataset, and is a top variant.
+Warning: '17:43664978' is missing from the main dataset, and is a top variant.
+Warning: '17:44298279' is missing from the main dataset, and is a top variant.
+Warning: '17:44283479' is missing from the main dataset, and is a top variant.
+Warning: 'rs148537841' is missing from the main dataset, and is a top variant.
+Warning: 'rs138126288' is missing from the main dataset, and is a top variant.
+Warning: '17:43671739' is missing from the main dataset, and is a top variant.
+Warning: '17:43671737' is missing from the main dataset, and is a top variant.
+--clump: 24 clumps formed from 3934 top variants.
+Results written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/WellBeing_Neuroticism.gwas.sumstats.clumped
+.
+
+End time: Thu Sep  6 05:44:33 2018

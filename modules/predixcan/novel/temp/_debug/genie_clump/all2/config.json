@@ -1,0 +1,17 @@
+{
+    "clump": true,
+    "--nojob": true,
+    "--distance": "250",
+    "--int": false,
+    "--other": null,
+    "--r2": "0.1",
+    "--dry-run": false,
+    "--p1": "0.00000005",
+    "--p2": "0.00000005",
+    "--out": "all2",
+    "--njobs": null,
+    "--sumstats": "/hpc/users/xrajagv01/wen_gwas_files/FEMORAL_BMD.gwas.sumstats",
+    "--ld": "1kg.eur.biallele.snps.maf0.01",
+    "pfix_clump": "genie_clump/all2/all2",
+    "--outfolder": "genie_clump/all2"
+}

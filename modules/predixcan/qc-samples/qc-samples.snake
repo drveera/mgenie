@@ -152,7 +152,7 @@ rule qcsamples_genome_collect:
             shell("cat {i} >> {output}")
 
 rule qcsamples_list_related:
-    message:"extracting related IDs to removed"
+    ##message:"extracting related IDs to removed"
     input: genome=genomeoutall, fam = lambda wildcards: bfile[wildcards.bfile][0]+".fam"
     output: relatedidstoremove
     params: script = removerelated_R

@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/AD,EpiXcan,51,24,27
+Sig_genes_for_traits/AD,PrediXcan,51,29,22

@@ -1,0 +1,49 @@
+Sender: LSF System <lsfadmin@node24-3>
+Subject: Job 110455468: </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.118> in cluster <minerva> Done
+
+Job </sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.118> was submitted from host <node26-55> by user <xrajagv01> in cluster <minerva>.
+Job was executed on host(s) <node24-3>, in queue <premium>, as user <xrajagv01> in cluster <minerva>.
+</hpc/users/xrajagv01> was used as the home directory.
+</hpc/users/xrajagv01/va-biobank/Veera/genie/modules/predixcan/novel/temp> was used as the working directory.
+Started at Thu Sep  6 05:55:33 2018
+Results reported on Thu Sep  6 05:55:48 2018
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+/sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp/.snakemake/tmp.3u4xkz3n/all2.clump_two.118
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   13.57 sec.
+    Max Memory :                                 528 MB
+    Average Memory :                             380.71 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1472.00 MB
+    Max Processes :                              6
+    Max Threads :                                8
+
+The output (if any) follows:
+
+[Thu Sep  6 05:55:34 2018] Building DAG of jobs...
+[Thu Sep  6 05:55:34 2018] Using shell: /bin/bash
+[Thu Sep  6 05:55:34 2018] Provided cores: 1
+[Thu Sep  6 05:55:34 2018] Rules claiming more threads will be scaled down.
+[Thu Sep  6 05:55:34 2018] Job counts:
+[Thu Sep  6 05:55:34 2018] 	count	jobs
+[Thu Sep  6 05:55:34 2018] 	1	clump_two
+[Thu Sep  6 05:55:34 2018] 	1
+
+[Thu Sep  6 05:55:34 2018] rule clump_two:
+[Thu Sep  6 05:55:34 2018]     input: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MA.gwas.sumstats.clumped, /sc/orga/projects/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/MA.gwas.sumstats
+[Thu Sep  6 05:55:34 2018]     output: genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/MA.gwas.sumstats.clumped.formatted
+[Thu Sep  6 05:55:34 2018]     jobid: 0
+[Thu Sep  6 05:55:34 2018]     wildcards: wcard=MA.gwas.sumstats
+
+Read 44.8% of 2164167 rowsRead 68.4% of 2164167 rowsRead 89.2% of 2164167 rowsRead 2164167 rows and 7 (of 7) columns from 0.076 GB file in 00:00:05
+[Thu Sep  6 05:55:47 2018] Finished job 0.
+[Thu Sep  6 05:55:47 2018] 1 of 1 steps (100%) done

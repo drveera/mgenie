@@ -18,6 +18,7 @@ pfix = config['pfix_fqtl']
 oargs = config['--oargs']
 pfactors = int(config['--npeer'])
 bed = config['--bed']
+bfile = config['--bfile']
 
 ### * scripts
 peer_R = f"{methoddir}/peer.R"
@@ -26,10 +27,14 @@ prepare_covar_R = f"{methoddir}/prepare.covars.R"
 plotcounts_R= f"{methoddir}/plotcounts.R"
 calcResiduals_R = f"{methoddir}/residuals.sample.R"
 createbed_R = f"{methoddir}/create.bed.R"
+transpheno_R = f"{methoddir}/transpheno.R"
+trans_summary_R = f"{methoddir}/find.tQTL.R"
+transplot_R = f"{methoddir}/plot.transQTL.R"
 
 ### * default values
 ##pfactors = 40 ##from config
 peer = list(range(0,pfactors+1))
+
 ### * outfiles
 expr_dge = f"{pfix}_intermediatefiles/{{expr}}.dge"
 peermodel=f"{pfix}_intermediatefiles/{{expr}}.peer.model.RDS"
@@ -47,13 +52,24 @@ nominalout = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.nominalout"
 nominalout_part = f"{pfix}_intermediatefiles/{{{{expr}}}}.{{peer}}.nominalout"
 qtlcounts = f"{pfix}_finalfiles/{{expr}}.qtlcounts"
 countplot = f"{pfix}_finalfiles/{{expr}}.qtlcounts.pdf"
+transpheno = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.tpheno.{{gno}}"
+transpheno_pre = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.tpheno"
+transassoc = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.tgwas.{{gno}}.qassoc"
+transassoc_prefix = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.tgwas.{{gno}}"
+trans_summary = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.tgwas.{{gno}}.stat"
+trans_summary_allgenes = f"{pfix}_intermediatefiles/{{expr}}.{{peer}}.allgenes"
+trans_summary_allpeers = f"{pfix}_intermediatefiles/{{expr}}.allpeers"
+transplot1_prefix = f"{pfix}_finalfiles/{{expr}}.transQTL"
+transplot1 = f"{pfix}_finalfiles/{{expr}}.transQTL.fdr.pdf"
 
 ### * rules
 ### ** define local rules
 localrules: fqtl_all, fqtl_prepareCovars, fqtl_createBed, fqtl_counthits, fqtl_plotcounts
 ### ** final files
+localrules: fqtl_all, fqtl_collect_transStat_genewise, fqtl_collect_tranStat, fqtl_plot_transQTL
 rule fqtl_all:
-    input: expand(covarout_residuals, expr=expr,peer=peer),
+    input: ##expand(covarout_residuals, expr=expr,peer=peer)
+           ##expand(transplot1, expr=expr)
            expand(countplot, expr=expr)
            ##expand(bedformatted, expr=expr, peer=peer)
            #expand(countplot, expr=expr),
@@ -125,6 +141,50 @@ rule fqtl_plotcounts:
     output: countplot
     params: script = plotcounts_R
     shell: "Rscript {params.script} {input} {output}"
+
+### ** rule prepare pheno for Trans GWAS
+rule fqtl_preparetpheno:
+    input: bedformatted
+    output: dynamic(transpheno)
+    params: script=transpheno_R , prefix= transpheno_pre
+    shell: "Rscript {params.script} {input} {params.prefix}"
+
+rule fqtl_transGWAS:
+    input: pheno=transpheno,
+           bed=bfile + ".bim"
+    output: temp(transassoc)
+    params: script = "module load plink/1.90 && plink ",
+            prefix = transassoc_prefix,
+            bfile = bfile
+    shell: "{params.script} --bfile {params.bfile} --assoc "
+           "--pheno {input.pheno} --out {params.prefix} --allow-no-sex "
+           "--memory 2000"
+
+rule fqtl_tranGWAS_filter:
+    input: transassoc
+    output: trans_summary
+    params: script = trans_summary_R
+    shell: "Rscript {params.script} {input} {output}"
+
+rule fqtl_collect_transStat_genewise:
+    input: dynamic(trans_summary)
+    output: trans_summary_allgenes
+    run:
+        for i in input:
+            shell("cat {i} >> {output}")
+
+rule fqtl_collect_tranStat:
+    input: expand(trans_summary_allgenes,expr=expr,peer=peer)
+    output: trans_summary_allpeers
+    run:
+        for i in input:
+            shell("cat {i} >> {output}")
+
+rule fqtl_plot_transQTL:
+    input: trans_summary_allpeers
+    output: transplot1
+    params: script = transplot_R, prefix=transplot1_prefix
+    shell: "Rscript {params.script} {input} {params.prefix}"
 
 ### * org mode sepcific
 ### Local Variables:

@@ -32,8 +32,9 @@ rule clump_all:
 rule clump_one:
     input: ld = expand(f"{ld}.{{ext}}", ext = ['bed','bim','fam']), sumstats = lambda wildcards: sumstats[wildcards.wcard]
     output: outfile
-    params: outfile_base
-    shell: "plink --bfile {ld} --clump {input.sumstats} --out {params} --clump-p1 {p1} --clump-p2 {p2} "
+    params: outname=outfile_base,
+            script="module load plink/1.90 && "
+    shell: "{params.script} plink --bfile {ld} --clump {input.sumstats} --out {params.outname} --clump-p1 {p1} --clump-p2 {p2} "
            "--clump-r2 {r2} --clump-kb {dist} {other} "
 
 rule clump_two:

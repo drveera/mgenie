@@ -39,7 +39,9 @@ argv = [arguments['<method>']] + arguments['<args>']
 method = arguments['<method>']
 gwasmethods = ['train','qc-dna','predict','-h','--help',
                'qc-samples','metax','covar',
-               'fqtl','covmat','simu','train_v7','train_module','wgcna','train_module1']
+               'fqtl','covmat','simu','train_v7','train_module','wgcna','train_module1','novel',
+               'gcta']
+
 if method not in gwasmethods:
     exit(method + " is not valid")
 ########################################################################################################

@@ -1,0 +1,3 @@
+trait,method,ngenes,known,novel
+Sig_genes_for_traits/CAD_ADD,EpiXcan,134,79,55
+Sig_genes_for_traits/CAD_ADD,PrediXcan,117,76,41

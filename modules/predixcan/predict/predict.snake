@@ -63,4 +63,3 @@ rule predict_cat_expressions:
         shell("head -1 {input.meta[0]} > {output.meta}")
         for i in input.meta:
             shell("cat {i} | sed 1d >> {output.meta}")
-

@@ -1,0 +1,34 @@
+PLINK v1.90b3.35 64-bit (25 Mar 2016)
+Options in effect:
+  --bfile 1kg.eur.biallele.snps.maf0.01
+  --clump /hpc/users/xrajagv01/va-biobank/Veera/downloads/CMC/modules/wen_gwas_files/TAG_CPD.gwas.sumstats
+  --clump-kb 250
+  --clump-p1 0.00000005
+  --clump-p2 0.00000005
+  --clump-r2 0.1
+  --out genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_CPD.gwas.sumstats
+
+Hostname: minerva2
+Working directory: /sc/orga/projects/va-biobank/Veera/genie/modules/predixcan/novel/temp
+Start time: Tue Sep 11 14:08:08 2018
+
+Random number seed: 1536689288
+129028 MB RAM detected; reserving 64514 MB for main workspace.
+Allocated 15309 MB successfully, after larger attempt(s) failed.
+8783349 variants loaded from .bim file.
+503 people (0 males, 0 females, 503 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_CPD.gwas.sumstats.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 503 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+8783349 variants and 503 people pass filters and QC.
+Note: No phenotypes present.
+Warning: 'rs4887053' is missing from the main dataset, and is a top variant.
+--clump: 3 clumps formed from 128 top variants.
+Results written to
+genie_clump/all2/all2ld_from_1kg.eur.biallele.snps.maf0.01/TAG_CPD.gwas.sumstats.clumped
+.
+
+End time: Tue Sep 11 14:08:17 2018
