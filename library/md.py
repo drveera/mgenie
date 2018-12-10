@@ -54,9 +54,9 @@ def main(args, methods):
     elif args['--nojob']:
         os.system(cmds)
     elif args['--int']:
-        run_job(debugdir, args['--out'], cmds, interactive=True)
+        run_job(debugdir, args, cmds, interactive=True)
     else:
-        run_job(debugdir, args['--out'], cmds, interactive=False)
+        run_job(debugdir, args, cmds, interactive=False)
 
 
 def process_arguments(args):
@@ -82,7 +82,8 @@ def write_config(args, debugdir):
         json.dump(args, outfile, indent=4)
 
 
-def run_job(debugdir, outname, scmds, interactive=False):
+def run_job(debugdir, args, scmds, interactive=False):
+    outname=args['--out']
     try:
         ##edit added on 10th Dec 2018 to make it work both in minerva and genome.dk
         if args['--cluster']=='minerva':
