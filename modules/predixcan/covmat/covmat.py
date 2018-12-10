@@ -12,6 +12,7 @@ options:
  --genes=FILE      genes files
  --out=PREFIX      outname prefix [default: out]
  --module          if computing for modules
+ --cluster         minerva or genomedk  [default: minerva]
  --nojob           run in front end
  --dry-run         just show the codes
  --njobs=NUMBER    number of parallel jobs; applicable only when running 
