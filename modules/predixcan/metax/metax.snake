@@ -17,6 +17,8 @@ if not genes:
 isbrain = config['--brain']
 pfix = config['pfix_metax']
 
+##software calls
+rscript = config['Rscript']
 ##scripts
 metax_R=f"{methoddir}/metax.script.R"
 
@@ -32,8 +34,9 @@ rule metaxcan_impute:
     input: gwas = lambda wildcards: gwas[wildcards.gwas],
            db = lambda wildcards: db[wildcards.db]
     output: geneout
-    params: script = metax_R, genes=genes
-    shell: "module load R/3.4.3 && "
-           "Rscript {params.script} {input.gwas} {input.db} {output} {params.genes}"
+    params: rscript=rscript,
+            script = metax_R, genes=genes
+    shell: ##"module load R/3.4.3 && "
+           "{rscript} {params.script} {input.gwas} {input.db} {output} {params.genes}"
 
 

@@ -6,7 +6,7 @@ import re
 
 methoddir = sys.path[0]
 #here we assume that the method is always 2 levels down mainfolder, ex, ./module/method/.
-#maindir = methoddir + "/../../../"
+\#maindir = methoddir + "/../../../"
 #so we grep search genie instead
 maindir = re.search(r'.*genie/',methoddir).group()
 
