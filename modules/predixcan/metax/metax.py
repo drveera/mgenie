@@ -12,6 +12,7 @@ options:
  --genes=FILE      a file or a list of files with list of genes
  --brain           If you want only brain tissues to be analysed ignored if u provide own db list
  --out=PREFIX      outname prefix [default: predixcan]
+ --cluster=NAME    minerva or genomedk  [default: minerva]
  --nojob           run in front end
  --dry-run         just show the codes
  --int             submit jobs from front end
