@@ -3,6 +3,5 @@ rule covmat_subset_gds:
            snpannot=snpannot
     output: gds = temp(subgds), annot=temp(subannot)
     params: script = gds_subset_R,genes = lambda wildcards: genes[wildcards.genes]
-    shell: "module unload R && module load R/3.5.1 && "
-           "Rscript {params.script} {input.gds} {input.snpannot} {params.genes} {input.db} "
+    shell: "{rscript} {params.script} {input.gds} {input.snpannot} {params.genes} {input.db} "
            "{output.gds} {output.annot}"

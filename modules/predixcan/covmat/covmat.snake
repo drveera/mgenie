@@ -24,6 +24,7 @@ module = config['--module']
 ##software calls
 rscript = config['Rscript']
 if config['--cluster'] == "minerva":
+    print("minerva")
     rscript = f"module unload R && module load R/3.5.1 && {rscript}"
 
 ##outfiles
