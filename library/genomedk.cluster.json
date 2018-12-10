@@ -1,0 +1,47 @@
+
+{
+    "__default__":
+    {
+        "time" : "12:00:00",
+        "n" : 1,
+        "partition" : "core",
+	"mem": "16g",
+	"cores": "1"
+    },
+    "gcta_bivariate_one":
+    {
+	"time" : "12:00:00",
+	"mem"  : "128g",
+	"cores": "8"
+    },
+    "gcta_variance_one":
+    {
+	"mem":"128g",
+	"cores":"16"
+    },
+    "rare_single_test":
+    {
+	"mem":"64g",
+	"cores":"16"
+    },
+    "rare_vt":
+    {
+	"mem":"64g",
+	"cores":"16"
+    },
+    "rare_burden":
+    {
+	"mem":"64g",
+	"cores":"16"
+    },
+    "rare_kernel":
+    {
+	"mem":"64g",
+	"cores":"16"
+    },
+    "rare_meta":
+    {
+	"mem":"64g",
+	"cores":"16"
+    }
+}

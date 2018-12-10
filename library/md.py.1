@@ -40,23 +40,21 @@ def main(args, methods):
         if args['--nojob']:
             njobs = 1
         else:
-            njobs = 1
-
+            njobs = 100000
+        
 
     cmds = f"snakemake -j {njobs} --use-conda --keep-going " \
-          f"--cluster-config {maindir}/library/{args['--cluster']}.cluster.json " \
+          f"--cluster-config {maindir}/library/cluster.json " \
           f"--configfile {debugdir}/config.json " \
           f"--nolock " \
           f"-s {methoddir}/{method}.snake"
 
     if args['--dry-run']:
-        os.system(cmds + " --dryrun")
+        os.system(cmds + " --printshellcmds")
     elif args['--nojob']:
         os.system(cmds)
-    elif args['--int']:
-        run_job(debugdir, args['--out'], cmds, interactive=True)
     else:
-        run_job(debugdir, args['--out'], cmds, interactive=False)
+        run_job(debugdir, args['--out'], cmds)
 
 
 def process_arguments(args):
@@ -67,50 +65,23 @@ def process_arguments(args):
 
 
 def write_config(args, debugdir):
-    try:
-        if args['--cluster']=='minerva':
-            scriptcalls = f"{maindir}/library/minerva.json"
-        else:
-            scriptcalls = f"{maindir}/library/openscripts.json"
-    except LookupError:
-        scriptcalls = f"{maindir}/library/openscripts.json"
-    with open(scriptcalls,'r') as s:
-        script_files = json.load(s)
-    script_files = script_files[0]
-    args.update(script_files)
     with open(debugdir + '/config.json', 'w') as outfile:
         json.dump(args, outfile, indent=4)
 
 
-def run_job(debugdir, outname, scmds, interactive=False):
-    try:
-        ##edit added on 10th Dec 2018 to make it work both in minerva and genome.dk
-        if args['--cluster']=='minerva':
-            cmds = f"#!/bin/sh \n {scmds} " \
-                   f"--jobname {outname}.{{rulename}}.{{jobid}} " \
-                   f"--cluster 'bsub -P {{cluster.P}} -q {{cluster.q}} -W {{cluster.W}} -M {{cluster.M}} -o {debugdir}/out/{{cluster.output}} -n {{cluster.n}}' "
-        elif args['--cluster']=="genomedk":
-            cmds = f"#!/bin/sh \n {scmds} " \
-                   f"--jobname {outname}.{{rulename}}.{{jobid}} " \
-                   f"--cluster 'sbatch -e {debugdir}/error/slurm-%A_%a.out.error -o {debugdir}/out/slurm-%A_%a.out " \
-                   f"--mem={{cluster.mem}} --time={{cluster.time}} -c {{cluster.cores}}' "
-    except LookupError:
-            cmds = f"#!/bin/sh \n {scmds} " \
-                   f"--jobname {outname}.{{rulename}}.{{jobid}} " \
-                   f"--cluster 'bsub -P {{cluster.P}} -q {{cluster.q}} -W {{cluster.W}} -M {{cluster.M}} -o {debugdir}/out/{{cluster.output}} -n {{cluster.n}}' "
+def run_job(debugdir, outname, scmds):
+
+    cmds = f"#!/bin/sh \n {scmds} " \
+           f"--jobname {outname}.{{rulename}}.{{jobid}} " \
+           f"--cluster 'sbatch -e {debugdir}/error/slurm-%A_%a.out.error -o {debugdir}/out/slurm-%A_%a.out " \
+           f"--mem={{cluster.mem}} --time={{cluster.time}} -c {{cluster.cores}}' " 
+
     jobscript = debugdir + '/jobscript.sh'
     with open(jobscript, 'w') as outfile:
         outfile.write(cmds)
-    if interactive:
-        os.system(f"sh {jobscript}")
-    else:
-        try:
-            if args['--cluster']=='minerva':
-                os.system(f"bsub -n 1 -P acc_epigenAD -q premium -W 12:00 -M 4000 -o logfile < {jobscript}")
-            elif args['--cluster']=='genomedk':
-                os.system(f"sbatch --time=12:00:00 -e {debugdir}/master.error -o {debugdir}/master.out {jobscript}")
-        except LookupError:
-            os.system(f"bsub -n 1 -P acc_epigenAD -q premium -W 12:00 -M 4000 -o logfile < {jobscript}")
+
+    os.system(f"sbatch --time=12:00:00 -e {debugdir}/master.error -o {debugdir}/master.out {jobscript}")
+
 
 def process_list(argument):
     if ".list" in argument:
@@ -131,3 +102,5 @@ def flen(fname):
         for i, l in enumerate(f):
             pass
     return i + 1
+
+    
