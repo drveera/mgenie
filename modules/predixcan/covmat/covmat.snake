@@ -21,6 +21,11 @@ else:
 pfix = config['pfix_covmat']
 module = config['--module']
 
+##software calls
+rscript = config['Rscript']
+if config['--cluster'] == "minerva":
+    rscript = f"module unload R && module load R/3.5.1 && {rscript}"
+
 ##outfiles
 subgds = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds"
 subannot = f"{pfix}_intermediatefiles/{{db}}/{{genes}}.gds.annot.RDS"
@@ -46,8 +51,7 @@ rule covmat_covariance:
            db=lambda wildcards: db[wildcards.db]
     output: covmat_sub
     params: script = covmat_R, genes=lambda wildcards: genes[wildcards.genes],
-    shell:"module unload R && module load R/3.5.1 &&"
-          "Rscript {params.script} {input.gds} {input.annot} "
+    shell:"{rscript} {params.script} {input.gds} {input.annot} "
           "{params.genes} {input.db} {output}"
 
 rule covmat_concat:
