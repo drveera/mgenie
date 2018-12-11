@@ -14,6 +14,7 @@ options:
  --grouping=FILE   grouping file
  --nested
  --out=PREFIX      outname prefix [default: predixcan]
+ --cluster=NAME    genomedk or minerva  [default: minerva]
  --nojob           run in front end
  --dry-run         just show the codes
  --njobs=NUMBER    number of parallel jobs; applicable only when running 
