@@ -1,0 +1,10 @@
+[
+  {
+    "plink":"source /com/extra/plink/1.90-beta-2016-03/load.sh && plink",
+    "bcftools":"source /com/extra/bcftools/LATEST/load/sh && bcftools",
+    "bgzip":"source /com/extra/tabix/LATEST/load.sh && bgzip",
+    "tabix":"source /com/extra/tabix/LATEST/load.sh && tabix",
+    "genotype_harmonizer":"/home/iveera/installs/gh/gh/gh.sh",
+    "Rscript":"Rscript"
+}
+]
