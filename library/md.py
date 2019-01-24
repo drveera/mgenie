@@ -76,12 +76,21 @@ def write_config(args, debugdir):
         ##    scriptcalls = f"{maindir}/library/openscripts.json"
     except LookupError:
         scriptcalls = f"{maindir}/library/openscripts.json"
-    with open(scriptcalls,'r') as s:
-        script_files = json.load(s)
-    script_files = script_files[0]
-    args.update(script_files)
-    with open(debugdir + '/config.json', 'w') as outfile:
-        json.dump(args, outfile, indent=4)
+    try:
+        with open(scriptcalls,'r') as s:
+            script_files = json.load(s)
+            script_files = script_files[0]
+            args.update(script_files)
+        with open(debugdir + '/config.json', 'w') as outfile:
+            json.dump(args, outfile, indent=4)
+    except FileNotFoundError:
+        scriptcalls = f"{maindir}/library/openscripts.json"
+        with open(scriptcalls,'r') as s:
+            script_files = json.load(s)
+            script_files = script_files[0]
+            args.update(script_files)
+        with open(debugdir + '/config.json', 'w') as outfile:
+            json.dump(args, outfile, indent=4)
 
 
 def run_job(debugdir, args, scmds, interactive=False):
