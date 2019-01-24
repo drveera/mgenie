@@ -43,5 +43,19 @@
     {
 	"mem":"64g",
 	"cores":"16"
+    },
+    "qcdna_harmonize":
+    {
+    "mem":"32g",
+    "time":"48:00:00"
+    },
+    "qcdna_gen2gds":
+    {
+    "mem":"16g",
+    "time":"48:00:00"
+    },
+    "qcdna_gdsannot":
+    {
+    "mem":"16g"
     }
 }
