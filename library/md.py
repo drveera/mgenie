@@ -69,13 +69,13 @@ def process_arguments(args):
 def write_config(args, debugdir):
     try:
         clustername = args['--cluster']
-        scriptcalls = f"{maindir}/library/{clustername}.json"
+        scriptcalls = f"{maindir}/library/scripts.{clustername}.json"
         ##if args['--cluster']=='minerva':
         ##    scriptcalls = f"{maindir}/library/minerva.json"
         ##else:
         ##    scriptcalls = f"{maindir}/library/openscripts.json"
     except LookupError:
-        scriptcalls = f"{maindir}/library/openscripts.json"
+        scriptcalls = f"{maindir}/library/scripts.open.json"
     try:
         with open(scriptcalls,'r') as s:
             script_files = json.load(s)
@@ -84,7 +84,7 @@ def write_config(args, debugdir):
         with open(debugdir + '/config.json', 'w') as outfile:
             json.dump(args, outfile, indent=4)
     except FileNotFoundError:
-        scriptcalls = f"{maindir}/library/openscripts.json"
+        scriptcalls = f"{maindir}/library/scripts.open.json"
         with open(scriptcalls,'r') as s:
             script_files = json.load(s)
             script_files = script_files[0]
