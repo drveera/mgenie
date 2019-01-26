@@ -74,27 +74,27 @@ rule qcdna_all:
 
 rule qcdna_filter1:
     input: vcf = lambda wildcards: vcf[wildcards.vcf]
-    output: vcfout1
+    output: temp(vcfout1)
     params: ifilter = ifilter
     shell:
         "{bcftools} view -m2 -M2 -i '{params.ifilter}' -v snps -o {output} -O z {input.vcf} "
 
 rule qcdna_renameINFO:
     input: vcfout1
-    output: vcfout1a
+    output: temp(vcfout1a)
     params: prefix = vcfout1a_prefix, script = "module load htslib && "
     shell: "zcat {input} | sed s/GT:GL:DS/GT:GP:DS/g - > {params.prefix} && "
            "{bgzip} {params.prefix}"
 
 rule qcdna_tabix1:
     input: vcf = vcfout12
-    output: index = vcfout12_tbi
+    output: index = temp(vcfout12_tbi)
     shell:
         "{tabix} {input.vcf}"
 
 rule qcdna_harmonize:
     input: vcf=vcfout12, ref=ref, tbi=vcfout12_tbi
-    output: gen=vcfout2_gen, sample=vcfout2_sample,OK=vcfout2_gen_OK
+    output: gen=temp(vcfout2_gen), sample=temp(vcfout2_sample),OK=vcfout2_gen_OK
     params: script = gh, prefix=vcfout2_prefix
     shell: "{genotype_harmonizer} --input {input.vcf} "
            "--inputType VCF --output {params.prefix} "
