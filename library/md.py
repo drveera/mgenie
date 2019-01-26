@@ -43,8 +43,12 @@ def main(args, methods):
             njobs = 1
 
 
+    try:
+        clusterjson=f"{args['--cluster]}.cluster.json"
+    except LookupError:
+        clusterjson="minerva.cluster.json"
     cmds = f"snakemake -j {njobs} --use-conda --keep-going " \
-          f"--cluster-config {maindir}/library/{args['--cluster']}.cluster.json " \
+          f"--cluster-config {maindir}/library/{clusterjson} " \
           f"--configfile {debugdir}/config.json " \
           f"--nolock " \
           f"-s {methoddir}/{method}.snake"
