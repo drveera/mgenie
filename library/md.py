@@ -44,7 +44,7 @@ def main(args, methods):
 
 
     try:
-        clusterjson=f"{args['--cluster]}.cluster.json"
+        clusterjson=f"{args['--cluster']}.cluster.json"
     except LookupError:
         clusterjson="minerva.cluster.json"
     cmds = f"snakemake -j {njobs} --use-conda --keep-going " \
