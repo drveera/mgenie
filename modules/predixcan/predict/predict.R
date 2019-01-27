@@ -19,8 +19,7 @@ output1 <- "temp.del.out1"
 output2 <- "temp.del.out2"
 }
 
-##library(DBI, lib.loc = "~/va-biobank/Veera/Rlibraries/")
-library(DBI)
+library(DBI, lib.loc = "~/va-biobank/Veera/Rlibraries/")
 library(GWASTools)
 library(data.table)
 library(SNPRelate)
@@ -101,15 +100,11 @@ for(i in 1:length(genes)){
 
 totalexpr1 <- do.call(rbind,totalexpr)
 totalexpr <- data.table(totalexpr1)
-totalexpr <- t(totalexpr)
-##colnames(totalexpr) <- c("id",genes)
-##totalexpr <- cbind(genes,totalexpr)
-##genes in columns and samples in rows
-totalexpr <- data.table(totalexpr)
+totalexpr <- cbind(genes,totalexpr)
 
-fwrite(totalexpr,output1,na="NA",quote=FALSE)
 
+fwrite(totalexpr,output1,na="NA")
 ###will change later for now just copy the output1 to output2
-fwrite(totalexpr,output2,na="NA",quote=FALSE)
+fwrite(totalexpr,output2,na="NA")
 
 
