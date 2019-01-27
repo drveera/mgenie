@@ -104,6 +104,7 @@ totalexpr <- data.table(totalexpr1)
 totalexpr <- cbind(genes,totalexpr)
 ##genes in columns and samples in rows
 totalexpr <- t(totalexpr)
+totalexpr <- data.table(totalexpr)
 
 fwrite(totalexpr,output1,na="NA",quote=FALSE)
 
