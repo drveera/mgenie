@@ -102,7 +102,7 @@ for(i in 1:length(genes)){
 totalexpr1 <- do.call(rbind,totalexpr)
 totalexpr <- data.table(totalexpr1)
 totalexpr <- t(totalexpr)
-colnames(totalexpr) <- c("id",genes)
+##colnames(totalexpr) <- c("id",genes)
 ##totalexpr <- cbind(genes,totalexpr)
 ##genes in columns and samples in rows
 totalexpr <- data.table(totalexpr)
