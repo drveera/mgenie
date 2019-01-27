@@ -101,9 +101,10 @@ for(i in 1:length(genes)){
 
 totalexpr1 <- do.call(rbind,totalexpr)
 totalexpr <- data.table(totalexpr1)
-totalexpr <- cbind(genes,totalexpr)
-##genes in columns and samples in rows
 totalexpr <- t(totalexpr)
+colnames(totalexpr) <- c("id",genes)
+##totalexpr <- cbind(genes,totalexpr)
+##genes in columns and samples in rows
 totalexpr <- data.table(totalexpr)
 
 fwrite(totalexpr,output1,na="NA",quote=FALSE)
