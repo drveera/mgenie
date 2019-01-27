@@ -12,6 +12,7 @@ options:
  --genes=FILE      a file with list of genes with co-ordinates
  --out=PREFIX      outname prefix [default: predixcan]
  --nojob           run in front end
+ --cluster=NAME    cluster name  [default: minerva]
  --dry-run         just show the codes
  --int             submit jobs from front end
  --njobs=NUMBER    number of parallel jobs; applicable only when running 
