@@ -19,7 +19,8 @@ output1 <- "temp.del.out1"
 output2 <- "temp.del.out2"
 }
 
-library(DBI, lib.loc = "~/va-biobank/Veera/Rlibraries/")
+##library(DBI, lib.loc = "~/va-biobank/Veera/Rlibraries/")
+library(DBI)
 library(GWASTools)
 library(data.table)
 library(SNPRelate)
