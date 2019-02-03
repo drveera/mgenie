@@ -5,6 +5,7 @@ args <- commandArgs(trailingOnly = TRUE)
 bfile <- args[1]
 reffam <- args[2]
 outfile <- args[3]
+orginalfam <- args[4]
 
 library(SNPRelate)
 library(data.table)
@@ -63,8 +64,9 @@ IID <- pca2$sample.id
 pca2.eigen <- cbind(IID,pca2.eigen)
 
 fwrite(pca2.eigen,paste0(outfile,".mds"),sep="\t",na="NA")
-selected.fam <- data.table(IID=pca2.eigen$IID,FID=pca2.eigen$IID,PHENO=1)
-fwrite(selected.fam,paste0(outfile,".samples"),sep="\t",col.names = TRUE, na="NA")
+##selected.fam <- data.table(IID=pca2.eigen$IID,FID=pca2.eigen$IID,PHENO=1)
+selected.fam <- fread(orginalfam)[V2 %in% pca2.eigen$IID]
+fwrite(selected.fam,paste0(outfile,".samples"),sep="\t",col.names = TRUE, na="NA",quote=FALSE)
 
 
 

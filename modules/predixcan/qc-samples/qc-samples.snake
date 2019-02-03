@@ -25,6 +25,11 @@ hetfilter_R = f"{methoddir}/het.R"
 mergebim_R = f"{methoddir}/mergebim.R"
 pca_R = f"{methoddir}/pca.R"
 
+##script calls
+plink=config['plink']
+Rscript=config['Rscript']
+bgzip = config['bgzip']
+tabix = config['tabix']
 #outputfiles
 ##
 sexreport = f"{pfix}_intermediatefiles/{{bfile}}.sexreport.sexcheck"
@@ -72,10 +77,16 @@ QC_PCs_raw = f"{pfix}_finalfiles/{{bfile}}/{{bfile}}.QC.allsamples.mds"
 QC_prefix = f"{pfix}_finalfiles/{{bfile}}/{{bfile}}.QC"
 delfolder = f"{pfix}_intermediatefiles/"
 deleteOK = f"{pfix}_finalfiles/.deleteOK"
+chrom=list(range(1,23))
+bfile_vcf_base = f"{pfix}_finalfiles/vcfs/{{bfile}}.{{chrom}}"
+bfile_vcf = f"{pfix}_finalfiles/vcfs/{{bfile}}.{{chrom}}.vcf"
+bfile_vcf_gz = f"{pfix}_finalfiles/vcfs/{{bfile}}.{{chrom}}.vcf.gz"
+bfile_vcf_tbi = f"{pfix}_finalfiles/vcfs/{{bfile}}.{{chrom}}.vcf.gz.tbi"
 
 rule qcsamples_all:
     message: "final file"
-    input: expand(QC_samples, bfile=bfile), deleteOK
+    input: expand(QC_samples, bfile=bfile), deleteOK,
+           expand(bfile_vcf_tbi,bfile=bfile,chrom=chrom)
 
 ###sex filter###
 rule qcsamples_sex_check:
@@ -83,23 +94,21 @@ rule qcsamples_sex_check:
     input: bfile = lambda wildcards: bfile[wildcards.bfile][0] + ".bim"
     output: sexreport
     params: bfile = lambda wildcards: bfile[wildcards.bfile], out = sexreport_prefix
-    shell: "module load plink/1.90 &&"
-           "plink --bfile {params.bfile} --check-sex --out {params.out}"
+    shell: "{plink} --bfile {params.bfile} --check-sex --out {params.out}"
 
 rule qcsample_missex_ids:
     message: "extracting IDs with sex mismatch"
     input: sexreport
     output: missex_ids
     params: script = sexcheck_R
-    shell: "Rscript {params.script} {input} {output}"
+    shell: "{Rscript} {params.script} {input} {output}"
 
 rule qcsamples_sex_filter:
     message: "removing samples with mismatched sex"
     input: bfile = lambda wildcards: bfile[wildcards.bfile][0] + ".bim", fam=missex_ids
     output: bfile_sexOK
     params:bfile = lambda wildcards: bfile[wildcards.bfile], out = bfile_sexOK_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --remove {input.fam} --make-bed --out {params.out}"
+    shell: "{plink} --bfile {params.bfile} --remove {input.fam} --make-bed --out {params.out}"
 ####
 
 rule qcsamples_het_report:
@@ -107,23 +116,21 @@ rule qcsamples_het_report:
     input: startfile
     output: hetreport
     params: bfile = startfile_prefix, out = hetreport_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --het --out {params.out}"
+    shell: "{plink} --bfile {params.bfile} --het --out {params.out}"
 
 rule qcsamples_het_getIDs:
     message: "listing IDs with F>0.2"
     input: het = hetreport, bfile=startfile
     output: hetfilter_ids
     params: script = hetfilter_R, fam = startfile_prefix
-    shell: "Rscript {params.script} {input.het} {params.fam} {output}"
+    shell: "{Rscript} {params.script} {input.het} {params.fam} {output}"
 
 rule qcsamples_het_hetfilter:
     message: "removing samples with F>0.2"
     input: bfile = startfile, remove=hetfilter_ids
     output: bfile_hetOK
     params: bfile = startfile_prefix, out = bfile_hetOK_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --remove {input.remove} --out {params.out} "
+    shell: "{plink} --bfile {params.bfile} --remove {input.remove} --out {params.out} "
            "--make-bed"
 
 rule qcsamples_thin:
@@ -131,16 +138,14 @@ rule qcsamples_thin:
     input: bfile = bfile_hetOK
     output: bfile_thin
     params: bfile = bfile_hetOK_prefix, out = bfile_thin_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --thin-count 20000 --out {params.out} --make-bed"
+    shell: "{plink} --bfile {params.bfile} --thin-count 20000 --out {params.out} --make-bed"
 
 rule qcsamples_genome:
     message: "running IBD analysis"
     input: bfile_thin
     output: genomeout
     params: bfile = bfile_thin_prefix, out = genomeout_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --genome --parallel {wildcards.pj} 10 "
+    shell: "{plink} --bfile {params.bfile} --genome --parallel {wildcards.pj} 10 "
            "--out {params.out}"
 
 rule qcsamples_genome_collect:
@@ -156,15 +161,14 @@ rule qcsamples_list_related:
     input: genome=genomeoutall, fam = lambda wildcards: bfile[wildcards.bfile][0]+".fam"
     output: relatedidstoremove
     params: script = removerelated_R
-    shell:"Rscript {params.script} {input.genome} {input.fam} {output}"
+    shell:"{Rscript} {params.script} {input.genome} {input.fam} {output}"
 
 rule qcsamples_remove_related:
     message: "removing related individuals"
     input: fam=relatedidstoremove, bfile = bfile_hetOK
     output: bfile_sexOK_hetOK_unrelated
     params: bfile = bfile_hetOK_prefix, out = bfile_sexOK_hetOK_unrelated_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --remove {input.fam} --out {params.out} "
+    shell: "{plink} --bfile {params.bfile} --remove {input.fam} --out {params.out} "
            "--make-bed "
 
 
@@ -173,7 +177,7 @@ rule qcsamples_mergebim:
     input: bim=bfile_sexOK_hetOK_unrelated, ref = ref + ".bim"
     output: commonsnps
     params: script = mergebim_R
-    shell: "Rscript {params.script} {input.bim} {input.ref} {output}"
+    shell: "{Rscript} {params.script} {input.bim} {input.ref} {output}"
 
 
 rule qcsamples_subset_bfile:
@@ -181,39 +185,36 @@ rule qcsamples_subset_bfile:
     input: bfile1 = bfile_sexOK_hetOK_unrelated, snps = commonsnps
     output: bfile_subset
     params: bfile = bfile_sexOK_hetOK_unrelated_prefix, out=bfile_subset_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --extract {input.snps} --out {params.out} --make-bed"
+    shell: "{plink} --bfile {params.bfile} --extract {input.snps} --out {params.out} --make-bed"
 
 rule qcsamples_ref_subset:
     message: "subset referrence file"
     input: bfile = ref + ".bim", snps = commonsnps
     output: ref_subset
     params: bfile = ref, out = ref_subset_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --extract {input.snps} --make-bed --out {params.out}"
+    shell: "{plink} --bfile {params.bfile} --extract {input.snps} --make-bed --out {params.out}"
 
 rule qcsamples_merge:
     message: "merging with referrence"
     input: bfile1 = bfile_subset, bfile2 = ref_subset
     output: bfile_merged
     params: bfile1 = bfile_subset_prefix, bfile2 = ref_subset_prefix, out = bfile_merged_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile1} --bmerge {params.bfile2} --out {params.out} --make-bed"
+    shell: "{plink} --bfile {params.bfile1} --bmerge {params.bfile2} --out {params.out} --make-bed"
 
 rule qcsamples_merged_thin:
     message: "thinning the markers to 30000"
     input: bfile_merged
     output: bfile_merged_thin
     params: bfile = bfile_merged_prefix, out = bfile_merged_thin_prefix
-    shell: "module load plink/1.90 && "
-           "plink --bfile {params.bfile} --thin-count 30000 --out {params.out} --make-bed"
+    shell: "{plink} --bfile {params.bfile} --thin-count 30000 --out {params.out} --make-bed"
 
 rule qcsamples_merged_PCA:
     message: "running principal component analysis"
-    input: bfile=bfile_merged_thin, ref=ref + ".fam"
+    input: bfile=bfile_merged_thin, ref=ref + ".fam",
+           fam=lambda wildcards: bfile[wildcards.bfile][0]+".fam"
     output: QC_plot, QC_PCs_raw, QC_PCs, QC_samples
     params: bfile = bfile_merged_thin_prefix, out = QC_prefix, script = pca_R
-    shell: "Rscript {params.script} {params.bfile} {input.ref} {params.out} "
+    shell: "{Rscript} {params.script} {params.bfile} {input.ref} {params.out} {input.fam}"
 
 rule qcsamples_remove_intermediates:
     message: "removing temperorary files"
@@ -221,3 +222,18 @@ rule qcsamples_remove_intermediates:
     output: deleteOK
     params: folder=delfolder
     shell: "rm -r {params.folder} && touch {output}"
+
+rule qcsamples_subset:
+    message: "subsetting the samples"
+    input: bfile = lambda wildcards: bfile[wildcards.bfile][0] + ".bim",
+           samples=QC_samples
+    output: bfile_vcf
+    params: bfile = lambda wildcards: bfile[wildcards.bfile],
+            out=bfile_vcf_base
+    shell: "{plink} --bfile {params.bfile} --keep {input.samples} --chr {wildcards.chrom} --recode-vcf --out {params.out}"
+
+rule qcsamples_zipandindex:
+    message: "bgzip and index"
+    input: vcf = bfile_vcf
+    output: bfile_vcf_gz, bfile_vcf_tbi
+    shell: "{bgzip} {input.vcf} && tabix -p vcf {input.vcf}.gz"

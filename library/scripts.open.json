@@ -5,6 +5,7 @@
   "bgzip":"bgzip",
   "tabix":"tabix",
   "genotype_harmonizer":"genotype_harmonizer",
-  "Rscript":"Rscript"
+  "Rscript":"Rscript",
+  "tabix":"tabix"
   }
 ]

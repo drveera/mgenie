@@ -5,6 +5,7 @@
 "bgzip":"module load htslib && bgzip",
 "tabix":"module load htslib/1.7 && ",
 "genotype_harmonizer":"/hpc/users/xrajagv01/installs/GenotypeHarmonizer-1.4.20-SNAPSHOT/GenotypeHarmonizer.sh",
-"Rscript":"Rscript"
+"Rscript":"Rscript",
+"tabix":"module load htslib && tabix "
 }
 ]

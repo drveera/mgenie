@@ -16,6 +16,9 @@ bim2 <- bim2[!duplicated(V4)&!duplicated(V2)]
 
 bim1$id <- with(bim1, paste0(V2,V5,V6))
 bim2$id <- with(bim2,paste0(V2,V5,V6))
-bim3 <- bim1[id %in% bim2$id]
 
-fwrite(bim3[,c("V2"),with=FALSE],outfile,col.names = FALSE,sep="\t",na="NA")
+bim3 <- bim1[id %in% bim2$id]
+cat(nrow(bim3)," variants are common ")
+
+##fwrite(bim3[,c("V2"),with=FALSE],outfile,col.names = FALSE,sep="\t",na="NA",quote=FALSE)
+writeLines(bim3$V2,outfile)

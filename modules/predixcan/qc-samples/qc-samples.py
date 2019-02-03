@@ -11,6 +11,7 @@ options:
  --ref=FILE        bgzipped and indexed referrence vcf file
  --out=PREFIX      outname prefix [default: predixcan]
  --skip-sex        skip sex checks
+ --cluster=NAME    cluster name  [default: open]
  --nojob           run in front end
  --dry-run         just show the codes
  --int             control job submission from frontend
