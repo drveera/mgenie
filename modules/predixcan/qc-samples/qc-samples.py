@@ -8,7 +8,7 @@ usage:
 
 options:
  --bfile=FILE      plink file basename or list 
- --ref=FILE        bgzipped and indexed referrence vcf file
+ --ref=FILE        referrence plink file (only basename)
  --out=PREFIX      outname prefix [default: predixcan]
  --skip-sex        skip sex checks
  --cluster=NAME    cluster name  [default: open]
