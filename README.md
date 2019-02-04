@@ -44,3 +44,7 @@ according to where you are working. `open` means you are working in your own com
 ### running in the front end
 Every module will have an argument called `--nojob`. when you call it, the jobs will not be submitted to cluster, but will run in front end. You can add another argument `--njobs` to specify how many jobs you should run in parallel, for example, `--njobs 4`. 
 *Note: when you specify `--cluster open`, you should specify --nojob*
+
+### --dry-run
+you can view only the job plans without actually running them. use the argument `--dry-run`. It's a good practice to first check everything is ok by running the `--dry-run` and then submit the jobs. 
+*Note: there are situations where the module will submit more than 10,000 jobs. in that case even the `--dry-run` will take 10-20 mins to finish displaying all the plans. it's better to avoid `--dry-run` there*
