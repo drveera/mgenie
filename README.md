@@ -1,7 +1,7 @@
 
 ## Installation
 1. install anaconda 
-2. create a new enviornmnent
+2. create a new enviornmnent with python 3.7 and docopt
 
 `conda create -n genie python=3.7 docopt=0.6.2`
 
