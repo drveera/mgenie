@@ -1,0 +1,52 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+gwas=config['--gwas']
+gwas=process_list(gwas)
+geneannot=config['--geneannot']
+ref=config['--ref']
+refbim = ref + ".bim"
+pfix = config['pfix_magma']
+magma = config['magma']
+magma_R = f"{methoddir}/magmar.R"
+rscript=config["Rscript"]
+
+geneout = f"{pfix}_intermediatefiles/{{gwas}}.genes.out"
+geneout_pre = f"{pfix}_intermediatefiles/{{gwas}}"
+geneout2 = f"{pfix}_intermediatefiles/{{gwas}}.geneout2"
+geneout3 = f"{pfix}_finalfiles/merged.out"
+
+rule predixcan_magma_all:
+    input: geneout3
+
+rule predixcan_magma:
+    input: geneannot=geneannot,
+           ref=refbim,
+           gwas= lambda wildcards: gwas[wildcards.gwas]
+    output: geneout
+    params: refbase=ref, magma=magma, outname=geneout_pre
+    shell: "{params.magma} --bfile {params.refbase} --pval {input.gwas} "
+           "ncol=N --gene-annot {input.geneannot} --out {params.outname}"
+
+rule predixcan_magma_two:
+    input: geneout=geneout,
+           gwas= lambda wildcards: gwas[wildcards.gwas]
+    output: geneout2
+    params: script=magma_R
+    shell: "{rscript} {params.script} {input.geneout} {input.gwas} {output}"
+
+rule predixcan_magma_three:
+    input: expand(geneout2,gwas=gwas)
+    output: geneout3
+    run:
+        shell("head -1 {input[0]} >> {output}")
+        for i in input:
+            shell("cat {i} | sed 1d >> {output}")
+

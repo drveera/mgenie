@@ -6,6 +6,7 @@
   "tabix":"tabix",
   "genotype_harmonizer":"genotype_harmonizer",
   "Rscript":"Rscript",
-  "tabix":"tabix"
+  "tabix":"tabix",
+  "magma":"~/Research/magma/magma"
   }
 ]
