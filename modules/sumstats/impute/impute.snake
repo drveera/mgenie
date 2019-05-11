@@ -22,7 +22,7 @@ rule fizi_all:
     input: chunkout_merged
 
 rule fizi_one:
-    input: bed = lambda wildcards: sumstats[wildcards.bed],
+    input: bed = lambda wildcards: bed[wildcards.bed],
            sumstats = sumstats,
            ld = expand(f"{ld}.{{ext}}", ext = ['bed','bim','fam'])
     output: chunkout
