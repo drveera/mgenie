@@ -9,7 +9,8 @@ The following methods are available:
 
 COMMAND     DESCRIPTION
 dbsnp       update snp names with dbsnp rsids 
-clump       clump the snps 
+clump       clump the snps
+impute      impute summary stats
 
 
 type 'genie sumstats <method> --help' for more information on specific method
@@ -28,7 +29,7 @@ argv = [arguments['<method>']] + arguments['<args>']
 
 # CHECK IF METHOD IS VALID
 method = arguments['<method>']
-methods = ['dbsnp','clump','-h','--help']
+methods = ['dbsnp','clump','impute','-h','--help']
 if method not in methods:
     exit("The sumstats method " + method +  " is not available")
 
