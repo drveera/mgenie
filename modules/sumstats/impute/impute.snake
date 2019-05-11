@@ -26,7 +26,7 @@ rule fizi_one:
            sumstats = sumstats,
            ld = expand(f"{ld}.{{ext}}", ext = ['bed','bim','fam'])
     output: chunkout
-    params: chunkout_base
+    params: chunkout_base = chunkout_base
     shell: "{fizi} impute {input.sumstats} {ld} --locations {input.bed}"
            "--out {params.chunkout_base}"
 
