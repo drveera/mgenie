@@ -14,6 +14,7 @@ options:
  --int
  --njobs=NUMBER      Number of parallel jobs when running in front end
  --dry-run           dry run snakemake
+ --cluster=NAME      cluster name  [default: open]
 
 '''
 
