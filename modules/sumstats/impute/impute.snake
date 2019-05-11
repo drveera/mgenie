@@ -28,7 +28,7 @@ rule fizi_one:
     output: chunkout
     params: chunkout_base = chunkout_base
     shell: "{fizi} impute {input.sumstats} {ld} --locations {input.bed}"
-           "--out {params.chunkout_base}"
+           " --out {params.chunkout_base}"
 
 rule fizi_two:
     input: expand(chunkout, bed=bed)
