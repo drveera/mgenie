@@ -5,6 +5,7 @@
     "bgzip":"source /com/extra/tabix/LATEST/load.sh && bgzip",
     "tabix":"source /com/extra/tabix/LATEST/load.sh && tabix",
     "genotype_harmonizer":"/home/iveera/installs/gh/gh/gh.sh",
-    "Rscript":"Rscript"
+      "Rscript":"Rscript",
+      "fizi":"fizi"
 }
 ]
