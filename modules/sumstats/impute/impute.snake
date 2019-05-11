@@ -1,0 +1,39 @@
+#!/bin/env snakemake
+
+sys.path.insert(1, sys.path[0] + '/../../../library')
+from md import process_list
+from os.path import basename
+
+pfix = config['pfix_impute']
+
+ld=config['--ld']
+sumstats=config['--sumstats']
+sumstats_name = basename(sumstats)
+fizi = config['fizi']
+
+bed = process_list(config['--bed'])
+
+##outputfiles
+chunkout = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}.sumstat"
+chunkout = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}"
+chunkout_merged = f"{pfix}_finalfiles/{sumstats_name}.fizi.sumstat"
+
+rule fizi_all:
+    input: chunkout_merged
+
+rule fizi_one:
+    input: bed = lambda wildcards: sumstats[wildcards.bed],
+           sumstats = sumstats,
+           ld = expand(f"{ld}.{{ext}}", ext = ['bed','bim','fam'])
+    output: chunkout
+    params: chunkout_base
+    shell: "{fizi} impute {input.sumstats} {ld} --locations {input.bed}"
+           "--out {params.chunkout_base}"
+
+rule fizi_two:
+    input: expand(chunkout, bed=bed)
+    output: chunkout_merged
+    run:
+        shell("head -1 {input[0]} >> {output}")
+        for i in input:
+            shell("cat {i} | sed 1d >> {output}")
