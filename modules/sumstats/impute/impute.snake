@@ -15,7 +15,7 @@ bed = process_list(config['--bed'])
 
 ##outputfiles
 chunkout = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}.sumstat"
-chunkout = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}"
+chunkout_base = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}"
 chunkout_merged = f"{pfix}_finalfiles/{sumstats_name}.fizi.sumstat"
 
 rule fizi_all:
