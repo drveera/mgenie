@@ -48,7 +48,7 @@ rule fizi_two:
 rule fizi_three:
     input: sumstats=chunkout_merged,
            frq=frq
-    output: chunkout_merge_formatted
+    output: chunkout_merged_formatted
     params: script=format_R, N=N
     shell: "{Rscript} {params.script} {input.sumstats} {input.frq} "
            "{output} {params.N}"
