@@ -3,15 +3,21 @@
 sys.path.insert(1, sys.path[0] + '/../../../library')
 from md import process_list
 from os.path import basename
+methoddir = sys.path[0]
 
 pfix = config['pfix_impute']
 
 ld=config['--ld']
+frq=f"{ld}.frq"
 sumstats=config['--sumstats']
 sumstats_name = basename(sumstats)
+N=config['--N']
 fizi = config['fizi']
+Rscript = config['Rscript']
 
 bed = process_list(config['--bed'])
+
+format_R = f"{methoddir}/format.fizi.R"
 
 ##outputfiles
 chunkout = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}.sumstat"
@@ -19,7 +25,7 @@ chunkout_base = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}"
 chunkout_merged = f"{pfix}_finalfiles/{sumstats_name}.fizi.sumstat"
 
 rule fizi_all:
-    input: chunkout_merged
+    input: chunkout_merged_formatted
 
 rule fizi_one:
     input: bed = lambda wildcards: bed[wildcards.bed],
@@ -37,3 +43,11 @@ rule fizi_two:
         shell("head -1 {input[0]} >> {output}")
         for i in input:
             shell("cat {i} | sed 1d >> {output}")
+
+rule fizi_three:
+    input: sumstats=chunkout_merged,
+           frq=frq
+    output: chunkout_merge_formatted
+    params: script=format_R, N=N
+    shell: "{Rscript} {params.script} {input.sumstats} {input.frq} "
+           "{output} {params.N}"
