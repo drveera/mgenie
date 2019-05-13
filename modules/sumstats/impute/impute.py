@@ -3,14 +3,14 @@
 '''
 
 usage:
- sumstats impute [options] --sumstats=FILE --ld=PLINK 
+ sumstats impute [options] --sumstats=FILE --ld=PLINK --N=SAMPLESIZE
 
 options:
  --sumstats=FILE     munged summary statistics file 
  --out=PREFIX        output name prefix [default: clump_out]
  --ld=PLINKFILE      plink file without extension
  --bed=BEDFILE       bed file  [default: |resources/sumstats/impute/fizi/locations.bed]
- --N=NUMBER          sample size 
+ --N=SAMPLESIZE          sample size 
  --nojob             if should run in front end
  --int
  --njobs=NUMBER      Number of parallel jobs when running in front end
