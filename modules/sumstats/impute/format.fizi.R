@@ -24,7 +24,7 @@ sumstats$N <- N
 
 ##add SE
 sumstats$SE <- with(sumstats, 1/sqrt(2 * MAF * (1-MAF) *N))
-sumstats$BETA <- sumstats$Z * sumstats$BETA
+sumstats$BETA <- sumstats$Z * sumstats$SE
 fwrite(sumstats,out.file, sep="\t",na="NA",quote=FALSE)
 
 
