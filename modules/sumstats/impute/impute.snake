@@ -23,6 +23,7 @@ format_R = f"{methoddir}/format.fizi.R"
 chunkout = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}.sumstat"
 chunkout_base = f"{pfix}_intermediatefiles/{sumstats_name}_{{bed}}"
 chunkout_merged = f"{pfix}_finalfiles/{sumstats_name}.fizi.sumstat"
+chunkout_merged_formatted = f"{pfix}_finalfiles/{sumstats_name}.fizi.sumstat.formatted"
 
 rule fizi_all:
     input: chunkout_merged_formatted
