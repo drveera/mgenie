@@ -14,6 +14,7 @@ bfile = process_list(bfile)
 ref = config['--ref']
 pfix = config['pfix_qc-samples']
 skip_sex = config['--skip-sex']
+overlap = config['--overlap']
 
 ##script specific
 pj=list(range(1,11))
@@ -64,10 +65,17 @@ bfile_sexOK_hetOK_unrelated_prefix = f"{pfix}_intermediatefiles/{{bfile}}.unrela
 commonsnps = f"{pfix}_intermediatefiles/{{bfile}}.commonSNPs"
 bfile_subset = f"{pfix}_intermediatefiles/{{bfile}}.subset.bim"
 bfile_subset_prefix = f"{pfix}_intermediatefiles/{{bfile}}.subset"
+##if the ref samples is within the main sample
+if overlap:
+    bfile_merged = bfile_subset
+    bfile_merged_prefix = bfile_subset_prefix
+else:
+    bfile_merged = f"{pfix}_intermediatefiles/{{bfile}}.merged.bim"
+    bfile_merged_prefix = f"{pfix}_intermediatefiles/{{bfile}}.merged"
+##
 ref_subset = f"{pfix}_intermediatefiles/{{bfile}}.subset.ref.bim"
 ref_subset_prefix = f"{pfix}_intermediatefiles/{{bfile}}.subset.ref"
-bfile_merged = f"{pfix}_intermediatefiles/{{bfile}}.merged.bim"
-bfile_merged_prefix = f"{pfix}_intermediatefiles/{{bfile}}.merged"
+
 bfile_merged_thin = f"{pfix}_intermediatefiles/{{bfile}}.mergedthin.bim"
 bfile_merged_thin_prefix = f"{pfix}_intermediatefiles/{{bfile}}.mergedthin"
 QC_samples = f"{pfix}_finalfiles/{{bfile}}/{{bfile}}.QC.samples"
