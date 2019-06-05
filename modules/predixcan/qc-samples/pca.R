@@ -61,6 +61,8 @@ ggsave(plot2)
 
 fwrite(pca.eigen,paste0(outfile,".allsamples.mds"),sep="\t",na="NA")
 ##pca.eigen1 <- pca.eigen[ell2sd6==TRUE & popgroup!="Referrence",]
+print(dim(pca.eigen1))
+print(head(pca.eigen1))
 pca.eigen1 <- pca.eigen[popgroup=="keep"]
 print(dim(pca.eigen1))
 
