@@ -11,7 +11,7 @@ options:
  --ref=FILE        referrence plink file (only basename)
  --out=PREFIX      outname prefix [default: predixcan]
  --skip-sex        skip sex checks
- --overlap         if the ref is in bfile 
+ --overlap         if the ref is within bfile
  --cluster=NAME    cluster name  [default: open]
  --nojob           run in front end
  --dry-run         just show the codes

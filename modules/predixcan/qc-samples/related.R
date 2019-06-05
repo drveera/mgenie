@@ -23,6 +23,8 @@ if(nrow(genome)==0){
   frq <- data.frame(table(allids))
   print(head(frq))
   names(frq) <- c("IID1","IID1.freq")
+  frq$IID1 <- as.character(frq$IID1)
+  relpairs$IID1 <- as.character(relpairs$IID1)
   relpairs <- merge(relpairs,frq,by="IID1",all.x=TRUE,sort=FALSE)
   names(frq) <- c("IID2","IID2.freq")
   relpairs <- merge(relpairs,frq,by="IID2",all.x=TRUE,sort=FALSE)
