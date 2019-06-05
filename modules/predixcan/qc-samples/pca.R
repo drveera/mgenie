@@ -66,7 +66,7 @@ fwrite(pca.eigen,paste0(outfile,".allsamples.mds"),sep="\t",na="NA")
 print(dim(pca.eigen))
 ##print(head(pca.eigen))
 print(table(pca.eigen$popgroup))
-pca.eigen1 <- pca.eigen[popgroup=="keep"&&IID %in%]
+pca.eigen1 <- pca.eigen[popgroup=="keep"]
 print(dim(pca.eigen1))
 
 ##repeat PCA
