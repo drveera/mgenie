@@ -30,7 +30,7 @@ pca.eigen <- cbind(IID,pca.eigen)
 fam <- fread(reffam)
 refsamples = fam$V2
 ##read bfile samples
-bfam <- fread(paste0(bfile,".fam"))
+bfam <- fread(orginalfam)
 bfamsamples <- bfam$V2
 
 pca.eigen$popgroup <- ifelse(pca.eigen$IID %in% refsamples,"Referrence","Cases")
@@ -66,7 +66,7 @@ fwrite(pca.eigen,paste0(outfile,".allsamples.mds"),sep="\t",na="NA")
 print(dim(pca.eigen))
 ##print(head(pca.eigen))
 print(table(pca.eigen$popgroup))
-pca.eigen1 <- pca.eigen[popgroup=="keep"]
+pca.eigen1 <- pca.eigen[popgroup=="keep"&&IID %in%]
 print(dim(pca.eigen1))
 
 ##repeat PCA
