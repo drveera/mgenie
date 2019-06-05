@@ -61,7 +61,8 @@ ggsave(plot2)
 
 fwrite(pca.eigen,paste0(outfile,".allsamples.mds"),sep="\t",na="NA")
 ##pca.eigen1 <- pca.eigen[ell2sd6==TRUE & popgroup!="Referrence",]
-pca.eigen1 <- pca.eigen[popgroup=="keep",]
+pca.eigen1 <- pca.eigen[popgroup=="keep"]
+print(dim(pca.eigen1))
 
 ##repeat PCA
 pca2 <- snpgdsPCA(genofile,num.thread = 4,sample.id=pca.eigen1$IID)
