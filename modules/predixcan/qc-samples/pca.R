@@ -63,6 +63,7 @@ fwrite(pca.eigen,paste0(outfile,".allsamples.mds"),sep="\t",na="NA")
 ##pca.eigen1 <- pca.eigen[ell2sd6==TRUE & popgroup!="Referrence",]
 print(dim(pca.eigen))
 print(head(pca.eigen))
+print(table(pca.eigen$popgroup))
 pca.eigen1 <- pca.eigen[popgroup=="keep"]
 print(dim(pca.eigen1))
 
