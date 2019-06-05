@@ -42,6 +42,8 @@ pca.eigen$popgroup <- ifelse(pca.eigen$IID %in% refsamples,"Referrence","Cases")
 
 ##subset the dfm
 pdfm = pca.eigen[IID %in% refsamples,]
+print(dim(pdfm))
+print(head(pdfm))
 ##formula
 pca.eigen$ell2sd6 <- (
   ((pca.eigen$V1 - mean(pdfm$V1, na.rm=TRUE))/(6*sd(pdfm$V1,na.rm=TRUE)))^2 +
@@ -62,7 +64,7 @@ ggsave(plot2)
 fwrite(pca.eigen,paste0(outfile,".allsamples.mds"),sep="\t",na="NA")
 ##pca.eigen1 <- pca.eigen[ell2sd6==TRUE & popgroup!="Referrence",]
 print(dim(pca.eigen))
-print(head(pca.eigen))
+##print(head(pca.eigen))
 print(table(pca.eigen$popgroup))
 pca.eigen1 <- pca.eigen[popgroup=="keep"]
 print(dim(pca.eigen1))
