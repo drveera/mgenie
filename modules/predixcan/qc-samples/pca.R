@@ -28,10 +28,10 @@ pca.eigen <- cbind(IID,pca.eigen)
 
 ##read referrence samples
 fam <- fread(reffam)
-refsamples = fam$V1
+refsamples = fam$V2
 ##read bfile samples
 bfam <- fread(paste0(bfile,".fam"))
-bfamsamples <- bfam$V1
+bfamsamples <- bfam$V2
 
 pca.eigen$popgroup <- ifelse(pca.eigen$IID %in% refsamples,"Referrence","Cases")
 
