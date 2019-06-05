@@ -27,6 +27,8 @@ if(nrow(genome)==0){
   relpairs$IID1 <- as.character(relpairs$IID1)
   relpairs <- merge(relpairs,frq,by="IID1",all.x=TRUE,sort=FALSE)
   names(frq) <- c("IID2","IID2.freq")
+  frq$IID2 <- as.character(frq$IID2)
+  relpairs$IID2 <- as.character(relpairs$IID2)
   relpairs <- merge(relpairs,frq,by="IID2",all.x=TRUE,sort=FALSE)
   relpairs$IID1 <- as.character(relpairs$IID1)
   relpairs$IID2 <- as.character(relpairs$IID2)
