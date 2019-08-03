@@ -1,0 +1,2 @@
+cat genie_chunkvcf/test2/test2_variantcuts/temp.vcf.gz/header genie_chunkvcf/test2/test2_variantcuts_nohead/temp.vcf.gz/temp.vcf.gz_..bv > genie_chunkvcf/test2/test2_variantcuts_head/temp.vcf.gz/temp.vcf.gz_..bv 
+bgzip genie_chunkvcf/test2/test2_variantcuts_head/temp.vcf.gz/temp.vcf.gz_..bv && tabix -p vcf genie_chunkvcf/test2/test2_variantcuts_head/temp.vcf.gz/temp.vcf.gz_..bv.gz

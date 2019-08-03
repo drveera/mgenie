@@ -1,0 +1,61 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+##from config
+vcf = config['--vcf']
+vcf = process_list(vcf)
+nvariants = config['--nvariants']
+nsamples = config['--nsamples']
+pfix_chunkvcf = config['pfix_chunkvcf']
+
+##software calls
+bcftools = config['bcftools']
+tabix = config['tabix']
+bgzip = config['bgzip']
+
+##outfiles
+vcfchunk_header = f"{pfix_chunkvcf}_variantcuts/{{vcf}}/header"
+vcfchunk = f"{pfix_chunkvcf}_variantcuts_nohead/{{vcf}}/{{vcf}}_{{batch}}"
+vcfchunk_hd = f"{pfix_chunkvcf}_variantcuts_head/{{vcf}}/{{vcf}}_{{batch}}.gz"
+vcfchunk_hd_prefix = f"{pfix_chunkvcf}_variantcuts_head/{{vcf}}/{{vcf}}_{{batch}}"
+vcfchunk_base = f"{pfix_chunkvcf}_variantcuts_nohead/{{vcf}}/{{vcf}}_."
+vcfchunk_list = f"{pfix_chunkvcf}_variantcuts/{{vcf}}.vcuts.list"
+vcfchunk_hdlist = f"{pfix_chunkvcf}_variantcuts/{{vcf}}.vcuts.hdlist"
+
+
+rule chunkvcf_all:
+    input: expand(vcfchunk_hdlist,vcf=vcf)
+
+rule chunkvcf_header:
+    input: lambda wildcards: vcf[wildcards.vcf]
+    output: vcfchunk_header
+    shell: "gzcat {input} | head -1000 | grep \"^#\" > {output}"
+
+rule chunkvcf_one:
+    input: a=lambda wildcards: vcf[wildcards.vcf],
+    output: dynamic(vcfchunk)
+    params: nvariants = nvariants, vcfchunk=vcfchunk_base
+    shell: "gzcat {input.a} | grep -v \"^#\" | split -l {nvariants} - {params.vcfchunk}.\n"
+
+rule chunkvcf_three:
+    input: a=vcfchunk,
+           b=vcfchunk_header
+    output: vcfchunk_hd
+    params: prefix=vcfchunk_hd_prefix
+    shell: "cat {input.b} {input.a} > {params.prefix} \n"
+           "bgzip {params.prefix} && tabix -p vcf {output}"
+
+rule chunkvcf_hdlist:
+    input: dynamic(vcfchunk_hd)
+    output: vcfchunk_hdlist
+    run:
+        for i in input:
+         shell("ls {input} >> {output}")
+

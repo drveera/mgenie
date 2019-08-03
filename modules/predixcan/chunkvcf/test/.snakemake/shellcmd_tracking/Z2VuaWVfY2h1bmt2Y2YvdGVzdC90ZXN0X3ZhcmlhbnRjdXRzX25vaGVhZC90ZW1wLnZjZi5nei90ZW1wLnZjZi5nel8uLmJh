@@ -1,0 +1,1 @@
+gzcat temp.vcf.gz | grep -v "^#" | split -l 10 - genie_chunkvcf/test/test_variantcuts_nohead/temp.vcf.gz/temp.vcf.gz_..

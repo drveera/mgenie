@@ -1,0 +1,1 @@
+head -1000 temp.vcf | grep "^#" > genie_chunkvcf/test/test_variantcuts/temp.vcf/header
