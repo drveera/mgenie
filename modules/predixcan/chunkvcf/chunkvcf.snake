@@ -21,7 +21,7 @@ tabix = config['tabix']
 bgzip = config['bgzip']
 
 ##outfiles
-vcfchunk_header = f"{pfix_chunkvcf}_variantcuts/{{vcf}}/header"
+vcfchunk_header = f"{pfix_chunkvcf}_variantcuts/{{vcf}}/xxheader"
 vcfchunk = f"{pfix_chunkvcf}_variantcuts_nohead/{{vcf}}/{{vcf}}_{{batch}}"
 vcfchunk_hd = f"{pfix_chunkvcf}_variantcuts_head/{{vcf}}/{{vcf}}_{{batch}}.gz"
 vcfchunk_hd_prefix = f"{pfix_chunkvcf}_variantcuts_head/{{vcf}}/{{vcf}}_{{batch}}"
