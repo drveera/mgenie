@@ -37,7 +37,7 @@ rule chunkvcf_header:
     input: lambda wildcards: vcf[wildcards.vcf]
     output: vcfchunk_header
     shell: "zcat {input} | head -1000 > {output}.temp \n"
-           "grep \"^#\" {output}.temp > {output} && rm {output.temp}"
+           "grep \"^#\" {output}.temp > {output} && rm {output}.temp"
 
 ##"gunzip -c {input} | head -1000 | grep \"^#\" - > {output}"
 
