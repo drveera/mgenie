@@ -42,7 +42,7 @@ rule chunkvcf_one:
     input: a=lambda wildcards: vcf[wildcards.vcf],
     output: dynamic(vcfchunk)
     params: nvariants = nvariants, vcfchunk=vcfchunk_base
-    shell: "gzcat {input.a} | grep -v \"^#\" | split -l {nvariants} - {params.vcfchunk}.\n"
+    shell: "zcat {input.a} | grep -v \"^#\" | split -l {nvariants} - {params.vcfchunk}.\n"
 
 rule chunkvcf_three:
     input: a=vcfchunk,
