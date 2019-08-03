@@ -36,7 +36,7 @@ rule chunkvcf_all:
 rule chunkvcf_header:
     input: lambda wildcards: vcf[wildcards.vcf]
     output: vcfchunk_header
-    shell: "gzcat {input} | head -1000 | grep \"^#\" > {output}"
+    shell: "zcat {input} | head -1000 | grep \"^#\" > {output}"
 
 rule chunkvcf_one:
     input: a=lambda wildcards: vcf[wildcards.vcf],
