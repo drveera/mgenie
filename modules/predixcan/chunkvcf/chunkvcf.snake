@@ -21,7 +21,7 @@ tabix = config['tabix']
 bgzip = config['bgzip']
 
 ##outfiles
-vcfchunk_header = f"{pfix_chunkvcf}_variantcuts/{{vcf}}/xxheader"
+vcfchunk_header = f"{pfix_chunkvcf}_variantcuts/{{vcf}}/header"
 vcfchunk = f"{pfix_chunkvcf}_variantcuts_nohead/{{vcf}}/{{vcf}}_{{batch}}"
 vcfchunk_hd = f"{pfix_chunkvcf}_variantcuts_head/{{vcf}}/{{vcf}}_{{batch}}.gz"
 vcfchunk_hd_prefix = f"{pfix_chunkvcf}_variantcuts_head/{{vcf}}/{{vcf}}_{{batch}}"
@@ -37,7 +37,7 @@ rule chunkvcf_header:
     input: lambda wildcards: vcf[wildcards.vcf]
     output: vcfchunk_header
     shell: "zcat {input} | head -1000 > {output}.temp \n"
-           "grep '^#' {output}.temp > {output} && rm {output}.temp"
+           "awk '!#' {output}.temp > {output} && rm {output}.temp"
 
 ##"gunzip -c {input} | head -1000 | grep \"^#\" - > {output}"
 
