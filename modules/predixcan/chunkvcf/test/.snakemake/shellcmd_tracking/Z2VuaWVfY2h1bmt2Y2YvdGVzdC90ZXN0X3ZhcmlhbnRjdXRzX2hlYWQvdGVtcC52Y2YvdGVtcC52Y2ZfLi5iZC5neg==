@@ -1,2 +1,0 @@
-cat genie_chunkvcf/test/test_variantcuts/temp.vcf/header genie_chunkvcf/test/test_variantcuts_nohead/temp.vcf/temp.vcf_..bd > genie_chunkvcf/test/test_variantcuts_head/temp.vcf/temp.vcf_..bd 
-gzip genie_chunkvcf/test/test_variantcuts_head/temp.vcf/temp.vcf_..bd

@@ -1,1 +1,0 @@
-head -1000 temp.txt | grep "^#" > genie_chunkvcf/test/test_variantcuts/temp.txt/header
