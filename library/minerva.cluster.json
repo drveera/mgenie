@@ -15,6 +15,11 @@
         "R" : "rsuage[mem=4000]",
         "M" : "16000"
     },
+    "qcdna_filter1":
+    {
+        "R" : "rsuage[mem=4000]",
+        "M" : "8000"
+    },
     "qcdna_harmonize":
     {
         "M":"32000",
