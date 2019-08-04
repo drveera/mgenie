@@ -50,7 +50,7 @@ rule chunkvcf_three:
     output: vcfchunk_hd
     params: prefix=vcfchunk_hd_prefix
     shell: "cat {input.b} {input.a} > {params.prefix} \n"
-           "bgzip {params.prefix} && tabix -p vcf {output}"
+           "bgzip {params.prefix} && tabix -p vcf {output} && rm {input.a}"
 
 rule chunkvcf_hdlist:
     input: dynamic(vcfchunk_hd)
