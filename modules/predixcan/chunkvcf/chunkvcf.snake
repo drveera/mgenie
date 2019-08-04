@@ -31,7 +31,7 @@ vcfchunk_hdlist = f"{pfix_chunkvcf}_variantcuts/{{vcf}}.vcuts.hdlist"
 
 
 rule chunkvcf_all:
-    input: expand(vcfchunk_header,vcf=vcf)
+    input: expand(vcfchunk_hdlist,vcf=vcf)
 
 rule chunkvcf_header:
     input: lambda wildcards: vcf[wildcards.vcf]
