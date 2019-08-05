@@ -22,9 +22,9 @@
     },
     "qcdna_harmonize":
     {
-        "M":"32000",
+        "M":"8000",
         "q":"premium",
-        "W":"48:00"
+        "W":"6:00"
 
     },
     "qcdna_gen2gds":
