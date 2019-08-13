@@ -30,7 +30,7 @@
     "qcdna_gen2gds":
     {
         "M":"64000",
-        "W":"24:00",
+        "W":"48:00",
         "q":"premium"
     },
     "qcdna_gdsannot":
