@@ -20,7 +20,8 @@ alleles <- read.gdsn(index.gdsn(mgds,"snp.allele"))
 index <- read.gdsn(index.gdsn(mgds,"snp.id"))
 
 ##gen file
-gen <- fread(genfile,select=1:5)
+##gen <- fread(genfile,select=1:5)
+gen <- fread(paste0("cut -d ' ' -f 1-5 ",genfile), header=FALSE)
 gen$alleles <- paste0(gen$V4,"/",gen$V5)
 
 ##checks
