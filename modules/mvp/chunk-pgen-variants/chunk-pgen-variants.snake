@@ -1,0 +1,61 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+
+##from config
+pgen = config['--pgen']
+pgen = process_list(pgen)
+nvariants = config['--nvariants']
+pfix_chunkpgen = config['pfix_chunk-pgen-variants']
+out = config['--out']
+##software calls
+plink2 = config['plink2']
+
+##outfiles
+pvarchunk1_base = f"{out}_variantchunks/{{pgen}}."
+pvarchunk1 = f"{out}_variantchunks/{{pgen}}.{{batch}}"
+pgenchunk1 = f"{out}_variantchunks/{{pgen}}.{{batch}}.pgen"
+pgenchunk1_base = f"{out}_variantchunks/{{pgen}}.{{batch}}"
+batchlist1 = f"{out}_variantchunks/{{pgen}}.variants.list"
+batchlist2 = f"{out}.variants.list"
+
+
+rule chunkpgen_all:
+    input: batchlist2
+
+rule chunkpgen_listsamples:
+    input: pvar=lambda wildcards: pgen[wildcards.pgen][0] + ".pvar"
+    output: dynamic(pvarchunk1)
+    params: nvariants=nvariants, base=pvarchunk1_base
+    shell: "grep -v '^#' {input.pvar} | cut -f 3 | "
+           "split -l {params.nvariants} - {params.base}"
+
+rule chunkpgen_subsetvariants:
+    input: pgen= lambda wildcards: pgen[wildcards.pgen][0] + ".pgen",
+           extract=pvarchunk1
+    output: pgenchunk1
+    params: base=pgenchunk1_base,
+            pgen_base = lambda wildcards: pgen[wildcards.pgen]
+    shell: "{plink2} --pfile {params.pgen_base} --extract {input.extract} "
+           "--out {params.base} --make-pgen"
+
+rule chunkpgen_listbatches:
+    input: dynamic(pgenchunk1)
+    output: batchlist1
+    run:
+        for i in input:
+            shell("ls {i} >> {output}")
+
+rule chunkpgen_listbatches2:
+    input: expand(batchlist1, pgen=pgen)
+    output: batchlist2
+    run:
+        for i in input:
+            shell("cat {i} | sed s/.pgen$//g >> {output}")

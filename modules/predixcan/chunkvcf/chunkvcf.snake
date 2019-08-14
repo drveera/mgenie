@@ -57,5 +57,5 @@ rule chunkvcf_hdlist:
     output: vcfchunk_hdlist
     run:
         for i in input:
-         shell("ls {input} >> {output}")
+         shell("ls {i} >> {output}")
 

@@ -1,12 +1,13 @@
 [
   {
-  "plink":"plink",
-  "bcftools":"bcftools",
-  "bgzip":"bgzip",
-  "tabix":"tabix",
-  "genotype_harmonizer":"genotype_harmonizer",
-  "Rscript":"Rscript",
-  "tabix":"tabix",
-  "magma":"~/Research/magma/magma"
+      "plink":"plink",
+      "bcftools":"bcftools",
+      "bgzip":"bgzip",
+      "tabix":"tabix",
+      "genotype_harmonizer":"genotype_harmonizer",
+      "Rscript":"Rscript",
+      "tabix":"tabix",
+      "magma":"magma",
+      "plink2":"/Users/veera/Research/softwares/plink2/plink2"
   }
 ]

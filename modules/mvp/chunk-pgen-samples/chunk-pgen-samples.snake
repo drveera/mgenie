@@ -1,0 +1,79 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+
+##from config
+pgen = config['--pgen']
+pgen = process_list(pgen)
+nsamples = config['--nsamples']
+pfix_chunkpgen = config['pfix_chunk-pgen-samples']
+out = config['--out']
+
+##software calls
+plink2 = config['plink2']
+bgzip = config['bgzip']
+tabix = config['tabix']
+
+##outfiles
+psamchunk1_base = f"{out}_samplechunks/listfiles/{{pgen}}."
+psamchunk1 = f"{out}_samplechunks/listfiles/{{pgen}}.{{batch}}"
+pgenchunk1 = f"{out}_samplechunks/{{pgen}}/{{pgen}}.{{batch}}.pgen"
+pgenchunk1_base = f"{out}_samplechunks/{{pgen}}/{{pgen}}.{{batch}}"
+vcf = f"{out}_vcfchunks/{{pgen}}/{{pgen}}.{{batch}}.vcf"
+vcfgz = f"{out}_vcfchunks/{{pgen}}/{{pgen}}.{{batch}}.vcf.gz"
+vcfgztbi = f"{out}_vcfchunks/{{pgen}}/{{pgen}}.{{batch}}.vcf.gz.tbi"
+vcf_base = f"{out}_vcfchunks/{{pgen}}/{{pgen}}.{{batch}}"
+batchlist1 = f"{out}_vcfchunks/{{pgen}}/{{pgen}}.vcf.list"
+batchlist2 = f"{out}.samples.list"
+
+
+rule chunkpgen_all:
+    input: batchlist2
+
+rule chunkpgen_listsamples:
+    input: psam=lambda wildcards: pgen[wildcards.pgen][0] + ".psam"
+    output: psamchunk1 = dynamic(psamchunk1)
+    params: nsamples=nsamples, base=psamchunk1_base
+    shell: "cut -f 1 {input.psam} | split -l {params.nsamples} - {params.base}"
+
+rule chunkpgen_subsetsamples:
+    input: pgen= lambda wildcards: pgen[wildcards.pgen][0] + ".pgen",
+           keep=psamchunk1
+    output: pgenchunk1
+    params: base=pgenchunk1_base,
+            pgen_base = lambda wildcards: pgen[wildcards.pgen]
+    shell: "{plink2} --pfile {params.pgen_base} --keep {input.keep} "
+           "--out {params.base} --make-pgen"
+
+rule chunkpgen_pgentovcf:
+    input: pgenchunk1
+    output: vcf
+    params: inputbase = pgenchunk1_base, outbase=vcf_base
+    shell: "{plink2} --pfile {params.inputbase} --recode vcf --out "
+           "{params.outbase}"
+
+rule chunkpgen_vcfzip:
+    input: vcf
+    output: a=vcfgz,b=vcfgztbi
+    shell: "{bgzip} {input} && tabix -p vcf {output.a}"
+
+rule chunkpgen_listbatches:
+    input: dynamic(vcfgz)
+    output: batchlist1
+    run:
+        for i in input:
+            shell("ls {i} >> {output}")
+
+rule chunkpgen_listbatches2:
+    input: expand(batchlist1, pgen=pgen)
+    output: batchlist2
+    run:
+        for i in input:
+            shell("ls {i} >> {output}")
