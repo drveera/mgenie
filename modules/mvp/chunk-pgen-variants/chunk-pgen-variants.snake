@@ -26,6 +26,7 @@ pgenchunk1_base = f"{out}_variantchunks/{{pgen}}.{{batch}}"
 batchlist1 = f"{out}_variantchunks/{{pgen}}.variants.list"
 batchlist2 = f"{out}.variants.list"
 
+localrules: chunkpgen_listsamples
 
 rule chunkpgen_all:
     input: batchlist2
@@ -44,7 +45,7 @@ rule chunkpgen_subsetvariants:
     params: base=pgenchunk1_base,
             pgen_base = lambda wildcards: pgen[wildcards.pgen]
     shell: "{plink2} --pfile {params.pgen_base} --extract {input.extract} "
-           "--out {params.base} --make-pgen"
+           "--out {params.base} --make-pgen --memory 8000"
 
 rule chunkpgen_listbatches:
     input: dynamic(pgenchunk1)
