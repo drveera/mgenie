@@ -33,7 +33,7 @@ argv = [arguments['<method>']] + arguments['<args>']
 ########################################################################################################
 # CHECK IF METHOD IS VALID
 method = arguments['<method>']
-gwasmethods = ['chunk-pgen-samples','chunk-pgen-variants',
+gwasmethods = ['chunk-pgen-samples','chunk-pgen-variants','gdsforpca',
                '-h','--help']
 
 if method not in gwasmethods:

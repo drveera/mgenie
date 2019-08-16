@@ -1,0 +1,121 @@
+#!/bin/env snakemake
+
+import sys
+methoddir = sys.path[0]
+maindir = re.search(r'.*genie/',methoddir).group()
+sys.path.insert(1,maindir + "/library")
+import md
+from md import process_list
+from os.path import basename
+
+##from config
+pgen = config['--pgen']
+pgen = process_list(pgen)
+nvariants = config['--nvariants']
+pfix_gdsforpca = config['pfix_gdsforpca']
+out = config['--out']
+
+##software calls
+plink2 = config['plink2']
+plink = config['plink']
+Rscript = config['Rscript']
+##scripts
+prunesh=f"{methoddir}/serialpruning.sh"
+gds_r = f"{methoddir}/plinktogds.R"
+
+##outfiles
+pgen1 = f"{pfix_gdsforpca}_intermediatefiles/{{pgen}}.f1.pgen"
+pgen1_base = f"{pfix_gdsforpca}_intermediatefiles/{{pgen}}.f1"
+variants1 = f"{pfix_gdsforpca}_intermediatefiles/{{pgen}}.f1.variantslist.prune.in"
+variants1_base = f"{pfix_gdsforpca}_intermediatefiles/{{pgen}}.f1.variantslist"
+pgen2 = f"{pfix_gdsforpca}_intermediatefiles/{{pgen}}.f2.bed"
+pgen2_base = f"{pfix_gdsforpca}_intermediatefiles/{{pgen}}.f2"
+mergelist=f"{pfix_gdsforpca}_intermediatefiles/mergelist"
+pgenmerged = f"{pfix_gdsforpca}_finalfiles/{out}.merged.bed"
+pgenmerged_base = f"{pfix_gdsforpca}_finalfiles/{out}.merged"
+pgenfinal = f"{pfix_gdsforpca}_finalfiles/{out}.final.bed"
+pgenfinal_base = f"{pfix_gdsforpca}_finalfiles/{out}.final"
+variantfile = f"{pfix_gdsforpca}_finalfiles/variantslist.prune.in"
+variantfile_base = f"{pfix_gdsforpca}_finalfiles/variantslist"
+gdsfinal = f"{pfix_gdsforpca}_finalfiles/{out}.gds"
+
+rule gdsforpca_all:
+    input: gdsfinal
+
+
+rule gdsforpca_one:
+    message: "keep only variants with missing rate < 0.01 and maf >0.01"
+    input: pgen = lambda wildcards: pgen[wildcards.pgen][0] + ".pgen"
+    output: temp(pgen1)
+    params: pgen_prefix = lambda wildcards: pgen[wildcards.pgen],
+            out_prefix=pgen1_base
+    shell: "{plink2} --pfile {params.pgen_prefix} --geno 0.01 "
+           "--maf 0.01 --max-maf 0.99 --out {params.out_prefix} "
+           "--make-pgen"
+
+rule gdsforpca_two:
+    message: "first level pruning"
+    input: pgen = pgen1
+    output: variants1
+    params: pgen_prefix=pgen1_base,
+            out_prefix=variants1_base
+    shell: "{plink2} --pfile {params.pgen_prefix} "
+           "--indep-pairwise 5000 500 0.08 --out {params.out_prefix}"
+
+rule gdsforpca_three:
+    message: "subset plink file"
+    input: pgen = pgen1, variants=variants1
+    output: temp(pgen2)
+    params: pgen_base=pgen1_base, out_prefix=pgen2_base
+    shell: "{plink2} --pfile {params.pgen_base} "
+           "--extract {input.variants} --make-bed "
+           "--out {params.out_prefix}"
+
+rule gdsforpca_four:
+    message: "create a merge list"
+    input: expand(pgen2, pgen=pgen)
+    output: mergelist
+    params: pgenbase=expand(pgen2_base,pgen=pgen)
+    run:
+        for i in params.pgenbase:
+            shell("echo \"{i}.bed {i}.bim {i}.fam\" >> {output}")
+
+rule gdsforpca_five:
+    message: "merge the plinkfiles"
+    input: pgen=expand(pgen2,pgen=pgen),
+           mergelist=mergelist
+    output: pgenmerged
+    params: pgenbase=expand(pgen2_base,pgen=pgen),
+            out_prefix=pgenmerged_base
+    shell: "{plink} --bfile {params.pgenbase[0]} --merge-list "
+           "{input.mergelist} --make-bed "
+           "--out {params.out_prefix}"
+
+rule gdsforpca_six:
+    message: f"prune until {nvariants} remain"
+    input: pgen = pgenmerged
+    output: variantfile
+    params: pgen_prefix = pgenmerged_base,
+            nvariants=nvariants,
+            out_prefix=variantfile_base
+    shell:
+        "sh {prunesh} {output} {plink} {params.pgen_prefix} "
+        " {params.out_prefix}"
+
+rule gdsforpca_seven:
+    message: "subset plink file"
+    input: pgen=pgenmerged, variantlist=variantfile
+    output: pgenfinal
+    params: pgen_prefix=pgenmerged_base,
+            out_prefix=pgenfinal_base
+    shell: "{plink} --bfile {params.pgen_prefix} "
+           "--extract {input.variantlist} --out "
+           "{params.out_prefix} --make-bed"
+
+rule gdsforpca_eight:
+    message: "plink to gds"
+    input: pgenfinal
+    output: gdsfinal
+    params: script = gds_r,
+            pgen_prefix=pgenfinal_base
+    shell: "{Rscript} {params.script} {params.pgen_prefix} {output}"

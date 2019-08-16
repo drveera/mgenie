@@ -1,6 +1,6 @@
 [
   {
-      "plink":"plink",
+      "plink":"/Users/veera/Research/plink/plink",
       "bcftools":"bcftools",
       "bgzip":"bgzip",
       "tabix":"tabix",
