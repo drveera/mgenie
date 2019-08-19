@@ -6,6 +6,7 @@
 "tabix":"module load htslib/1.7 && ",
 "genotype_harmonizer":"/hpc/users/xrajagv01/installs/GenotypeHarmonizer-1.4.20-SNAPSHOT/GenotypeHarmonizer.sh",
 "Rscript":"Rscript",
-"tabix":"module load htslib && tabix "
+"tabix":"module load htslib && tabix ",
+"plink2":"module load plink2 && plink2"
 }
 ]
