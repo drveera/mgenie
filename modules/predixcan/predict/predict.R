@@ -37,7 +37,11 @@ totalexpr <- list()
 for(i in 1:length(genes)){
   ensid <- genes[i]
   ##get weights
-  dbwts <- tbl(db,"weights") %>% filter(gene == ensid) %>% collect()
+  ##dbwts <- tbl(db,"weights") %>% filter(gene == ensid) %>% collect()
+  ##above line causes error switch_lang
+  dbwts <- tbl(db,"weights")
+  dbwts <- data.table(as.data.frame(dbwts))
+  dbwts <- dbwts[gene==ensid]
   dbwts <- as.data.frame(dbwts)
   rownames(dbwts) <- dbwts$rsid
   snps.df <- snpannot[snpannot$rsid %in% dbwts$rsid]
