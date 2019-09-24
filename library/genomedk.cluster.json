@@ -57,5 +57,10 @@
     "qcdna_gdsannot":
     {
     "mem":"16g"
+    },
+    "metaxcan_impute":
+    {
+    "mem":"32g",
+    "cores":"4"
     }
 }
